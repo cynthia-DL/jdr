@@ -1,0 +1,185 @@
+<fiche>
+	<div class="container text-center  mx-auto">
+		<h1>Fiche de {props.perso.prenom} - <span class="badge badge-pill badge-secondary">PV : {props.perso.armure} + {props.perso.pv} / {props.perso.pvMax}</span></h1>
+		<hr>
+		<div class="row">
+			<button class="btn btn-outline-primary mx-auto" onclick={_onInfo}>Informations et statistiques</button>
+			<button class="btn btn-outline-primary mx-auto" onclick={_onComp}>Compétences, dons et traits</button>
+			<button class="btn btn-outline-primary mx-auto" onclick={_onInv}>Inventaire</button>
+			<button class="btn btn-outline-primary mx-auto" onclick={_onFam} if={props.perso.familier}>Familier(s)</button>
+		</div>
+
+		<div if={state.info}>
+			<h2>Informations générales</h2>
+			<div class="row">
+				<div class="card col-5 mx-auto mb-3">
+					<em class="text-primary">Nom</em>
+					<em>{props.perso.nom}</em>	
+				</div>
+				
+				<div class="card col-5  mx-auto mb-3">
+					<em class="text-primary">Prenom</em>
+					<em>{props.perso.prenom}</em>
+				</div>
+				
+			</div>
+
+			<div class="row">
+				<div class="card col-3 mx-auto mb-3">
+					<em class="text-primary">Âge</em>
+					<em>{props.perso.age}</em>
+				</div>
+				<div class="card col-3 mx-auto mb-3">
+					<em class="text-primary">Niveau</em>
+					<em>{props.perso.niveau}</em>
+				</div>
+				
+				<div class="card col-3 mx-auto mb-3">
+					<em class="text-primary">Classe</em>
+					<em>{props.perso.classe}</em>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="card col-5 mx-auto mb-3">
+					<em class="text-primary">Race</em>
+					<em>{props.perso.race}</em>
+				</div>
+				<div class="card col-5 mx-auto mb-3">
+					<em class="text-primary">Genre</em>
+					<em>{props.perso.genre}</em>
+				</div>
+			</div>
+			<hr>
+
+			<h2>Statistiques</h2>
+			<table class="table table-hover">
+			  <thead>
+			    <tr class="table-active">
+			      <th scope="col">Force</th>
+			      <th scope="col">Agilité</th>
+			      <th scope="col">Social</th>
+			      <th scope="col">Perseption</th>
+			      <th scope="col">Mental</th>
+			      <th scope="col">Inteligence</th>
+			      <th scope="col">Constitution</th>
+			    </tr>
+			    <tr>
+			      <td scope="col">{props.perso.stats.F}</td>
+			      <td scope="col">{props.perso.stats.A}</td>
+			      <td scope="col">{props.perso.stats.S}</td>
+			      <td scope="col">{props.perso.stats.P}</td>
+			      <td scope="col">{props.perso.stats.M}</td>
+			      <td scope="col">{props.perso.stats.I}</td>
+			      <td scope="col">{props.perso.stats.C}</td>
+			    </tr>
+			  </thead>
+			</table>
+			<hr>
+		</div>
+
+		<div if={state.comp}>
+			<div class="row">
+				<!-- Competences -->
+				<div class="col-5 mx-auto">
+					<h2>Competences</h2>
+					<div each={c in props.perso.competences}>
+						<div class="card  mb-3">
+							<div class="card-header" if={c.titre}>{c.titre}</div>
+							<div class="card-body">{c.desc}</div>
+						</div>
+					</div>
+				</div>		
+		
+
+				<!-- Dons et traits -->
+				<div class="col-5  mx-auto">
+					<h2>Don et traits</h2>
+					<div each={c in props.perso.traits}>
+						<div class="card  mb-3">
+							<div class="card-header" if={c.titre}>{c.titre}</div>
+							<div class="card-body">{c.desc}</div>
+						</div>
+					</div>
+				</div>		
+			</div>
+		</div>
+
+		<div if={state.inv}>
+			<h2>Sac de {props.perso.prenom}</h2>
+			<div class="row d-flex align-items-center">
+				<div class="col-3 mx-auto" each={i in props.perso.inventaire.sac}>
+					<div class="card-body">
+						<ul class="list-group">
+							<li class="list-group-item bg-primary text-white" if={i.label}>{i.label}</li>
+							<li class="list-group-item border-primary" if={i.type}>Type : {i.type}</li>
+							<li class="list-group-item border-primary" if={i.degat}>Dégats : D{i.degat}</li>
+							<li class="list-group-item border-primary" if={i.contenu}>Contenu : {i.contenu}</li>
+							<li class="list-group-item border-primary" if={i.qtte}>Quantité : {i.qtte}</li>
+							<li class="list-group-item border-primary" if={i.desc}>Description : {i.desc}</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+
+			<h2>Selle de {props.perso.prenom}</h2>
+			<div class="row d-flex align-items-center">
+				<div class="col-3 mx-auto" each={i in props.perso.inventaire.selle}>
+					<div class="card-body">
+						<ul class="list-group">
+							<li class="list-group-item bg-primary text-white" if={i.label}>{i.label}</li>
+							<li class="list-group-item border-primary" if={i.type}>Type : {i.type}</li>
+							<li class="list-group-item border-primary" if={i.degat}>Dégats : D{i.degat}</li>
+							<li class="list-group-item border-primary" if={i.contenu}>Contenu : {i.contenu}</li>
+							<li class="list-group-item border-primary" if={i.qtte}>Quantité : {i.qtte}</li>
+							<li class="list-group-item border-primary" if={i.desc}>Description : {i.desc}</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>	
+	<script>
+		export default {
+			state : {
+				info : false,
+				comp : false,
+				inv : false,
+				fam : true,
+			},
+
+			_onInfo(){
+				this.state.info = true;
+				this.state.comp = false;
+				this.state.inv = false;
+				this.state.fam = false;
+				this.update();
+			},
+
+			_onComp(){
+				this.state.info = false;
+				this.state.comp = true;
+				this.state.inv = false;
+				this.state.fam = false;
+				this.update();
+			},
+
+			_onInv(){
+				this.state.info = false;
+				this.state.comp = false;
+				this.state.inv = true;
+				this.state.fam = false;
+				this.update();
+			},
+
+			_onFam(){
+				this.state.info = false;
+				this.state.comp = false;
+				this.state.inv = false;
+				this.state.fam = true;
+				this.update();
+			}
+		}
+	</script>
+</fiche>

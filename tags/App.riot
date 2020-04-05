@@ -1,0 +1,128 @@
+<app>
+	<!-- Nav bar -->
+	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+	  <a class="navbar-brand" href="#">Gestionnaire de jdr</a>
+	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+	    <span class="navbar-toggler-icon"></span>
+	  </button>
+
+	  <div class="collapse navbar-collapse" id="navbarColor01">
+	    <ul class="navbar-nav mr-auto">
+	      <li class="nav-item">
+	        <a class="nav-link" href="#">Voir les fiches</a>
+	      </li>
+	      <li class="nav-item">
+	        <a class="nav-link" href="http://devirtuel.com/">Dés en ligne</a>
+	      </li>
+	    </ul>
+	    <ul class="navbar-nav my-2 my-lg-0">
+	      <li class="nav-item">
+	        <a class="nav-link" href="#">Se connecter</a>
+	      </li>
+	    </ul>
+	  </div>
+	</nav>
+
+	<!-- gestions des fiches -->
+	<fiche perso={state.oram}></fiche>
+
+	<script>
+		export default {
+			state : {
+				oram : {
+					nom : "De Barbe",
+					prenom : "Oram",
+					age : 27,
+					niveau : 2,
+					race : "Humain",
+					classe : "Mage",
+					genre : "Homme",
+					pv : 7,
+					pvMax : 7,
+					armure : 0,
+					stats : {
+						F : 40,
+						A : 40,
+						S : 45,
+						P : 50,
+						M : 65,
+						I : 75,
+						C : 60
+					},
+					competences : [
+						{
+							titre: "Invocation",
+							desc : "Invoque une armure enchantée"
+						},
+
+						{
+							titre: "Sort de soin",
+							desc : "Soigne ses aliées, peux s'évanouir pendant 3h"
+						}
+
+					],
+
+					traits : [
+						{
+							titre: "",
+							desc : "A une aptitide pour les sort de vent, a un malus de 5 pour les autres éléments"
+						}
+					],
+
+					inventaire : {
+						sac : [
+							{
+								label : "Dague",
+								type : "ARME",
+								degat : 4
+							},
+
+							{
+								label : "Bourse",
+								type : "CONSOMMABLE",
+								contenu : 0,
+								desc : "PUTAIN DE VOLEURS !!!"
+							},
+
+							{
+								label : "Tempete",
+								type : "MONTURE",
+								animal : "cheval"
+							},
+
+							{
+								label : "Fourche",
+								type : "ARME",
+								degat : 4
+							},
+
+							{
+								label : "Plume d'oie",
+								type : "UTILITAIRE",
+								desc : "Pour écrire"
+							}
+						],
+
+						selle : [
+							{
+								label : "Cuir de boeuf",
+								type : "CONSOMMABLE",
+							},
+							
+							{
+								label : "Viande de boeuf",
+								type : "CONSOMMABLE",
+								qtte : 2
+							}
+						]
+					},
+
+					familier : [
+						{}
+					]
+
+				}
+			}
+		}
+	</script>
+</app>
