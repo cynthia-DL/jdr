@@ -1,6 +1,8 @@
 <fiche>
+	<button class="btn btn-danger" onclick={props.return}><i class="fa fa-mail-reply"></i> RETOUR</button>
 	<div class="container text-center  mx-auto">
-		<h1>Fiche de {props.perso.prenom} - <span class="badge badge-pill badge-secondary">PV : {props.perso.armure} + {props.perso.pv} / {props.perso.pvMax}</span></h1>
+		<h1>Fiche de {props.perso.prenom} - <span class="badge badge-pill badge-secondary">PV : <span if={props.perso.armure}> {props.perso.armure}+</span> {props.perso.pv} / {props.perso.pvMax}</span>
+		</h1>
 		<hr>
 		<div class="row">
 			<button class="btn btn-outline-primary mx-auto" onclick={_onInfo}>Informations et statistiques</button>
@@ -116,6 +118,7 @@
 							<li class="list-group-item border-primary" if={i.degat}>Dégats : D{i.degat}</li>
 							<li class="list-group-item border-primary" if={i.contenu}>Contenu : {i.contenu}</li>
 							<li class="list-group-item border-primary" if={i.qtte}>Quantité : {i.qtte}</li>
+							<li class="list-group-item border-primary" if={i.animal}>Animal : {i.animal}</li>
 							<li class="list-group-item border-primary" if={i.desc}>Description : {i.desc}</li>
 						</ul>
 					</div>
@@ -132,6 +135,7 @@
 							<li class="list-group-item border-primary" if={i.degat}>Dégats : D{i.degat}</li>
 							<li class="list-group-item border-primary" if={i.contenu}>Contenu : {i.contenu}</li>
 							<li class="list-group-item border-primary" if={i.qtte}>Quantité : {i.qtte}</li>
+							<li class="list-group-item border-primary" if={i.animal}>Animal : {i.animal}</li>
 							<li class="list-group-item border-primary" if={i.desc}>Description : {i.desc}</li>
 						</ul>
 					</div>
@@ -180,10 +184,10 @@
 	<script>
 		export default {
 			state : {
-				info : false,
+				info : true,
 				comp : false,
 				inv : false,
-				fam : true,
+				fam : false,
 			},
 
 			_onInfo(){

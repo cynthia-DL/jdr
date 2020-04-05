@@ -49,7 +49,7 @@ oram : {
 			{
 				label : "Bourse",
 				type : "CONSOMMABLE",
-				contenu : 0,
+				contenu : "0po",
 				desc : "PUTAIN DE VOLEURS !!!"
 			},
 

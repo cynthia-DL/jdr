@@ -1,0 +1,47 @@
+<vignette class="col-4 mx-auto">
+	<div>
+		<div class="card-body">
+			<ul class="list-group">
+				<li class="list-group-item bg-primary text-white">
+					<h2>{props.perso.prenom}<br>
+					<span class="badge badge-pill badge-secondary">PV : <span if={props.perso.armure}> {props.perso.armure}+ </span> {props.perso.pv} / {props.perso.pvMax}</span>
+					</h2>
+				</li>
+				<li class="list-group-item border-primary">
+					<table class="table table-hover">
+					  <thead>
+					    <tr class="table-active">
+					      <th scope="col">F</th>
+					      <th scope="col">A</th>
+					      <th scope="col">S</th>
+					      <th scope="col">P</th>
+					      <th scope="col">M</th>
+					      <th scope="col">I</th>
+					      <th scope="col">C</th>
+					    </tr>
+					    <tr>
+					      <td scope="col">{props.perso.stats.F}</td>
+					      <td scope="col">{props.perso.stats.A}</td>
+					      <td scope="col">{props.perso.stats.S}</td>
+					      <td scope="col">{props.perso.stats.P}</td>
+					      <td scope="col">{props.perso.stats.M}</td>
+					      <td scope="col">{props.perso.stats.I}</td>
+					      <td scope="col">{props.perso.stats.C}</td>
+					    </tr>
+					  </thead>
+					</table>
+				</li>
+				<li class="list-group-item border-primary text-center"><button class="btn btn-outline-primary"  onclick={_test}><i class="fa fa-info-circle"></i> En voir plus</button></li>
+			</ul>
+		</div>
+	</div>
+	<script>
+		export default {
+			_test(){
+				if (this.props.fct){
+					this.props.fct(this.props.perso);
+				}
+			}
+		}
+	</script>
+</vignette>
