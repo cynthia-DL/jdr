@@ -3,10 +3,12 @@
 		<div class="card-body">
 			<ul class="list-group">
 				<li class="list-group-item bg-primary text-white">
+					<!-- Prenom et PV du personnage -->
 					<h2>{props.perso.prenom}<br>
 					<span class="badge badge-pill badge-secondary">PV : <span if={props.perso.armure}> {props.perso.armure}+ </span> {props.perso.pv} / {props.perso.pvMax}</span>
 					</h2>
 				</li>
+				<!-- Stats -->
 				<li class="list-group-item border-primary">
 					<table class="table table-hover">
 					  <thead>
@@ -31,12 +33,14 @@
 					  </thead>
 					</table>
 				</li>
+				<!-- Boutton pour ouvrir les fiches -->
 				<li class="list-group-item border-primary text-center"><button class="btn btn-outline-primary"  onclick={_test}><i class="fa fa-info-circle"></i> En voir plus</button></li>
 			</ul>
 		</div>
 	</div>
 	<script>
 		export default {
+			// Cette fonction ouvre une fiche via le pere
 			_test(){
 				if (this.props.fct){
 					this.props.fct(this.props.perso);

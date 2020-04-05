@@ -407,17 +407,20 @@
 				curPerso : null
 			},
 
+			// Fonction du fils pour afficher une fiche en entier
 			_toggle(perso){
 				this.update({"curPerso":perso});
 				this._fullVer();
 			},
 
+			//Fonction du pere pour afficher une fiche en entier
 			_fullVer(){
 				this.state.fiche = !this.state.fiche;
 				this.state.liste = !this.state.fiche;
 				this.update();
 			},
 
+			//Fonction du boutton retour
 			_retour(){
 				this.state.liste = true;
 				this.state.fiche = false;

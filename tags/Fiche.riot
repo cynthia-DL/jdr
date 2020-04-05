@@ -1,16 +1,22 @@
-<fiche>
+<fiche class="container">
+	<!-- Boutton retour -->
 	<button class="btn btn-danger" onclick={props.return}><i class="fa fa-mail-reply"></i> RETOUR</button>
+	
+	<!-- Debut de la fiche -->
 	<div class="container text-center  mx-auto">
 		<h1>Fiche de {props.perso.prenom} - <span class="badge badge-pill badge-secondary">PV : <span if={props.perso.armure}> {props.perso.armure}+</span> {props.perso.pv} / {props.perso.pvMax}</span>
 		</h1>
 		<hr>
+		<!-- Les boutttons de navigation dans une fiche -->
 		<div class="row">
 			<button class="btn btn-outline-primary mx-auto" onclick={_onInfo}>Informations et statistiques</button>
 			<button class="btn btn-outline-primary mx-auto" onclick={_onComp}>Compétences, dons et traits</button>
 			<button class="btn btn-outline-primary mx-auto" onclick={_onInv}>Inventaire</button>
 			<button class="btn btn-outline-primary mx-auto" onclick={_onFam} if={props.perso.familier}>Familier(s)</button>
 		</div>
-
+		<br>
+		
+		<!-- Infos générales -->
 		<div if={state.info}>
 			<h2>Informations générales</h2>
 			<div class="row">
@@ -53,7 +59,7 @@
 				</div>
 			</div>
 			<hr>
-
+			<!-- Statistiques -->
 			<h2>Statistiques</h2>
 			<table class="table table-hover">
 			  <thead>
@@ -107,7 +113,9 @@
 			</div>
 		</div>
 
+		<!-- Inventaire -->
 		<div if={state.inv}>
+			<!-- Contenu du sac -->
 			<h2>Sac de {props.perso.prenom}</h2>
 			<div class="row d-flex align-items-center">
 				<div class="col-3 mx-auto" each={i in props.perso.inventaire.sac}>
@@ -124,7 +132,8 @@
 					</div>
 				</div>
 			</div>
-
+			
+			<!-- Contenu de la selle -->
 			<h2>Selle de {props.perso.prenom}</h2>
 			<div class="row d-flex align-items-center">
 				<div class="col-3 mx-auto" each={i in props.perso.inventaire.selle}>
@@ -142,16 +151,21 @@
 				</div>
 			</div>
 		</div>
-
+		
+		<!-- Familiers -->
 		<div if={state.fam}>
 			<div class="col-10 mx-auto" each={f in props.perso.familier}>
 				<div class="card-body">
 					<ul class="list-group">
+						<!-- Nom du famillier + ses PV -->
 						<li class="list-group-item bg-primary text-white">
 							<h3 if={f.nom}>{f.nom}</h3>
 							<span class="badge badge-pill badge-secondary">PV : {f.armure} + {f.pv} / {f.pvMax}</li>
+						<!-- Label -->
 						<li class="list-group-item bg-primary text-white" if={f.label}>{f.label}</li>
+						<!-- Type -->
 						<li class="list-group-item border-primary" if={f.type}>Type : {f.type}</li>
+						<!-- Statistiques du familier -->
 						<li class="list-group-item border-primary">
 							<table class="table table-hover">
 							  <thead>
@@ -176,6 +190,7 @@
 							  </thead>
 							</table>							
 						</li>
+						<!-- Description du familier -->
 						<li class="list-group-item border-primary" if={f.desc}>Description : {f.desc}</li>
 				</div>
 			</div>
