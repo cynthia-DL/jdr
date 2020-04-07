@@ -5,8 +5,9 @@
 				<li class="list-group-item bg-primary text-white">
 					<!-- Prenom et PV du personnage -->
 					<h2>{props.perso.prenom}<br>
-					<span class="badge badge-pill badge-secondary">PV : {props.perso.pv} / {props.perso.pvMax}</span>
-					<span if={props.perso.armure} class="badge badge-pill badge-secondary">Armure : {props.perso.armure}</span>
+					<span class="badge badge-pill badge-secondary"><i class="fa fa-heartbeat" aria-hidden="true"></i> 
+ {props.perso.pv} / {props.perso.pvMax}</span>
+					<span if={props.perso.armure} class="badge badge-pill badge-success"><i class="fa fa-shield" aria-hidden="true"></i> {props.perso.armure}</span>
 					</h2>
 				</li>
 				<!-- Stats -->
@@ -35,7 +36,7 @@
 					</table>
 				</li>
 				<!-- Boutton pour ouvrir les fiches -->
-				<li class="list-group-item border-primary text-center"><button class="btn btn-outline-primary"  onclick={_test}><i class="fa fa-info-circle"></i> En voir plus</button></li>
+				<li class="list-group-item border-primary text-center"><button class="btn btn-outline-success"  onclick={_test}><i class="fa fa-info-circle"></i> En voir plus</button></li>
 			</ul>
 		</div>
 	</div>

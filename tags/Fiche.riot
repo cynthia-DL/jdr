@@ -5,17 +5,17 @@
 	<!-- Debut de la fiche -->
 	<div class="container text-center  mx-auto">
 		<h1>Fiche de {props.perso.prenom} - 
-		<span class="badge badge-pill badge-secondary">PV : {props.perso.pv} / {props.perso.pvMax}</span>
-		<span if={props.perso.armure} class="badge badge-pill badge-secondary">Armure : {props.perso.armure}</span>
+		<span class="badge badge-pill badge-secondary"><i class="fa fa-heartbeat" aria-hidden="true"></i> {props.perso.pv} / {props.perso.pvMax}</span>
+		<span if={props.perso.armure} class="badge badge-pill badge-success"><i class="fa fa-shield" aria-hidden="true"></i> {props.perso.armure}</span>
 		</h1>
 		<hr>
 		<!-- Les bouttons de navigation dans une fiche -->
 		<div class="row">
-			<button class="btn btn-outline-primary mx-auto" onclick={_onInfo}>Informations</button>
-			<button class="btn btn-outline-primary mx-auto" onclick={_onStats}>Statistiques</button>
-			<button class="btn btn-outline-primary mx-auto" onclick={_onComp}>Compétences, dons et traits</button>
-			<button class="btn btn-outline-primary mx-auto" onclick={_onInv}>Inventaire</button>
-			<button class="btn btn-outline-primary mx-auto" onclick={_onFam} if={props.perso.familier}>Familier(s)</button>
+			<button class="btn btn-outline-primary mx-auto" onclick={_onInfo}><i class="fa fa-info" aria-hidden="true"></i> Informations</button>
+			<button class="btn btn-outline-primary mx-auto" onclick={_onStats}><i class="fa fa-bar-chart" aria-hidden="true"></i> Statistiques</button>
+			<button class="btn btn-outline-primary mx-auto" onclick={_onComp}><i class="fa fa-book" aria-hidden="true"></i> Compétences, dons et traits</button>
+			<button class="btn btn-outline-primary mx-auto" onclick={_onInv}><i class="fa fa-briefcase" aria-hidden="true"></i> Inventaire</button>
+			<button class="btn btn-outline-primary mx-auto" onclick={_onFam} if={props.perso.familier}><i class="fa fa-paw" aria-hidden="true"></i> Familier(s)</button>
 		</div>
 		<br>
 
@@ -25,12 +25,14 @@
 			<div class="row">
 				<div class="card col-5 mx-auto mb-3">
 					<em class="text-primary">Nom</em>
-					<em>{props.perso.nom}</em>	
+					<em if={props.perso.nom}>{props.perso.nom}</em>
+					<em if={!props.perso.nom}>Ce personnage n'a pas de nom</em>	
 				</div>
 				
 				<div class="card col-5  mx-auto mb-3">
 					<em class="text-primary">Prenom</em>
-					<em>{props.perso.prenom}</em>
+					<em if={props.perso.prenom}>{props.perso.prenom}</em>
+					<em if={!props.perso.prenom}>Ce personnage n'a pas de prénom</em>
 				</div>
 				
 			</div>
@@ -38,36 +40,46 @@
 			<div class="row">
 				<div class="card col-3 mx-auto mb-3">
 					<em class="text-primary">Âge</em>
-					<em>{props.perso.age}</em>
+					<em if={props.perso.age}>{props.perso.age}</em>
+					<em if={!props.perso.age}>Ce personnage n'a pas d'age</em>
 				</div>
 				<div class="card col-3 mx-auto mb-3">
 					<em class="text-primary">Niveau</em>
-					<em>{props.perso.niveau}</em>
+					<em if={props.perso.niveau}>{props.perso.niveau}</em>
+					<em if={!props.perso.niveau}>Ce personnage n'a pas de niveau</em>
 				</div>
 				
 				<div class="card col-3 mx-auto mb-3">
 					<em class="text-primary">Classe</em>
-					<em>{props.perso.classe}</em>
+					<em if={props.perso.classe}>{props.perso.classe}</em>
+					<em if={!props.perso.classe}>Ce personnage n'a pas de classe</em>
 				</div>
 			</div>
 
 			<div class="row">
 				<div class="card col-5 mx-auto mb-3">
 					<em class="text-primary">Race</em>
-					<em>{props.perso.race}</em>
+					<em if={props.perso.race}>{props.perso.race}</em>
+					<em if={!props.perso.race}>Ce personnage n'a pas de race. Yikes.</em>
 				</div>
 				<div class="card col-5 mx-auto mb-3">
 					<em class="text-primary">Genre</em>
-					<em>{props.perso.genre}</em>
+					<em if={props.perso.genre}>{props.perso.genre}</em>
+					<em if={!props.perso.genre}>Ce personnage n'a pas de genre</em>
 				</div>
 			</div>
 			<hr>
+			<div class="card mx-auto mb-3">
+				<em class="text-primary">Lore</em>
+				<em if={props.perso.lore}>{props.perso.lore}</em>
+				<em if={!props.perso.lore}>Ce personnage n'a pas de lore</em>
+			</div>
 		</div>
 	
-			<!-- Statistiques -->
+		<!-- Statistiques -->
 		<div if={state.stats}>
 			<h2>Statistiques</h2>
-				<table class="table table-hover">
+				<table class="table table-hover" if={props.perso.statsData}>
 				  <thead>
 				    <tr class="table-active">
 				      <th scope="col">Force</th>
@@ -138,6 +150,9 @@
 						</ul>
 					</div>
 				</div>
+				<div class="mx-auto" if={!props.perso.inventaire.sac}>
+					Le sac de ce personnage est vide
+				</div>
 			</div>
 			
 			<!-- Contenu de la selle -->
@@ -155,6 +170,9 @@
 							<li class="list-group-item border-primary" if={i.desc}>Description : {i.desc}</li>
 						</ul>
 					</div>
+				</div>
+				<div class="mx-auto" if={!props.perso.inventaire.selle}>
+					La selle de ce personnage est vide
 				</div>
 			</div>
 		</div>
