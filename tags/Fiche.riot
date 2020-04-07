@@ -9,10 +9,10 @@
 		<span if={props.perso.armure} class="badge badge-pill badge-secondary">Armure : {props.perso.armure}</span>
 		</h1>
 		<hr>
-		<!-- Les boutttons de navigation dans une fiche -->
+		<!-- Les bouttons de navigation dans une fiche -->
 		<div class="row">
 			<button class="btn btn-outline-primary mx-auto" onclick={_onInfo}>Informations</button>
-			<!-- <button class="btn btn-outline-primary mx-auto" onclick={_onStats}>Statistiques</button> -->
+			<button class="btn btn-outline-primary mx-auto" onclick={_onStats}>Statistiques</button>
 			<button class="btn btn-outline-primary mx-auto" onclick={_onComp}>Compétences, dons et traits</button>
 			<button class="btn btn-outline-primary mx-auto" onclick={_onInv}>Inventaire</button>
 			<button class="btn btn-outline-primary mx-auto" onclick={_onFam} if={props.perso.familier}>Familier(s)</button>
@@ -62,8 +62,10 @@
 				</div>
 			</div>
 			<hr>
+		</div>
 	
 			<!-- Statistiques -->
+		<div if={state.stats}>
 			<h2>Statistiques</h2>
 				<table class="table table-hover">
 				  <thead>
@@ -219,13 +221,13 @@
 				this.state.fam = false;
 				this.update();
 			},
+
 			_onStats(){
 				this.state.info = false;
 				this.state.stats = true;
 				this.state.comp = false;
 				this.state.inv = false;
 				this.state.fam = false;
-				this._drawStatGraph();
 				this.update();
 			},
 
