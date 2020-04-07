@@ -5,7 +5,8 @@
 				<li class="list-group-item bg-primary text-white">
 					<!-- Prenom et PV du personnage -->
 					<h2>{props.perso.prenom}<br>
-					<span class="badge badge-pill badge-secondary">PV : <span if={props.perso.armure}> {props.perso.armure}+ </span> {props.perso.pv} / {props.perso.pvMax}</span>
+					<span class="badge badge-pill badge-secondary">PV : {props.perso.pv} / {props.perso.pvMax}</span>
+					<span if={props.perso.armure} class="badge badge-pill badge-secondary">Armure : {props.perso.armure}</span>
 					</h2>
 				</li>
 				<!-- Stats -->

@@ -4,7 +4,9 @@
 	
 	<!-- Debut de la fiche -->
 	<div class="container text-center  mx-auto">
-		<h1>Fiche de {props.perso.prenom} - <span class="badge badge-pill badge-secondary">PV : <span if={props.perso.armure}> {props.perso.armure}+</span> {props.perso.pv} / {props.perso.pvMax}</span>
+		<h1>Fiche de {props.perso.prenom} - 
+		<span class="badge badge-pill badge-secondary">PV : {props.perso.pv} / {props.perso.pvMax}</span>
+		<span if={props.perso.armure} class="badge badge-pill badge-secondary">Armure : {props.perso.armure}</span>
 		</h1>
 		<hr>
 		<!-- Les boutttons de navigation dans une fiche -->
@@ -209,10 +211,6 @@
 				fam : false,
 			},
 
-			onMounted(props, state) {
-				this._drawStatGraph();
-			},
-
 			_onInfo(){
 				this.state.info = true;
 				this.state.stats = false;
@@ -256,43 +254,6 @@
 				this.state.inv = false;
 				this.state.fam = true;
 				this.update();
-			},
-
-			_drawStatGraph(){
-
-			/* Radar chart design created by Nadieh Bremer - VisualCinnamon.com */
-			////////////////////////////////////////////////////////////// 
-			//////////////////////// Set-Up ////////////////////////////// 
-			////////////////////////////////////////////////////////////// 
-
-			var margin = {top: 100, right: 100, bottom: 100, left: 100},
-			width = Math.min(700, window.innerWidth - 10) - margin.left - margin.right,
-			height = Math.min(width, window.innerHeight - margin.top - margin.bottom - 20);
-
-			////////////////////////////////////////////////////////////// 
-			////////////////////////// Data ////////////////////////////// 
-			////////////////////////////////////////////////////////////// 
-
-			console.log(this.props.perso.statsData);
-			var data = this.props.perso.statsData;
-			////////////////////////////////////////////////////////////// 
-			//////////////////// Draw the Chart ////////////////////////// 
-			////////////////////////////////////////////////////////////// 
-
-			var color = d3.scale.ordinal()
-			.range(["#B58900", "#839496", "#2AA198", "#268BD2", "#CB4B16", "#D33682"]);
-
-			var radarChartOptions = {
-				w: width,
-				h: height,
-				margin: margin,
-				maxValue: 0.5,
-				levels: 5,
-				roundStrokes: true,
-				color: color
-			};
-			//Call function to draw the Radar chart
-			RadarChart(".radarChart", data, radarChartOptions);
 			}
 		}
 	</script>

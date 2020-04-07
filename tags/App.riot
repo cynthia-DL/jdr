@@ -37,7 +37,7 @@
 				fiche : false,
 
 				perso : [
-				 {
+					{
 						nom : "De Barbe",
 						prenom : "Oram",
 						age : 27,
@@ -449,8 +449,8 @@
 
 			//Fonction du pere pour afficher une fiche en entier
 			_fullVer(){
-				this.state.fiche = !this.state.fiche;
-				this.state.liste = !this.state.fiche;
+				this.state.liste = false;
+				this.state.fiche = true;
 				this.update();
 			},
 

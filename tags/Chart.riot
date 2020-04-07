@@ -3,6 +3,10 @@
 
 	<script>
 		export default {
+			onMounted(props, state) {
+				this._drawStatGraph();
+			},
+
 			_drawStatGraph(){
 
 			/* Radar chart design created by Nadieh Bremer - VisualCinnamon.com */
