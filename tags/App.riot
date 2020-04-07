@@ -9,10 +9,13 @@
 	  <div class="collapse navbar-collapse" id="navbarColor01">
 	    <ul class="navbar-nav mr-auto">
 	      <li class="nav-item">
-	        <a class="nav-link" href="#"><i class="fa fa-id-card"></i> Voir les fiches</a>
+	         <button class="btn nav-link" onclick={_retour}><i class="fa fa-id-card"></i> Voir les fiches</button>
 	      </li>
 	      <li class="nav-item">
 	        <a class="nav-link" href="http://devirtuel.com/" target="_blank"><i class="fa fa-random" aria-hidden="true"></i> Dés en ligne</a>
+	      </li>
+	      <li class="nav-item">
+	        <button class="btn nav-link" onclick={_onStoryLine}><i class="fa fa-archive" aria-hidden="true"></i> StoryLine</button>
 	      </li>
 	    </ul>
 	    <ul class="navbar-nav my-2 my-lg-0">
@@ -27,14 +30,21 @@
 	<div class="row d-flex align-items-center" if={state.liste}>
 		<vignette each={p in state.perso} perso={p} fct={_toggle}></vignette>
 	</div>
-
+	
+	<!-- Affichage d'une fiche en plein écran -->
 	<fiche perso={state.curPerso} if={state.fiche} return={_retour}></fiche>
+
+	<!-- La Storyline -->
+	<div class="container" if={state.storyline}>
+		<chapitre each={c in state.contenu} contenu={c}></chapitre>
+	</div>
 	
 	<script>
 		export default {
 			state : {
 				liste : true,
 				fiche : false,
+				storyLine : false,
 
 				perso : [
 					{
@@ -455,6 +465,18 @@
 					},
 				],
 
+				contenu : [
+					{
+						date : "07-04-2020",
+						resume : "suite à une discution avec le gérant de l'écurie, il se trouve que ses fils lui ont amené des chevaux volés dans le but de les revendre. ainsi, nos héros décident de se rendre au ranch des dits fils pour, je cite, \"leur casser la gueule\""
+					},
+
+					{
+						date : "05-04-2020",
+						resume : "Noct, Oram et Gwen se retrouvent à aider les gardiens après avoir vaincu un Sheikan affaiblit. Nul ne sais ce qu'il est devenu ni ou il est aller, la prudence est donc de mise. C'est dans ce climat ou nos héros ont décidé de visiter une ville voisine pas très honête... Ou Oram c'est fait détroussé. Nos heros essayent de recuperer les biens d'Oram et leurs chevaux, retrouvé dans une ecurie de la dit ville après s'etre fait magnipulé mentalement dans une église ((feat les fotes d'aurtaugrafe))"
+					}
+				],
+
 				curPerso : null
 			},
 
@@ -468,6 +490,7 @@
 			_fullVer(){
 				this.state.liste = false;
 				this.state.fiche = true;
+				this.state.storyline = false;
 				this.update();
 			},
 
@@ -475,6 +498,14 @@
 			_retour(){
 				this.state.liste = true;
 				this.state.fiche = false;
+				this.state.storyline = false;
+				this.update();
+			},
+
+			_onStoryLine(){
+				this.state.liste = false;
+				this.state.fiche = false;
+				this.state.storyline = true;
 				this.update();
 			}
 		}
