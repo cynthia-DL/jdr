@@ -43,13 +43,13 @@
 					      <th scope="col">C</th>
 					    </tr>
 					    <tr>
-					      <td scope="col">{props.perso.stats.F}</td>
-					      <td scope="col">{props.perso.stats.A}</td>
-					      <td scope="col">{props.perso.stats.S}</td>
-					      <td scope="col">{props.perso.stats.P}</td>
-					      <td scope="col">{props.perso.stats.M}</td>
-					      <td scope="col">{props.perso.stats.I}</td>
-					      <td scope="col">{props.perso.stats.C}</td>
+					      <td scope="col">{Math.round(props.perso.statsData[0][0].value * 100)}</td>
+					      <td scope="col">{Math.round(props.perso.statsData[0][1].value * 100)}</td>
+					      <td scope="col">{Math.round(props.perso.statsData[0][2].value * 100)}</td>
+					      <td scope="col">{Math.round(props.perso.statsData[0][3].value * 100)}</td>
+					      <td scope="col">{Math.round(props.perso.statsData[0][4].value * 100)}</td>
+					      <td scope="col">{Math.round(props.perso.statsData[0][5].value * 100)}</td>
+					      <td scope="col">{Math.round(props.perso.statsData[0][6].value * 100)}</td>
 					    </tr>
 					  </thead>
 					</table>
