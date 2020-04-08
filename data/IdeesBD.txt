@@ -1,0 +1,83 @@
+Tables : 
+    - Personnage (Table) done
+        ° idJoueur
+        ° idEtat (clé étrangère vers idEtat de Etat) 1
+        ° nom
+        ° prenom
+        ° age
+        ° niveau
+        ° idRace (clé étrangère vers idRace de Race) 1
+        ° idClasse (clé étrangère vers idClasse de Classe) 3
+        ° idGenre (clé étrangère vers idGenre de Genre) 2
+        ° pv
+        ° pvMax
+        ° armure
+        ° idStatistique (clé étrangère vers idStatistique de Statistique) (mettre les stats des familiers inexistantes à 0)
+
+    - Etat (Enum) done
+        ° idEtat
+        ° nomEtat
+
+    - Race (Enum) done
+        ° idRace
+        ° nomRace
+
+    - Classe (Enum) done
+        ° idClasse
+        ° nomClasse
+
+    - Genre (Enum) done
+        ° idGenre
+        ° nomGenre
+
+    - Statistique (Table) done
+        ° idStatistique
+        ° force
+        ° agilite
+        ° social
+        ° perception
+        ° mental
+        ° intelligence (IL FAUT ECRIRE "intelligence" ET PAS "inteligence" CYNTHIA XD)
+        ° constitution
+
+    - TypeInventaire (Enum) done
+        ° idTypeInventaire
+        ° nomTypeInventaire
+
+    - TypeObjet (Enum) done
+        ° idTypeObjet
+        ° nomTypeObjet
+
+    - Animal (Enum) done
+        ° idAnimal
+        ° nomAnimal
+
+    - Familier (Table) done
+        ° idFamilier
+        ° idPersonnage (clé étrangère vers idPersonnage de Personnage)
+        ° nomFamilier
+        ° pv
+        ° pvMax
+        ° armure
+        ° idStatistique (clé étrangère vers idStatistique de Statistique)
+        ° descriptionFamilier
+
+ - Inventaire (Table) done
+        ° idInventaire
+        ° idPersonnage (clé étrangère vers idPersonnage de Personnage)
+        ° idTypeInventaire (clé étrangère vers idTypeInventaire de TypeInventaire)
+        ° nomObjet
+        ° idTypeObjet (clé étrangère vers idTypeObjet de TypeObjet)
+        ° degatObjet
+        ° protectionObjet
+        ° contenuObjet
+        ° quantiteObjet
+        ° idAnimal (clé étrangère vers idAnimal de Animal)
+        ° descriptionObjet
+
+    - Aptitude (Table) done
+        ° idAptitude
+        ° estUneCompetence
+        ° idPersonnage (clé étrangère vers idPersonnage de Personnage)
+        ° nomAptitude
+        ° descriptionAptitude
