@@ -4,10 +4,29 @@
 			<ul class="list-group">
 				<li class="list-group-item bg-primary text-white">
 					<!-- Prenom et PV du personnage -->
-					<h2>{props.perso.prenom}<br>
-					<span class="badge badge-pill badge-secondary"><i class="fa fa-heartbeat" aria-hidden="true"></i> 
- {props.perso.pv} / {props.perso.pvMax}</span>
-					<span if={props.perso.armure} class="badge badge-pill badge-success"><i class="fa fa-shield" aria-hidden="true"></i> {props.perso.armure}</span>
+					<h2>{props.perso.prenom}
+					<br />
+					<span class="badge badge-pill badge-secondary">
+						<i class="fa fa-heartbeat" aria-hidden="true">&nbsp;</i>
+						{props.perso.pv} / {props.perso.pvMax}
+					</span>
+					<span if={props.perso.armure} class="badge badge-pill badge-info">
+						<i class="fa fa-shield" aria-hidden="true">&nbsp;</i>
+						{props.perso.armure}
+					</span>
+					<br />
+					<span if={props.perso.etat == "Actif"} class="badge badge-pill badge-success">
+						<i class="fa fa-check-square-o" aria-hidden="true">&nbsp;</i>
+						{props.perso.etat}
+					</span>
+					<span if={props.perso.etat == "Reroll"} class="badge badge-pill badge-warning">
+						<i class="fa fa-recycle" aria-hidden="true">&nbsp;</i>
+						{props.perso.etat}
+					</span>
+					<span if={props.perso.etat == "Mort"} class="badge badge-pill badge-danger">
+						<i class="fa fa-window-close" aria-hidden="true">&nbsp;</i>
+						{props.perso.etat}
+					</span>
 					</h2>
 				</li>
 				<!-- Stats -->

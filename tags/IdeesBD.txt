@@ -1,0 +1,22 @@
+Tables :
+    - Perso :
+        ° idEtat (clé étrangère vers idEtat de Etat)
+        ° nom
+        ° prenom
+        ° age
+        ° niveau
+        ° idRace (clé étrangère vers idRace de Race)
+        ° idClasse (clé étrangère vers idClasse de Classe)
+        ° 
+        ° 
+        ° 
+        ° 
+    - Etat
+        ° idEtat
+        ° nomEtat
+    - Race
+        ° idRace
+        ° nomRace
+    - Classe
+        ° idClasse
+        °
