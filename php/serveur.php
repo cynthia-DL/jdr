@@ -40,6 +40,26 @@
 	}
 
 	/**
+	* Permet de récupérer tous les chapitres
+	* @param $DB
+	* @return array de tous les chapitres
+	*/
+	function getArrayChapitre($DB){
+		$resultat = mysqli_query($DB, "SELECT * from jdrChapitre ORDER BY date DESC");
+		$arrayChapitre = array();
+		$i = 0;
+		
+		while ($ligne = $resultat->fetch_assoc()){
+			$arrayChapitre[$i] = $ligne;
+			$i++;
+		}
+
+		mysqli_free_result($resultat);
+		
+		return $arrayChapitre;
+	}
+
+	/**
 	* Permet de récupérer toutes les classes
 	* @param $DB
 	* @return array de toutes les classes possibles
@@ -362,6 +382,8 @@
 	$arrayTrait = getArrayTrait($DB, 1);
 	$personnage = getPersonnage($DB, 1);
 	print_r($personnage);
+	echo "<br/>";
+	print_r(getArrayChapitre($DB));
 
 	closeDb($DB);
 ?>
