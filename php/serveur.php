@@ -211,6 +211,40 @@
 		return $arrayTypeObjet;
 	}
 
+		/**
+	* Permet de récupérer les familiers d'un personnage
+	* @param $DB
+	* @param $idPersonnage l'ID du personnage
+	* @return array de tout les familiers du personnage
+	*/
+	function getFamilier($DB, $idPersonnage){
+		$i = 0;
+		$stmt = mysqli_prepare($DB, "SELECT nomFamilier, pvFamilier, pvMaxFamilier, armureFamilier, idStatistique, descriptionFamilier FROM jdrFamilier WHERE idPersonnage = ? ");
+		mysqli_stmt_bind_param($stmt, 'i', $idPersonnage);
+		mysqli_execute($stmt);
+		$resultat = mysqli_stmt_bind_result($stmt, $nom, $pv, $pvMax, $armure, $idStatistique, $description);
+		
+		$familier = array();
+		
+		if($resultat) {
+			while(mysqli_stmt_fetch($stmt)){
+				$familier[$i]["nom"] = $nom;
+				$familier[$i]["pv"] = $pv;
+				$familier[$i]["pvMax"] = $pvMax;
+				$familier[$i]["armure"] = $armure;
+				$familier[$i]["description"] = $description;
+				$familier[$i]["statistiques"] = $idStatistique;
+
+				$i++;
+			}
+		}
+
+		for ($i = 0; $i < count($familier); $i++)
+			$familier[$i]["statistiques"] = getStatistique($DB, $familier[$i]["statistiques"]);
+
+		return $familier;
+	}
+
 	/**
 	* Permet de récupérer l'inventaire d'un personnage
 	* @param $DB
@@ -228,6 +262,10 @@
 		
 		if($resultat) {
 			while(mysqli_stmt_fetch($stmt)){
+				if(is_array($inventaire[$typeInventaire]))
+					$i = count($inventaire[$typeInventaire]);
+				else $i = 0;
+
 				$inventaire[$typeInventaire][$i]["nom"] = $nom;
 				$inventaire[$typeInventaire][$i]["type"] = $type;
 				$inventaire[$typeInventaire][$i]["degat"] = $degat;
@@ -236,8 +274,6 @@
 				$inventaire[$typeInventaire][$i]["quantite"] = $quantite;
 				$inventaire[$typeInventaire][$i]["animal"] = $animal;
 				$inventaire[$typeInventaire][$i]["description"] = $description;
-
-				$i++;
 			}
 		}
 
@@ -278,6 +314,7 @@
 
 		$personnage["statistiques"] = getStatistique($DB, $personnage["statistiques"]);
 		$personnage["inventaire"] = getInventaire($DB, $idPersonnage);
+		$personnage["familier"] = getFamilier($DB, $idPersonnage);
 		
 		return $personnage;
 	}
