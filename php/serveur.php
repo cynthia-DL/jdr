@@ -36,8 +36,6 @@
 
 		mysqli_free_result($resultat);
 
-		print_r($arrayAnimal);
-
 		return $arrayAnimal;
 	}
 
@@ -57,8 +55,6 @@
 		}
 
 		mysqli_free_result($resultat);
-
-		print_r($arrayClasse);
 		
 		return $arrayClasse;
 	}
@@ -85,8 +81,6 @@
 				$i++;
 			}
 		}
-
-		print_r($arrayCompetence);
 		
 		return $arrayCompetence;
 	}
@@ -107,8 +101,6 @@
 		}
 
 		mysqli_free_result($resultat);
-
-		print_r($arrayEtat);
 		
 		return $arrayEtat;
 	}
@@ -129,8 +121,6 @@
 		}
 
 		mysqli_free_result($resultat);
-
-		print_r($arrayGenre);
 		
 		return $arrayGenre;
 	}
@@ -151,8 +141,6 @@
 		}
 
 		mysqli_free_result($resultat);
-
-		print_r($arrayRace);
 		
 		return $arrayRace;
 	}
@@ -179,8 +167,6 @@
 				$i++;
 			}
 		}
-
-		print_r($arrayTrait);
 		
 		return $arrayTrait;
 	}
@@ -201,8 +187,6 @@
 		}
 
 		mysqli_free_result($resultat);
-
-		print_r($arrayTypeInventaire);
 		
 		return $arrayTypeInventaire;
 	}
@@ -224,9 +208,40 @@
 
 		mysqli_free_result($resultat);
 
-		print_r($arrayTypeObjet);
-		
 		return $arrayTypeObjet;
+	}
+
+	/**
+	* Permet de récupérer l'inventaire d'un personnage
+	* @param $DB
+	* @param $idPersonnage l'ID du personnage
+	* @return array de tout l'inventaire du personnage
+	*/
+	function getInventaire($DB, $idPersonnage){
+		$i = 0;
+		$stmt = mysqli_prepare($DB, "SELECT nomTypeInventaire, nomObjet, nomTypeObjet, degatObjet, protectionObjet, contenuObjet, quantiteObjet, nomAnimal, descriptionObjet FROM jdrInventaire NATURAL JOIN jdrTypeInventaire NATURAL JOIN jdrTypeObjet NATURAL JOIN jdrAnimal WHERE idPersonnage = ? ");
+		mysqli_stmt_bind_param($stmt, 'i', $idPersonnage);
+		mysqli_execute($stmt);
+		$resultat = mysqli_stmt_bind_result($stmt, $typeInventaire, $nom, $type, $degat, $protection, $contenu, $quantite, $animal, $description);
+		
+		$inventaire = array();
+		
+		if($resultat) {
+			while(mysqli_stmt_fetch($stmt)){
+				$inventaire[$typeInventaire][$i]["nom"] = $nom;
+				$inventaire[$typeInventaire][$i]["type"] = $type;
+				$inventaire[$typeInventaire][$i]["degat"] = $degat;
+				$inventaire[$typeInventaire][$i]["protection"] = $protection;
+				$inventaire[$typeInventaire][$i]["contenu"] = $contenu;
+				$inventaire[$typeInventaire][$i]["quantite"] = $quantite;
+				$inventaire[$typeInventaire][$i]["animal"] = $animal;
+				$inventaire[$typeInventaire][$i]["description"] = $description;
+
+				$i++;
+			}
+		}
+
+		return $inventaire;
 	}
 
 	/**
@@ -236,10 +251,10 @@
 	* @return array de tout ce que contient le personnage
 	*/
 	function getPersonnage($DB, $idPersonnage){
-		$stmt = mysqli_prepare($DB, "SELECT nomEtat, nom, prenom, age, nomRace, nomClasse, nomGenre, pv, pvMax, armure, lore FROM jdrPersonnage NATURAL JOIN jdrEtat NATURAL JOIN jdrRace NATURAL JOIN jdrClasse NATURAL JOIN jdrGenre WHERE idPersonnage = ? ");
+		$stmt = mysqli_prepare($DB, "SELECT nomEtat, nom, prenom, age, nomRace, nomClasse, nomGenre, pv, pvMax, armure, idStatistique, lore FROM jdrPersonnage NATURAL JOIN jdrEtat NATURAL JOIN jdrRace NATURAL JOIN jdrClasse NATURAL JOIN jdrGenre WHERE idPersonnage = ? ");
 		mysqli_stmt_bind_param($stmt, 'i', $idPersonnage);
 		mysqli_execute($stmt);
-		$resultat = mysqli_stmt_bind_result($stmt, $etat, $nom, $prenom, $age, $race, $classe, $genre, $pv, $pvMax, $armure, $lore);
+		$resultat = mysqli_stmt_bind_result($stmt, $etat, $nom, $prenom, $age, $race, $classe, $genre, $pv, $pvMax, $armure, $idStatistique, $lore);
 		
 		$personnage = array();
 		
@@ -257,35 +272,59 @@
 			$personnage["pvMax"] = $pvMax;
 			$personnage["armure"] = $armure;
 			$personnage["lore"] = $lore;
+			$personnage["statistiques"] = $idStatistique;
 			}
 		}
 
-		print_r($personnage);
+		$personnage["statistiques"] = getStatistique($DB, $personnage["statistiques"]);
+		$personnage["inventaire"] = getInventaire($DB, $idPersonnage);
 		
 		return $personnage;
+	}
+
+	/**
+	* Permet de récupérer des statistiques a partir d'un idStatistique
+	* @param $DB
+	* @param $idStatistique l'ID du personnage
+	* @return array de tout ce que contient le personnage
+	*/
+	function getStatistique($DB, $idStatistique){
+		$stmt = mysqli_prepare($DB, 
+			"SELECT * FROM jdrStatistique WHERE idStatistique = ?");
+		mysqli_stmt_bind_param($stmt, 'i', $idStatistique);
+		mysqli_execute($stmt);
+		$resultat = mysqli_stmt_bind_result($stmt, $id, $force, $agilite, $social, $perception, $mental, $intelligence, $constitution);
+		
+		$stats = array();
+		
+		if($resultat) {
+			while(mysqli_stmt_fetch($stmt)){
+			$stats["force"] = $force;
+			$stats["agilite"] = $agilite;
+			$stats["social"] = $social;
+			$stats["perception"] = $perception;
+			$stats["mental"] = $mental;
+			$stats["intelligence"] = $intelligence;
+			$stats["constitution"] = $constitution;
+			}
+		}
+		
+		return $stats;
 	}
 
 	$DB = generateDb();
 
 	$arrayEtat = getArrayEtat($DB);
-	echo("<br/>");
 	$arrayAnimal = getArrayAnimal($DB);
-	echo("<br/>");
 	$arrayClasse = getArrayClasse($DB);
-	echo("<br/>");
 	$arrayGenre = getArrayGenre($DB);
-	echo("<br/>");
 	$arrayRace = getArrayRace($DB);
-	echo("<br/>");
 	$arrayTypeInventaire = getArrayTypeInventaire($DB);
-	echo("<br/>");
 	$arrayTypeObjet = getArrayTypeObjet($DB);
-	echo("<br/>");
 	$arrayCompetence = getArrayCompetence($DB, 1);
-	echo("<br/>");
 	$arrayTrait = getArrayTrait($DB, 1);
-	echo("<br/>");
 	$personnage = getPersonnage($DB, 1);
+	print_r($personnage);
 
 	closeDb($DB);
 ?>
