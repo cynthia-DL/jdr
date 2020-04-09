@@ -96,7 +96,7 @@ oram : {
 			stats : {
 				F : 70,
 				A : 40,
-				P : 50,
+				P : 20,
 				C : 70
 			},
 			desc : "L'oubliée"
