@@ -36,7 +36,7 @@
 
 	<!-- La Storyline -->
 	<div class="container" if={state.storyline}>
-		<chapitre each={c in state.contenu} contenu={c}></chapitre>
+		<chapitre each={c in state.chapitres} storyline={c}></chapitre>
 	</div>
 	
 	<script>
@@ -484,7 +484,7 @@
 					},
 				],
 
-				contenu : [],
+				chapitres : [],
 
 				curPerso : null
 			},
@@ -493,7 +493,7 @@
 				this.sa.getStoryLine().then(
 					(e) => {
 						console.log(e);
-						this.state.contenu = JSON.parse(e);
+						this.state.chapitres = JSON.parse(e);
 						this.update();
 					}
 				);
