@@ -56,7 +56,7 @@
 	}
 
 	/**
-	* Permet de rajouter un etat dans la table jdrEtat de la BD
+	* Permet de rajouter un familier dans la table jdrFamilier de la BD
 	* @param $DB
 	* @param $idPersonnage
 	* @param $nomFamilier
@@ -69,6 +69,109 @@
 	function addFamilier($DB, $idPersonnage, $nomFamilier, $pvFamilier, $pvMaxFamilier, $armureFamilier, $idStatistique, $descriptionFamilier){
 		$stmt = mysqli_prepare($DB, "INSERT INTO jdrFamilier (idPersonnage, nomFamilier, pvFamilier, pvMaxFamilier, armureFamilier, idStatistique, descriptionFamilier) VALUES (?, ?, ?, ?, ?, ?, ?)");
 		mysqli_stmt_bind_param($stmt, 'isiiiis', $idPersonnage, $nomFamilier, $pvFamilier, $pvMaxFamilier, $armureFamilier, $idStatistique, $descriptionFamilier);
+		mysqli_execute($stmt);
+	}
+
+	/**
+	* Permet de rajouter un genre dans la table jdrGenre de la BD
+	* @param $DB
+	* @param $nomGenre
+	*/
+	function addGenre($DB, $nomGenre){
+		$stmt = mysqli_prepare($DB, "INSERT INTO jdrGenre (nomGenre) VALUES (?)");
+		mysqli_stmt_bind_param($stmt, 's', $nomGenre);
+		mysqli_execute($stmt);
+	}
+
+	/**
+	* Permet de rajouter un objet dans la table jdrInventaire de la BD
+	* @param $DB
+	* @param $idPersonnage
+	* @param $idTypeInventaire
+	* @param $nomObjet
+	* @param $idTypeObjet
+	* @param $degatObjet
+	* @param $protectionObjet
+	* @param $contenuObjet
+	* @param $quantiteObjet
+	* @param $idAnimal
+	* @param $descriptionObjet
+	*/
+	function addObjet($DB, $idPersonnage, $idTypeInventaire, $nomObjet, $idTypeObjet, $degatObjet, $protectionObjet, $contenuObjet, $quantiteObjet, $idAnimal, $descriptionObjet){
+		$stmt = mysqli_prepare($DB, "INSERT INTO jdrInventaire (idPersonnage, idTypeInventaire, nomObjet, idTypeObjet, degatObjet, protectionObjet, contenuObjet, quantiteObjet, idAnimal, descriptionObjet) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+		mysqli_stmt_bind_param($stmt, 'iisiiisiis', $idPersonnage, $idTypeInventaire, $nomObjet, $idTypeObjet, $degatObjet, $protectionObjet, $contenuObjet, $quantiteObjet, $idAnimal, $descriptionObjet);
+		mysqli_execute($stmt);
+	}
+
+	/**
+	* Permet de rajouter un personnage dans la table jdrPersonnage de la BD
+	* @param $DB
+	* @param $idEtat
+	* @param $nom
+	* @param $prenom
+	* @param $age
+	* @param $idRace
+	* @param $idClasse
+	* @param $idGenre
+	* @param $pv
+	* @param $pvMax
+	* @param $armure
+	* @param $idStatistique
+	* @param $lore
+	*/
+	function addPersonnage($DB, $idEtat, $nom, $prenom, $age, $idRace, $idClasse, $idGenre, $pv, $pvMax, $armure, $idStatistique, $lore){
+		$stmt = mysqli_prepare($DB, "INSERT INTO jdrPersonnage (idEtat, nom, prenom, age, idRace, idClasse, idGenre, pv, pvMax, armure, idStatistique, lore) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+		mysqli_stmt_bind_param($stmt, 'issiiiiiiiis', $idEtat, $nom, $prenom, $age, $idRace, $idClasse, $idGenre, $pv, $pvMax, $armure, $idStatistique, $lore);
+		mysqli_execute($stmt);
+	}
+
+	/**
+	* Permet de rajouter une race dans la table jdrRace de la BD
+	* @param $DB
+	* @param $nomRace
+	*/
+	function addRace($DB, $nomRace){
+		$stmt = mysqli_prepare($DB, "INSERT INTO jdrRace (nomRace) VALUES (?)");
+		mysqli_stmt_bind_param($stmt, 's', $nomRace);
+		mysqli_execute($stmt);
+	}
+
+	/**
+	* Permet de rajouter une statistique dans la table jdrStatistique de la BD
+	* @param $DB
+	* @param $force
+	* @param $agilite
+	* @param $social
+	* @param $perception
+	* @param $mental
+	* @param $intelligence
+	* @param $constitution
+	*/
+	/*function addStatistique($DB, $force, $agilite, $social, $perception, $mental, $intelligence, $constitution){
+		$stmt = mysqli_prepare($DB, "INSERT INTO jdrStatistique (force, agilite, social, perception, mental, intelligence, constitution) VALUES (?, ?, ?, ?, ?, ?, ?)");
+		mysqli_stmt_bind_param($stmt, 'iiiiiii', $force, $agilite, $social, $perception, $mental, $intelligence, $constitution);
+		mysqli_execute($stmt);
+	}*/
+
+	/**
+	* Permet de rajouter un type d'inventaire dans la table jdrTypeInventaire de la BD
+	* @param $DB
+	* @param $nomTypeInventaire
+	*/
+	function addTypeInventaire($DB, $nomTypeInventaire){
+		$stmt = mysqli_prepare($DB, "INSERT INTO jdrTypeInventaire (nomTypeInventaire) VALUES (?)");
+		mysqli_stmt_bind_param($stmt, 's', $nomTypeInventaire);
+		mysqli_execute($stmt);
+	}
+
+	/**
+	* Permet de rajouter un type d'objet dans la table jdrTypeObjet de la BD
+	* @param $DB
+	* @param $nomTypeObjet
+	*/
+	function addTypeObjet($DB, $nomTypeObjet){
+		$stmt = mysqli_prepare($DB, "INSERT INTO jdrTypeObjet (nomTypeObjet) VALUES (?)");
+		mysqli_stmt_bind_param($stmt, 's', $nomTypeObjet);
 		mysqli_execute($stmt);
 	}
 
@@ -450,8 +553,7 @@
 
 	$DB = generateDb();
 
-	echo("TEST<br>");
-	addFamilier($DB, 1, "Rififa", 5, 5, 2, 9, "Test")
+	//addStatistique($DB, 50, 50, 50, 50, 50, 50, 50);
 
 	closeDb($DB);
 ?>
