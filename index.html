@@ -17,18 +17,18 @@
 	<script src="https://cdn.jsdelivr.net/npm/riot@4/riot+compiler.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>
 	<script src="./js/radarChart.js"></script>
-	<!-- <script src="./js/serviceAjax.js"></script> -->
+	<script src="./js/serviceAjax.js"></script>
 </head>
 <body>
 	<app></app>
 		<script>
 			riot.compile().then(()=>{
 
-			// riot.install(function(component){
-			// 	if (component.name == "app"){
-			// 		component.sa = makeServiceAjax()
-			// 	}
-			// });
+			riot.install(function(component){
+				if (component.name == "app"){
+					component.sa = makeServiceAjax()
+				}
+			});
 
 			riot.mount('vignette');
 			riot.mount('chapitre');
