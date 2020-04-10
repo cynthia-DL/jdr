@@ -492,11 +492,16 @@
 			onMounted(state, props) {
 				this.sa.getStoryLine().then(
 					(e) => {
-						console.log(e);
 						this.state.chapitres = JSON.parse(e);
 						this.update();
 					}
 				);
+
+				// this.sa.getPersonnage(1).then(
+				// 	(e) => {
+				// 		console.log(e);
+				// 	}
+				// );
 			},
 
 			// Fonction du fils pour afficher une fiche en entier
