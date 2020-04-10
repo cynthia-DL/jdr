@@ -1,4 +1,84 @@
 <?php
+
+	/**
+	* Permet de rajouter un animal dans la table jdrAnimal de la BD
+	* @param $DB
+	* @param $nomAnimal
+	*/
+	function addAnimal($DB, $nomAnimal){
+		$stmt = mysqli_prepare($DB, "INSERT INTO jdrAnimal (nomAnimal) VALUES (?)");
+		mysqli_stmt_bind_param($stmt, 's', $nomAnimal);
+		mysqli_execute($stmt);
+	}
+
+	/**
+	* Permet de rajouter une aptitude dans la table jdrAptitude de la BD
+	* @param $DB
+	* @param $nomAptitude
+	*/
+	function addAptitude($DB, $estUneCompetence, $idPersonnage, $nomAptitude, $descriptionAptitude){
+		$stmt = mysqli_prepare($DB, "INSERT INTO jdrAptitude (estUneCompetence, idPersonnage, nomAptitude, descriptionAptitude) VALUES (?, ?, ?, ?)");
+		mysqli_stmt_bind_param($stmt, 'iiss', $estUneCompetence, $idPersonnage, $nomAptitude, $descriptionAptitude);
+		mysqli_execute($stmt);
+	}	
+
+	/**
+	* Permet de rajouter un chapitre dans la table jdrChapitre de la BD
+	* @param $DB
+	* @param $contenu
+	*/
+	function addChapitre($DB, $contenu){
+		$stmt = mysqli_prepare($DB, "INSERT INTO jdrChapitre (contenu) VALUES (?)");
+		mysqli_stmt_bind_param($stmt, 's', $contenu);
+		mysqli_execute($stmt);
+	}
+
+	/**
+	* Permet de rajouter une classe dans la table jdrClasse de la BD
+	* @param $DB
+	* @param $nomClasse
+	*/
+	function addClasse($DB, $nomClasse){
+		$stmt = mysqli_prepare($DB, "INSERT INTO jdrClasse (nomClasse) VALUES (?)");
+		mysqli_stmt_bind_param($stmt, 's', $nomClasse);
+		mysqli_execute($stmt);
+	}
+
+	/**
+	* Permet de rajouter un etat dans la table jdrEtat de la BD
+	* @param $DB
+	* @param $nomEtat
+	*/
+	function addEtat($DB, $nomEtat){
+		$stmt = mysqli_prepare($DB, "INSERT INTO jdrEtat (nomEtat) VALUES (?)");
+		mysqli_stmt_bind_param($stmt, 's', $nomEtat);
+		mysqli_execute($stmt);
+	}
+
+	/**
+	* Permet de rajouter un etat dans la table jdrEtat de la BD
+	* @param $DB
+	* @param $idPersonnage
+	* @param $nomFamilier
+	* @param $pvFamilier
+	* @param $pvMaxFamilier
+	* @param $armureFamilier
+	* @param $idStatistique
+	* @param $descriptionFamilier
+	*/
+	function addFamilier($DB, $idPersonnage, $nomFamilier, $pvFamilier, $pvMaxFamilier, $armureFamilier, $idStatistique, $descriptionFamilier){
+		$stmt = mysqli_prepare($DB, "INSERT INTO jdrFamilier (idPersonnage, nomFamilier, pvFamilier, pvMaxFamilier, armureFamilier, idStatistique, descriptionFamilier) VALUES (?, ?, ?, ?, ?, ?, ?)");
+		mysqli_stmt_bind_param($stmt, 'isiiiis', $idPersonnage, $nomFamilier, $pvFamilier, $pvMaxFamilier, $armureFamilier, $idStatistique, $descriptionFamilier);
+		mysqli_execute($stmt);
+	}
+
+
+
+
+
+
+	
+
 	/**
 	* Cette fonction permet de fermer une base de données
 	* @param $DB la base de données à fermer.
@@ -368,36 +448,10 @@
 		return $stats;
 	}
 
-	/**
-	* Permet de récupérer des statistiques a partir d'un idStatistique
-	* @param $DB
-	* @param $idStatistique l'ID du personnage
-	* @return array de tout ce que contient le personnage
-	*/
-	function setAnimal($DB, $nomAnimal){
-		$stmt = mysqli_prepare($DB, "SELECT * FROM jdrStatistique WHERE idStatistique = ?");
-		mysqli_stmt_bind_param($stmt, 'i', $idStatistique);
-		mysqli_execute($stmt);
-		$resultat = mysqli_stmt_bind_result($stmt, $id, $force, $agilite, $social, $perception, $mental, $intelligence, $constitution);
-		
-		$stats = array();
-		
-		if($resultat) {
-			while(mysqli_stmt_fetch($stmt)){
-			$stats["force"] = $force;
-			$stats["agilite"] = $agilite;
-			$stats["social"] = $social;
-			$stats["perception"] = $perception;
-			$stats["mental"] = $mental;
-			$stats["intelligence"] = $intelligence;
-			$stats["constitution"] = $constitution;
-			}
-		}
-		
-		return $stats;
-	}
-
 	$DB = generateDb();
+
+	echo("TEST<br>");
+	addFamilier($DB, 1, "Rififa", 5, 5, 2, 9, "Test")
 
 	closeDb($DB);
 ?>
