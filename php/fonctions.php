@@ -346,8 +346,36 @@
 	* @return array de tout ce que contient le personnage
 	*/
 	function getStatistique($DB, $idStatistique){
-		$stmt = mysqli_prepare($DB, 
-			"SELECT * FROM jdrStatistique WHERE idStatistique = ?");
+		$stmt = mysqli_prepare($DB, "SELECT * FROM jdrStatistique WHERE idStatistique = ?");
+		mysqli_stmt_bind_param($stmt, 'i', $idStatistique);
+		mysqli_execute($stmt);
+		$resultat = mysqli_stmt_bind_result($stmt, $id, $force, $agilite, $social, $perception, $mental, $intelligence, $constitution);
+		
+		$stats = array();
+		
+		if($resultat) {
+			while(mysqli_stmt_fetch($stmt)){
+			$stats["force"] = $force;
+			$stats["agilite"] = $agilite;
+			$stats["social"] = $social;
+			$stats["perception"] = $perception;
+			$stats["mental"] = $mental;
+			$stats["intelligence"] = $intelligence;
+			$stats["constitution"] = $constitution;
+			}
+		}
+		
+		return $stats;
+	}
+
+	/**
+	* Permet de récupérer des statistiques a partir d'un idStatistique
+	* @param $DB
+	* @param $idStatistique l'ID du personnage
+	* @return array de tout ce que contient le personnage
+	*/
+	function setAnimal($DB, $nomAnimal){
+		$stmt = mysqli_prepare($DB, "SELECT * FROM jdrStatistique WHERE idStatistique = ?");
 		mysqli_stmt_bind_param($stmt, 'i', $idStatistique);
 		mysqli_execute($stmt);
 		$resultat = mysqli_stmt_bind_result($stmt, $id, $force, $agilite, $social, $perception, $mental, $intelligence, $constitution);
@@ -370,10 +398,6 @@
 	}
 
 	$DB = generateDb();
-
-	print_r(getPersonnage($DB, 1));
-	echo "<br/>";
-	print_r(getArrayChapitre($DB));
 
 	closeDb($DB);
 ?>
