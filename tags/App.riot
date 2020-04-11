@@ -17,6 +17,9 @@
 	      <li class="nav-item">
 	        <button class="btn nav-link" onclick={_onStoryLine}><i class="fa fa-archive" aria-hidden="true"></i> StoryLine</button>
 	      </li>
+	      <li class="nav-item">
+	        <button class="btn nav-link" onclick={_onNewPersonnage}><i class="fa fa-user" aria-hidden="true"></i> Nouveau Personnage</button>
+	      </li>
 	    </ul>
 	    <ul class="navbar-nav my-2 my-lg-0">
 	      <li class="nav-item">
@@ -38,6 +41,11 @@
 	<div class="container" if={state.storyline}>
 		<chapitre each={c in state.chapitres} storyline={c}></chapitre>
 	</div>
+
+	<!-- La création de personnage -->
+	<div if={state.newPersonnage}>
+		<newpersonnage></newpersonnage>
+	</div>
 	
 	<script>
 		export default {
@@ -45,6 +53,7 @@
 				liste : true,
 				fiche : false,
 				storyLine : false,
+				newPersonnage : false,
 
 				perso : [
 					{
@@ -510,6 +519,7 @@
 				this.state.liste = false;
 				this.state.fiche = true;
 				this.state.storyline = false;
+				this.state.newPersonnage = false;
 				this.update();
 			},
 
@@ -518,13 +528,23 @@
 				this.state.liste = true;
 				this.state.fiche = false;
 				this.state.storyline = false;
+				this.state.newPersonnage = false;
 				this.update();
 			},
 
 			_onStoryLine(){
 				this.state.liste = false;
 				this.state.fiche = false;
+				this.state.newPersonnage = false;
 				this.state.storyline = true;
+				this.update();
+			},
+
+			_onNewPersonnage(){
+				this.state.liste = false;
+				this.state.fiche = false;
+				this.state.newPersonnage = true;
+				this.state.storyline = false;
 				this.update();
 			}
 		}
