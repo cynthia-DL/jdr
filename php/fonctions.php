@@ -414,6 +414,27 @@
 		return $arrayTypeObjet;
 	}
 
+	/**
+	* Permet de récupérer toutes les preview de personnages
+	* @param $DB
+	* @return array de toutes les preview de personnages
+	*/
+	function getArrayVignette($DB){
+		$resultat = mysqli_query($DB, "SELECT idPersonnage, prenom, pv, pvMax, armure, nomEtat, idStatistique from jdrPersonnage NATURAL JOIN jdrEtat");
+		$arrayVignette = array();
+		$i = 0;
+		
+		while ($ligne = $resultat->fetch_assoc()){
+			$arrayVignette[$i] = $ligne;
+			$arrayVignette[$i]['statistiques'] = getStatistique($DB, $arrayVignette[$i]['idStatistique']);
+			$i++;
+		}
+
+		mysqli_free_result($resultat);
+
+		return $arrayVignette;
+	}
+
 		/**
 	* Permet de récupérer les familiers d'un personnage
 	* @param $DB
@@ -550,8 +571,4 @@
 		
 		return $stats;
 	}
-
-	$DB = generateDb();
-
-	closeDb($DB);
 ?>
