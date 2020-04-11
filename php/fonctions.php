@@ -151,6 +151,8 @@
 		$stmt = mysqli_prepare($DB, "INSERT INTO jdrStatistique (F, A, S, P, M, I, C) VALUES (?, ?, ?, ?, ?, ?, ?)");
 		mysqli_stmt_bind_param($stmt, 'iiiiiii', $F, $A, $S, $P, $M, $I, $C);
 		mysqli_execute($stmt);
+
+		return mysqli_insert_id();
 	}
 
 	/**
@@ -208,12 +210,12 @@
 	* @return array de tous les animaux possibles
 	*/
 	function getArrayAnimal($DB){
-		$resultat = mysqli_query($DB, "SELECT nomAnimal from jdrAnimal");
+		$resultat = mysqli_query($DB, "SELECT * from jdrAnimal");
 		$arrayAnimal = array();
 		$i = 0;
 		
 		while ($ligne = $resultat->fetch_assoc()){
-			$arrayAnimal[$i] = $ligne["nomAnimal"];
+			$arrayAnimal[$i] = $ligne;
 			$i++;
 		}
 
@@ -248,12 +250,12 @@
 	* @return array de toutes les classes possibles
 	*/
 	function getArrayClasse($DB){
-		$resultat = mysqli_query($DB, "SELECT nomClasse from jdrClasse");
+		$resultat = mysqli_query($DB, "SELECT * from jdrClasse");
 		$arrayClasse = array();
 		$i = 0;
 		
 		while ($ligne = $resultat->fetch_assoc()){
-			$arrayClasse[$i] = $ligne["nomClasse"];
+			$arrayClasse[$i] = $ligne;
 			$i++;
 		}
 
@@ -294,12 +296,12 @@
 	* @return array de tous les états possibles
 	*/
 	function getArrayEtat($DB){
-		$resultat = mysqli_query($DB, "SELECT nomEtat from jdrEtat");
+		$resultat = mysqli_query($DB, "SELECT * from jdrEtat");
 		$arrayEtat = array();
 		$i = 0;
 		
 		while ($ligne = $resultat->fetch_assoc()){
-			$arrayEtat[$i] = $ligne["nomEtat"];
+			$arrayEtat[$i] = $ligne;
 			$i++;
 		}
 
@@ -314,12 +316,12 @@
 	* @return array de tous les genres possibles
 	*/
 	function getArrayGenre($DB){
-		$resultat = mysqli_query($DB, "SELECT nomGenre from jdrGenre");
+		$resultat = mysqli_query($DB, "SELECT * from jdrGenre");
 		$arrayGenre = array();
 		$i = 0;
 		
 		while ($ligne = $resultat->fetch_assoc()){
-			$arrayGenre[$i] = $ligne["nomGenre"];
+			$arrayGenre[$i] = $ligne;
 			$i++;
 		}
 
@@ -334,12 +336,12 @@
 	* @return array de tous les races possibles
 	*/
 	function getArrayRace($DB){
-		$resultat = mysqli_query($DB, "SELECT nomRace from jdrRace");
+		$resultat = mysqli_query($DB, "SELECT * from jdrRace");
 		$arrayRace = array();
 		$i = 0;
 		
 		while ($ligne = $resultat->fetch_assoc()){
-			$arrayRace[$i] = $ligne["nomRace"];
+			$arrayRace[$i] = $ligne;
 			$i++;
 		}
 
@@ -380,12 +382,12 @@
 	* @return array de tous les types d'inventaire possibles
 	*/
 	function getArrayTypeInventaire($DB){
-		$resultat = mysqli_query($DB, "SELECT nomTypeInventaire from jdrTypeInventaire");
+		$resultat = mysqli_query($DB, "SELECT * from jdrTypeInventaire");
 		$arrayTypeInventaire = array();
 		$i = 0;
 		
 		while ($ligne = $resultat->fetch_assoc()){
-			$arrayTypeInventaire[$i] = $ligne["nomTypeInventaire"];
+			$arrayTypeInventaire[$i] = $ligne;
 			$i++;
 		}
 
@@ -400,12 +402,12 @@
 	* @return array de tous les types d'objet possibles
 	*/
 	function getArrayTypeObjet($DB){
-		$resultat = mysqli_query($DB, "SELECT nomTypeObjet from jdrTypeObjet");
+		$resultat = mysqli_query($DB, "SELECT * from jdrTypeObjet");
 		$arrayTypeObjet = array();
 		$i = 0;
 		
 		while ($ligne = $resultat->fetch_assoc()){
-			$arrayTypeObjet[$i] = $ligne["nomTypeObjet"];
+			$arrayTypeObjet[$i] = $ligne;
 			$i++;
 		}
 

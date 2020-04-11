@@ -1,5 +1,6 @@
 function makeServiceAjax(){
 	var service = {
+      addPersonnage:addPersonnage,
       getAllAnimal:getAllAnimal,
       getAllClasse:getAllClasse,
       getAllEtat:getAllEtat,
@@ -11,6 +12,26 @@ function makeServiceAjax(){
       getPersonnage:getPersonnage,
       getStoryLine:getStoryLine
     };
+
+    function addPersonnage(nom, prenom, pv, race, genre, age, niveau, classe, lore, force, agilite, 
+        social, perception, mental, intelligence, constitution) {
+        var url = "./php/post.php";
+        return new Promise(function(resolve,reject){
+            http = new XMLHttpRequest();
+            http.open("POST",url);
+            http.send("case=personnage&nom="+nom+"&prenom="+prenom+"&pv="+pv+"&race="+race+"&genre="+genre+
+                "&age="+age+"&niveau="+niveau+"&classe="+classe+"&lore="+lore+"&force="+force+"&agilite"+agilite+ 
+                "&social="+social+"&perception="+perception+"&mental"+mental+"&intelligence="+intelligence+"&constitution="+constitution);
+            http.onload=function(){
+                if (http.status == 200){
+                    resolve(this.response);
+                } else reject("Erreur getAllAnimal 1 : "+http.serverResponse);
+            };
+            http.onerror = function(){
+                reject("Erreur getAllAnimal 2 : "+http.serverResponse);
+            };
+        });
+    }
 
     function getAllAnimal() {
         var url = "./php/get.php?case=all_animal";

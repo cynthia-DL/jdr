@@ -1,6 +1,6 @@
 <newpersonnage>
 	<div class="container">
-		<form class="form-group">
+		<form class="form-group" method="post" onsubmit={ _submit }>
 		<h2>Informations générales</h2>
 		<div class="row">
 			<div class="col-3 mx-auto mb-3">
@@ -116,8 +116,8 @@
 
 						for (var i = 0; i < this.state.enumGenre.length; i++) {
 							var tmp = document.createElement("option");
-							tmp.value = this.state.enumGenre[i];
-							tmp.innerText = this.state.enumGenre[i];
+							tmp.value = this.state.enumGenre[i].idGenre;
+							tmp.innerText = this.state.enumGenre[i].nomGenre;
 							genre.appendChild(tmp);
 
 						}
@@ -130,8 +130,8 @@
 
 								for (i = 0; i < this.state.enumClasse.length; i++) {
 									tmp = document.createElement("option");
-									tmp.value = this.state.enumClasse[i];
-									tmp.innerText = this.state.enumClasse[i];
+									tmp.value = this.state.enumClasse[i].idClasse;
+									tmp.innerText = this.state.enumClasse[i].nomClasse;
 									classe.appendChild(tmp);
 								}
 
@@ -143,8 +143,8 @@
 
 										for (i = 0; i < this.state.enumRace.length; i++) {
 											tmp = document.createElement("option");
-											tmp.value = this.state.enumRace[i];
-											tmp.innerText = this.state.enumRace[i];
+											tmp.value = this.state.enumRace[i].idRace;
+											tmp.innerText = this.state.enumRace[i].nomRace;
 											race.appendChild(tmp);
 
 										}
@@ -154,6 +154,12 @@
 						);
 					}
 				);
+			},
+
+			_submit(e){
+				e.preventDefault();
+				
+				
 			}
 		}
 	</script>
