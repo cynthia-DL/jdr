@@ -1,0 +1,111 @@
+<newpersonnage>
+	<div class="container">
+		<form class="form-group">
+		<h2>Informations générales</h2>
+		<div class="row">
+			<div class="col-5 mx-auto mb-3">
+				<em class="text-primary">Nom</em>
+				<input class="form-control" type="text" name="nom">
+			</div>
+			
+			<div class="col-5 mx-auto mb-3">
+				<em class="text-primary">Prénom</em>
+				<input class="form-control" type="text" name="prenom">
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-3 mx-auto mb-3">
+				<em class="text-primary">Âge</em>
+				<input class="form-control" type="number" name="age" min="0" max="99999">
+			</div>
+			<div class="col-3 mx-auto mb-3">
+				<em class="text-primary">Niveau</em>
+				<input class="form-control" type="number" name="niveau">
+			</div>
+			
+			<div class="col-3 mx-auto mb-3">
+				<em class="text-primary">Classe</em>
+				<select class="form-control" id="classe" nom="classe">
+					<option>1</option>
+			        <option>2</option>
+			        <option>3</option>
+			        <option>4</option>
+			        <option>5</option>
+				</select>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-5 mx-auto mb-3">
+				<em class="text-primary">Race</em>
+				<select class="form-control" id="race" nom="race">
+					<option>1</option>
+			        <option>2</option>
+			        <option>3</option>
+			        <option>4</option>
+			        <option>5</option>
+				</select>
+			</div>
+			<div class="col-5 mx-auto mb-3">
+				<em class="text-primary">Genre</em>
+				<select class="form-control" id="genre" nom="genre">
+					<option>1</option>
+			        <option>2</option>
+			        <option>3</option>
+			        <option>4</option>
+			        <option>5</option>
+				</select>
+			</div>
+		</div>
+		<div class="row">
+			<div class="mx-auto mb-3 col">
+				<em class="text-primary">Lore</em>
+				<textarea class="form-control" name="lore" rows="3"></textarea>
+			</div>
+		</div>
+		<h2>Statistiques</h2>
+		<div class="row">
+				<table class="table table-hover mx-auto ">
+				  <thead>
+				    <tr class="table-active">
+				      <th scope="col">Force</th>
+				      <th scope="col">Agilité</th>
+				      <th scope="col">Social</th>
+				      <th scope="col">Perception</th>
+				      <th scope="col">Mental</th>
+				      <th scope="col">Inteligence</th>
+				      <th scope="col">Constitution</th>
+				    </tr>
+				    <tr>
+				      <td scope="col">
+				      	<input class="form-control" type="number" name="force" min="20" max="80">
+				      </td>
+				      <td scope="col">
+				      	<input class="form-control" type="number" name="agilite" min="20" max="80">
+				      </td>
+				      <td scope="col">
+				      	<input class="form-control" type="number" name="social" min="20" max="80">
+				      </td>
+				      <td scope="col">
+				      	<input class="form-control" type="number" name="perception" min="20" max="80">
+				      </td>
+				      <td scope="col">
+				      	<input class="form-control" type="number" name="mental" min="20" max="80">
+				      </td>
+				      <td scope="col">
+				      	<input class="form-control" type="number" name="intelligence" min="20" max="80">
+				      </td>
+				      <td scope="col">
+				      	<input class="form-control" type="number" name="constitution" min="20" max="80">
+				      </td>
+				    </tr>
+				  </thead>
+				</table>
+		</div>
+		<button class="btn btn-primary text-center" type="submit">
+			Créer ce personnage
+		</button>
+	</form>
+	</div>
+</newpersonnage>
