@@ -9,7 +9,7 @@
 	  <div class="collapse navbar-collapse" id="navbarColor01">
 	    <ul class="navbar-nav mr-auto">
 	      <li class="nav-item">
-	         <button class="btn nav-link" onclick={_retour}><i class="fa fa-id-card"></i> Voir les fiches</button>
+	         <button class="btn nav-link" onclick={_onListe}><i class="fa fa-id-card"></i> Voir les fiches</button>
 	      </li>
 	      <li class="nav-item">
 	        <a class="nav-link" href="http://devirtuel.com/" target="_blank"><i class="fa fa-random" aria-hidden="true"></i> Dés en ligne</a>
@@ -35,7 +35,7 @@
 	</div>
 	
 	<!-- Affichage d'une fiche en plein écran -->
-	<fiche perso={state.curPerso} if={state.fiche} return={_retour}></fiche>
+	<fiche perso={state.curPerso} if={state.fiche} return={_onListe}></fiche>
 
 	<!-- La Storyline -->
 	<div class="container" if={state.storyline}>
@@ -44,7 +44,7 @@
 
 	<!-- La création de personnage -->
 	<div if={state.newPersonnage}>
-		<newpersonnage sa={sa}></newpersonnage>
+		<newpersonnage sa={sa} fct={_newPersonnageCreated}></newpersonnage>
 	</div>
 	
 	<script>
@@ -86,6 +86,10 @@
 
 			},
 
+			_newPersonnageCreated() {
+				this._onListe();
+			},
+
 			//Fonction du pere pour afficher une fiche en entier
 			_fullVer(){
 				this.sa.getPersonnage(this.state.idCurPerso).then(
@@ -104,12 +108,17 @@
 			},
 
 			//Fonction du boutton retour
-			_retour(){
-				this.state.liste = true;
-				this.state.fiche = false;
-				this.state.storyline = false;
-				this.state.newPersonnage = false;
-				this.update();
+			_onListe(){
+				this.sa.getAllVignette().then(
+					(e) => {
+						this.state.vignette = JSON.parse(e);
+						this.state.liste = true;
+						this.state.fiche = false;
+						this.state.storyline = false;
+						this.state.newPersonnage = false;
+						this.update();
+					}	
+				);
 			},
 
 			_onStoryLine(){
