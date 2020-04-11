@@ -538,6 +538,8 @@
 
 		$personnage["statistiques"] = getStatistique($DB, $personnage["statistiques"]);
 		$personnage["inventaire"] = getInventaire($DB, $idPersonnage);
+		$personnage["competences"] = getArrayCompetence($DB, $idPersonnage);
+		$personnage["traits"] = getArrayTrait($DB, $idPersonnage);
 		$personnage["familier"] = getFamilier($DB, $idPersonnage);
 		
 		return $personnage;

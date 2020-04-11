@@ -8,7 +8,8 @@ function makeServiceAjax(){
       getAllGenre:getAllGenre,
       getAllRace:getAllRace,
       getAllTypeInventaire:getAllTypeInventaire,
-      getAllTypeObjet:getAllTypeObjet
+      getAllTypeObjet:getAllTypeObjet,
+      getAllVignette:getAllVignette
     };
 
     function getStoryLine() {
@@ -160,6 +161,23 @@ function makeServiceAjax(){
             };
             http.onerror = function(){
                 reject("Erreur getAllTypeObjet 2 : "+http.serverResponse);
+            };
+        });
+    }
+
+    function getAllVignette() {
+        var url = "./php/get.php?case=vignette";
+        return new Promise(function(resolve,reject){
+            http = new XMLHttpRequest();
+            http.open("GET",url);
+            http.send();
+            http.onload=function(){
+                if (http.status == 200){
+                    resolve(this.response);
+                } else reject("Erreur getAllVignette 1 : "+http.serverResponse);
+            };
+            http.onerror = function(){
+                reject("Erreur getAllVignette 2 : "+http.serverResponse);
             };
         });
     }

@@ -15,17 +15,17 @@
 						{props.perso.armure}
 					</span>
 					<br />
-					<span if={props.perso.etat == "Actif"} class="badge badge-pill badge-success">
+					<span if={props.perso.nomEtat == "ACTIF"} class="badge badge-pill badge-success">
 						<i class="fa fa-check-square-o" aria-hidden="true">&nbsp;</i>
-						{props.perso.etat}
+						{props.perso.nomEtat}
 					</span>
-					<span if={props.perso.etat == "Reroll"} class="badge badge-pill badge-warning">
+					<span if={props.perso.nomEtat == "REROLL"} class="badge badge-pill badge-warning">
 						<i class="fa fa-recycle" aria-hidden="true">&nbsp;</i>
-						{props.perso.etat}
+						{props.perso.nomEtat}
 					</span>
-					<span if={props.perso.etat == "Mort"} class="badge badge-pill badge-danger">
+					<span if={props.perso.nomEtat == "MORT"} class="badge badge-pill badge-danger">
 						<i class="fa fa-window-close" aria-hidden="true">&nbsp;</i>
-						{props.perso.etat}
+						{props.perso.nomEtat}
 					</span>
 					</h2>
 				</li>
@@ -43,13 +43,13 @@
 					      <th scope="col">C</th>
 					    </tr>
 					    <tr>
-					      <td scope="col">{Math.round(props.perso.statsData[0][0].value * 100)}</td>
-					      <td scope="col">{Math.round(props.perso.statsData[0][1].value * 100)}</td>
-					      <td scope="col">{Math.round(props.perso.statsData[0][2].value * 100)}</td>
-					      <td scope="col">{Math.round(props.perso.statsData[0][3].value * 100)}</td>
-					      <td scope="col">{Math.round(props.perso.statsData[0][4].value * 100)}</td>
-					      <td scope="col">{Math.round(props.perso.statsData[0][5].value * 100)}</td>
-					      <td scope="col">{Math.round(props.perso.statsData[0][6].value * 100)}</td>
+					      <td scope="col">{props.perso.statistiques.force}</td>
+					      <td scope="col">{props.perso.statistiques.agilite}</td>
+					      <td scope="col">{props.perso.statistiques.social}</td>
+					      <td scope="col">{props.perso.statistiques.perception}</td>
+					      <td scope="col">{props.perso.statistiques.mental}</td>
+					      <td scope="col">{props.perso.statistiques.intelligence}</td>
+					      <td scope="col">{props.perso.statistiques.constitution}</td>
 					    </tr>
 					  </thead>
 					</table>
@@ -64,7 +64,7 @@
 			// Cette fonction ouvre une fiche via le pere
 			_test(){
 				if (this.props.fct){
-					this.props.fct(this.props.perso);
+					this.props.fct(this.props.perso.idPersonnage);
 				}
 			}
 		}

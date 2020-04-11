@@ -31,7 +31,7 @@
 
 	<!-- gestions des fiches -->
 	<div class="row d-flex align-items-center" if={state.liste}>
-		<vignette each={p in state.perso} perso={p} fct={_toggle}></vignette>
+		<vignette each={p in state.vignette} perso={p} fct={_toggle}></vignette>
 	</div>
 	
 	<!-- Affichage d'une fiche en plein écran -->
@@ -494,7 +494,9 @@
 				],
 
 				chapitres : [],
+				vignette : [],
 
+				idCurPerso : null,
 				curPerso : null
 			},
 
@@ -502,25 +504,42 @@
 				this.sa.getStoryLine().then(
 					(e) => {
 						this.state.chapitres = JSON.parse(e);
+						console.log(this.state.chapitres);
 						this.update();
+
+						this.sa.getAllVignette().then(
+							(f) => {
+								this.state.vignette = JSON.parse(f);
+								console.log(this.state.vignette);
+								this.update();
+							}
+						);
 					}
 				);
 			},
 
 			// Fonction du fils pour afficher une fiche en entier
-			_toggle(perso){
-				this.update({"curPerso":perso});
+			_toggle(id){
+				this.update({"idCurPerso":id});
 				this._fullVer();
 
 			},
 
 			//Fonction du pere pour afficher une fiche en entier
 			_fullVer(){
-				this.state.liste = false;
-				this.state.fiche = true;
-				this.state.storyline = false;
-				this.state.newPersonnage = false;
-				this.update();
+				this.sa.getPersonnage(this.state.idCurPerso).then(
+					(e) => {
+						this.state.curPerso = JSON.parse(e);
+						console.log(this.state.curPerso);
+						this.update();
+
+						this.state.liste = false;
+						this.state.fiche = true;
+						this.state.storyline = false;
+						this.state.newPersonnage = false;
+						this.update();
+					}
+				);
 			},
 
 			//Fonction du boutton retour

@@ -19,9 +19,10 @@ if ($_GET['case'] == 'personnage'){
 	$res = getArrayTypeInventaire($bdd);
 } else if ($_GET['case'] == 'all_type_objet'){
 	$res = getArrayTypeObjet($bdd);
-} else 
-if ($_GET['case'] == 'storyline'){
+} else if ($_GET['case'] == 'storyline'){
 	$res = getArrayChapitre($bdd);
+} else if ($_GET['case'] == 'vignette'){
+	$res = getArrayVignette($bdd);
 }
 
 echo json_encode($res);

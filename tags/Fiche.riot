@@ -79,7 +79,7 @@
 		<!-- Statistiques -->
 		<div if={state.stats}>
 			<h2>Statistiques</h2>
-				<table class="table table-hover" if={props.perso.statsData}>
+				<table class="table table-hover">
 				  <thead>
 				    <tr class="table-active">
 				      <th scope="col">Force</th>
@@ -91,17 +91,17 @@
 				      <th scope="col">Constitution</th>
 				    </tr>
 				    <tr>
-				      <td scope="col">{Math.round(props.perso.statsData[0][0].value * 100)}</td>
-				      <td scope="col">{Math.round(props.perso.statsData[0][1].value * 100)}</td>
-				      <td scope="col">{Math.round(props.perso.statsData[0][2].value * 100)}</td>
-				      <td scope="col">{Math.round(props.perso.statsData[0][3].value * 100)}</td>
-				      <td scope="col">{Math.round(props.perso.statsData[0][4].value * 100)}</td>
-				      <td scope="col">{Math.round(props.perso.statsData[0][5].value * 100)}</td>
-				      <td scope="col">{Math.round(props.perso.statsData[0][6].value * 100)}</td>
+				      <td scope="col">{props.perso.statistiques.force}</td>
+				      <td scope="col">{props.perso.statistiques.agilite}</td>
+				      <td scope="col">{props.perso.statistiques.social}</td>
+				      <td scope="col">{props.perso.statistiques.perception}</td>
+				      <td scope="col">{props.perso.statistiques.mental}</td>
+				      <td scope="col">{props.perso.statistiques.intelligence}</td>
+				      <td scope="col">{props.perso.statistiques.constitution}</td>
 				    </tr>
 				  </thead>
 				</table>
-				<chart stats={props.perso.statsData}></chart>
+				<chart stats={state.statData}></chart>
 			<hr>
 		</div>
 
@@ -112,8 +112,8 @@
 					<h2>Competences</h2>
 					<div each={c in props.perso.competences}>
 						<div class="card  mb-3">
-							<div class="card-header" if={c.titre}>{c.titre}</div>
-							<div class="card-body">{c.desc}</div>
+							<div class="card-header" if={c[0]}>{c[0]}</div>
+							<div class="card-body">{c[1]}</div>
 						</div>
 					</div>
 				</div>		
@@ -124,8 +124,8 @@
 					<h2>Don et traits</h2>
 					<div each={c in props.perso.traits}>
 						<div class="card  mb-3">
-							<div class="card-header" if={c.titre}>{c.titre}</div>
-							<div class="card-body">{c.desc}</div>
+							<div class="card-header" if={c[0]}>{c[0]}</div>
+							<div class="card-body">{c[1]}</div>
 						</div>
 					</div>
 				</div>		
@@ -137,10 +137,10 @@
 			<!-- Contenu du sac -->
 			<h2>Sac de {props.perso.prenom}</h2>
 			<div class="row d-flex align-items-center">
-				<div class="col-3 mx-auto" each={i in props.perso.inventaire.sac}>
+				<div class="col-3 mx-auto" each={i in props.perso.inventaire.SAC}>
 					<div class="card-body">
 						<ul class="list-group">
-							<li class="list-group-item bg-primary text-white" if={i.label}>{i.label}</li>
+							<li class="list-group-item bg-primary text-white" if={i.nom}>{i.nom}</li>
 							<li class="list-group-item border-primary" if={i.type}>Type : {i.type}</li>
 							<li class="list-group-item border-primary" if={i.degat}>Dégats : D{i.degat}</li>
 							<li class="list-group-item border-primary" if={i.contenu}>Contenu : {i.contenu}</li>
@@ -150,7 +150,7 @@
 						</ul>
 					</div>
 				</div>
-				<div class="mx-auto" if={!props.perso.inventaire.sac}>
+				<div class="mx-auto" if={!props.perso.inventaire.SAC}>
 					Le sac de ce personnage est vide
 				</div>
 			</div>
@@ -158,10 +158,10 @@
 			<!-- Contenu de la selle -->
 			<h2>Selle de {props.perso.prenom}</h2>
 			<div class="row d-flex align-items-center">
-				<div class="col-3 mx-auto" each={i in props.perso.inventaire.selle}>
+				<div class="col-3 mx-auto" each={i in props.perso.inventaire.SELLE}>
 					<div class="card-body">
 						<ul class="list-group">
-							<li class="list-group-item bg-primary text-white" if={i.label}>{i.label}</li>
+							<li class="list-group-item bg-primary text-white" if={i.nom}>{i.nom}</li>
 							<li class="list-group-item border-primary" if={i.type}>Type : {i.type}</li>
 							<li class="list-group-item border-primary" if={i.degat}>Dégats : D{i.degat}</li>
 							<li class="list-group-item border-primary" if={i.contenu}>Contenu : {i.contenu}</li>
@@ -171,7 +171,7 @@
 						</ul>
 					</div>
 				</div>
-				<div class="mx-auto" if={!props.perso.inventaire.selle}>
+				<div class="mx-auto" if={!props.perso.inventaire.SELLE}>
 					La selle de ce personnage est vide
 				</div>
 			</div>
@@ -195,22 +195,22 @@
 							<table class="table table-hover">
 							  <thead>
 							    <tr class="table-active">
-							      <th scope="col" if={f.stats.F}>Force</th>
-							      <th scope="col" if={f.stats.A}>Agilité</th>
-							      <th scope="col" if={f.stats.S}>Social</th>
-							      <th scope="col" if={f.stats.P}>Perception</th>
-							      <th scope="col" if={f.stats.M}>Mental</th>
-							      <th scope="col" if={f.stats.I}>Inteligence</th>
-							      <th scope="col" if={f.stats.C}>Constitution</th>
+							      <th scope="col" if={f.statistiques.force}>Force</th>
+							      <th scope="col" if={f.statistiques.agilite}>Agilité</th>
+							      <th scope="col" if={f.statistiques.social}>Social</th>
+							      <th scope="col" if={f.statistiques.perception}>Perception</th>
+							      <th scope="col" if={f.statistiques.mental}>Mental</th>
+							      <th scope="col" if={f.statistiques.inteligence}>Inteligence</th>
+							      <th scope="col" if={f.statistiques.constitution}>Constitution</th>
 							    </tr>
 							    <tr>
-							      <td scope="col" if={f.stats.F}>{f.stats.F}</td>
-							      <td scope="col" if={f.stats.A}>{f.stats.A}</td>
-							      <td scope="col" if={f.stats.S}>{f.stats.S}</td>
-							      <td scope="col" if={f.stats.P}>{f.stats.P}</td>
-							      <td scope="col" if={f.stats.M}>{f.stats.M}</td>
-							      <td scope="col" if={f.stats.I}>{f.stats.I}</td>
-							      <td scope="col" if={f.stats.C}>{f.stats.C}</td>
+							      <td scope="col" if={f.statistiques.force}>{f.statistiques.force}</td>
+							      <td scope="col" if={f.statistiques.agilite}>{f.statistiques.agilite}</td>
+							      <td scope="col" if={f.statistiques.social}>{f.statistiques.social}</td>
+							      <td scope="col" if={f.statistiques.perception}>{f.statistiques.perception}</td>
+							      <td scope="col" if={f.statistiques.mental}>{f.statistiques.mental}</td>
+							      <td scope="col" if={f.statistiques.intelligence}>{f.statistiques.intelligence}</td>
+							      <td scope="col" if={f.statistiques.constitution}>{f.statistiques.constitution}</td>
 							    </tr>
 							  </thead>
 							</table>							
@@ -229,6 +229,30 @@
 				comp : false,
 				inv : false,
 				fam : false,
+
+				statData : [
+					[
+						{axis : "Force" , value : .5},
+						{axis : "Agilité" , value : .5},
+						{axis : "Social" , value : .5},
+						{axis : "Perception" , value : .5},
+						{axis : "Mental" , value : .5},
+						{axis : "Intelligence" , value : .5},
+						{axis : "Constitution" , value : .5}
+						]
+					]
+			},
+
+			onMounted(props, state){
+				this.state.statData[0][0].value = this.props.perso.statistiques.force / 100;
+				this.state.statData[0][1].value = this.props.perso.statistiques.agilite / 100;
+				this.state.statData[0][2].value = this.props.perso.statistiques.social / 100;
+				this.state.statData[0][3].value = this.props.perso.statistiques.perception / 100;
+				this.state.statData[0][4].value = this.props.perso.statistiques.mental / 100;
+				this.state.statData[0][5].value = this.props.perso.statistiques.intelligence / 100;
+				this.state.statData[0][6].value = this.props.perso.statistiques.constitution / 100;
+
+				this.update();
 			},
 
 			_onInfo(){
