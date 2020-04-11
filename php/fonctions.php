@@ -139,19 +139,19 @@
 	/**
 	* Permet de rajouter une statistique dans la table jdrStatistique de la BD
 	* @param $DB
-	* @param $force
-	* @param $agilite
-	* @param $social
-	* @param $perception
-	* @param $mental
-	* @param $intelligence
-	* @param $constitution
+	* @param $F pour la force
+	* @param $A pour l'agilité
+	* @param $S pour le social
+	* @param $P pour la perception
+	* @param $M pour le mental
+	* @param $I pour l'intelligence
+	* @param $C pour la constitution
 	*/
-	/*function addStatistique($DB, $force, $agilite, $social, $perception, $mental, $intelligence, $constitution){
-		$stmt = mysqli_prepare($DB, "INSERT INTO jdrStatistique (force, agilite, social, perception, mental, intelligence, constitution) VALUES (?, ?, ?, ?, ?, ?, ?)");
-		mysqli_stmt_bind_param($stmt, 'iiiiiii', $force, $agilite, $social, $perception, $mental, $intelligence, $constitution);
+	function addStatistique($DB, $F, $A, $S, $P, $M, $I, $C){
+		$stmt = mysqli_prepare($DB, "INSERT INTO jdrStatistique (F, A, S, P, M, I, C) VALUES (?, ?, ?, ?, ?, ?, ?)");
+		mysqli_stmt_bind_param($stmt, 'iiiiiii', $F, $A, $S, $P, $M, $I, $C);
 		mysqli_execute($stmt);
-	}*/
+	}
 
 	/**
 	* Permet de rajouter un type d'inventaire dans la table jdrTypeInventaire de la BD
@@ -532,19 +532,19 @@
 		$stmt = mysqli_prepare($DB, "SELECT * FROM jdrStatistique WHERE idStatistique = ?");
 		mysqli_stmt_bind_param($stmt, 'i', $idStatistique);
 		mysqli_execute($stmt);
-		$resultat = mysqli_stmt_bind_result($stmt, $id, $force, $agilite, $social, $perception, $mental, $intelligence, $constitution);
+		$resultat = mysqli_stmt_bind_result($stmt, $id, $F, $A, $S, $P, $M, $I, $C);
 		
 		$stats = array();
 		
 		if($resultat) {
 			while(mysqli_stmt_fetch($stmt)){
-			$stats["force"] = $force;
-			$stats["agilite"] = $agilite;
-			$stats["social"] = $social;
-			$stats["perception"] = $perception;
-			$stats["mental"] = $mental;
-			$stats["intelligence"] = $intelligence;
-			$stats["constitution"] = $constitution;
+			$stats["force"] = $F;
+			$stats["agilite"] = $A;
+			$stats["social"] = $S;
+			$stats["perception"] = $P;
+			$stats["mental"] = $M;
+			$stats["intelligence"] = $I;
+			$stats["constitution"] = $C;
 			}
 		}
 		
@@ -552,8 +552,6 @@
 	}
 
 	$DB = generateDb();
-
-	//addStatistique($DB, 50, 50, 50, 50, 50, 50, 50);
 
 	closeDb($DB);
 ?>
