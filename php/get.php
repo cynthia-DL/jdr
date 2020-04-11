@@ -3,26 +3,40 @@ include './fonctions.php';
 
 $bdd = generateDb();
 
-if ($_GET['case'] == 'personnage'){
-	$res = getPersonnage($bdd, intval($_GET['id']));
-} else if ($_GET['case'] == 'all_animal'){
-	$res = getArrayAnimal($bdd);
-} else if ($_GET['case'] == 'all_classe'){
-	$res = getArrayClasse($bdd);
-} else if ($_GET['case'] == 'all_etat'){
-	$res = getArrayEtat($bdd);
-} else if ($_GET['case'] == 'all_genre'){
-	$res = getArrayGenre($bdd);
-} else if ($_GET['case'] == 'all_race'){
-	$res = getArrayRace($bdd);
-} else if ($_GET['case'] == 'all_type_inventaire'){
-	$res = getArrayTypeInventaire($bdd);
-} else if ($_GET['case'] == 'all_type_objet'){
-	$res = getArrayTypeObjet($bdd);
-} else if ($_GET['case'] == 'storyline'){
-	$res = getArrayChapitre($bdd);
-} else if ($_GET['case'] == 'vignette'){
-	$res = getArrayVignette($bdd);
+switch ($_GET['case']) {
+	case 'personnage':
+		$res = getPersonnage($bdd, intval($_GET['id']));
+		break;
+	case 'all_animal':
+		$res = getArrayAnimal($bdd);
+		break;
+	case 'all_classe':
+		$res = getArrayClasse($bdd);
+		break;
+	case 'all_etat':
+		$res = getArrayEtat($bdd);
+		break;
+	case 'all_genre':
+		$res = getArrayGenre($bdd);
+		break;
+	case 'all_race':
+		$res = getArrayRace($bdd);
+		break;
+	case 'all_type_inventaire':
+		$res = getArrayTypeInventaire($bdd);
+		break;
+	case 'all_type_objet':
+		$res = getArrayTypeObjet($bdd);
+		break;
+	case 'storyline':
+		$res = getArrayChapitre($bdd);
+		break;
+	case 'vignette':
+		$res = getArrayVignette($bdd);
+		break;
+	default:
+		$res = [];
+		break;
 }
 
 echo json_encode($res);
