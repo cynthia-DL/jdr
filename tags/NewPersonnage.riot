@@ -3,17 +3,31 @@
 		<form class="form-group">
 		<h2>Informations générales</h2>
 		<div class="row">
-			<div class="col-5 mx-auto mb-3">
+			<div class="col-3 mx-auto mb-3">
 				<em class="text-primary">Nom</em>
 				<input class="form-control" type="text" name="nom">
 			</div>
 			
-			<div class="col-5 mx-auto mb-3">
+			<div class="col-3 mx-auto mb-3">
 				<em class="text-primary">Prénom</em>
 				<input class="form-control" type="text" name="prenom">
 			</div>
-		</div>
 
+			<div class="col-3 mx-auto mb-3">
+				<em class="text-primary">Pv</em>
+				<input class="form-control" type="number" name="pv" min="1">
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-5 mx-auto mb-3">
+				<em class="text-primary">Race</em>
+				<select class="form-control" id="race" nom="race"></select>
+			</div>
+			<div class="col-5 mx-auto mb-3">
+				<em class="text-primary">Genre</em>
+				<select class="form-control" id="genre" nom="genre"></select>
+			</div>
+		</div>
 		<div class="row">
 			<div class="col-3 mx-auto mb-3">
 				<em class="text-primary">Âge</em>
@@ -26,36 +40,7 @@
 			
 			<div class="col-3 mx-auto mb-3">
 				<em class="text-primary">Classe</em>
-				<select class="form-control" id="classe" nom="classe">
-					<option>1</option>
-			        <option>2</option>
-			        <option>3</option>
-			        <option>4</option>
-			        <option>5</option>
-				</select>
-			</div>
-		</div>
-
-		<div class="row">
-			<div class="col-5 mx-auto mb-3">
-				<em class="text-primary">Race</em>
-				<select class="form-control" id="race" nom="race">
-					<option>1</option>
-			        <option>2</option>
-			        <option>3</option>
-			        <option>4</option>
-			        <option>5</option>
-				</select>
-			</div>
-			<div class="col-5 mx-auto mb-3">
-				<em class="text-primary">Genre</em>
-				<select class="form-control" id="genre" nom="genre">
-					<option>1</option>
-			        <option>2</option>
-			        <option>3</option>
-			        <option>4</option>
-			        <option>5</option>
-				</select>
+				<select class="form-control" id="classe" nom="classe"></select>
 			</div>
 		</div>
 		<div class="row">
@@ -103,9 +88,73 @@
 				  </thead>
 				</table>
 		</div>
-		<button class="btn btn-primary text-center" type="submit">
-			Créer ce personnage
-		</button>
+		<div class="row">
+			<button class="btn btn-primary mx-auto" type="submit">
+				Créer ce personnage
+			</button>
+		</div>
 	</form>
 	</div>
+	<script>
+		export default {
+			state : {
+				enumGenre : [],
+				enumClasse : [],
+				enumRace : []
+			},
+
+			onMounted(props, state){
+				var genre = document.querySelector("#genre");
+				var classe = document.querySelector("#classe");
+				var race = document.querySelector("#race");
+
+				this.props.sa.getAllGenre().then(
+					(e) => {
+						this.state.enumGenre = JSON.parse(e);
+						console.log(this.state.enumGenre);
+						this.update();
+
+						for (var i = 0; i < this.state.enumGenre.length; i++) {
+							var tmp = document.createElement("option");
+							tmp.value = this.state.enumGenre[i];
+							tmp.innerText = this.state.enumGenre[i];
+							genre.appendChild(tmp);
+
+						}
+
+						this.props.sa.getAllClasse().then(
+							(e) => {
+								this.state.enumClasse = JSON.parse(e);
+								console.log(this.state.enumClasse);
+								this.update();
+
+								for (i = 0; i < this.state.enumClasse.length; i++) {
+									tmp = document.createElement("option");
+									tmp.value = this.state.enumClasse[i];
+									tmp.innerText = this.state.enumClasse[i];
+									classe.appendChild(tmp);
+								}
+
+								this.props.sa.getAllRace().then(
+									(e) => {
+										this.state.enumRace = JSON.parse(e);
+										console.log(this.state.enumRace);
+										this.update();
+
+										for (i = 0; i < this.state.enumRace.length; i++) {
+											tmp = document.createElement("option");
+											tmp.value = this.state.enumRace[i];
+											tmp.innerText = this.state.enumRace[i];
+											race.appendChild(tmp);
+
+										}
+									}
+								);
+							}
+						);
+					}
+				);
+			}
+		}
+	</script>
 </newpersonnage>

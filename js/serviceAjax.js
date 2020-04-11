@@ -1,7 +1,5 @@
 function makeServiceAjax(){
 	var service = {
-      getStoryLine:getStoryLine,
-      getPersonnage:getPersonnage,
       getAllAnimal:getAllAnimal,
       getAllClasse:getAllClasse,
       getAllEtat:getAllEtat,
@@ -9,42 +7,10 @@ function makeServiceAjax(){
       getAllRace:getAllRace,
       getAllTypeInventaire:getAllTypeInventaire,
       getAllTypeObjet:getAllTypeObjet,
-      getAllVignette:getAllVignette
+      getAllVignette:getAllVignette,
+      getPersonnage:getPersonnage,
+      getStoryLine:getStoryLine
     };
-
-    function getStoryLine() {
-        var url = "./php/get.php?case=storyline";
-        return new Promise(function(resolve,reject){
-            http = new XMLHttpRequest();
-            http.open("GET",url);
-            http.send();
-            http.onload=function(){
-                if (http.status == 200){
-                    resolve(this.response);
-                } else reject("Erreur getStoryLine 1 : "+http.serverResponse);
-            };
-            http.onerror = function(){
-                reject("Erreur getStoryLine 2 : "+http.serverResponse);
-            };
-        });
-    }
-
-    function getPersonnage(idPersonnage) {
-        var url = "./php/get.php?case=personnage&id="+idPersonnage;
-        return new Promise(function(resolve,reject){
-            http = new XMLHttpRequest();
-            http.open("GET",url);
-            http.send();
-            http.onload=function(){
-                if (http.status == 200){
-                    resolve(this.response);
-                } else reject("Erreur getPersonnage 1 : "+http.serverResponse);
-            };
-            http.onerror = function(){
-                reject("Erreur getPersonnage 2 : "+http.serverResponse);
-            };
-        });
-    }
 
     function getAllAnimal() {
         var url = "./php/get.php?case=all_animal";
@@ -178,6 +144,40 @@ function makeServiceAjax(){
             };
             http.onerror = function(){
                 reject("Erreur getAllVignette 2 : "+http.serverResponse);
+            };
+        });
+    }
+
+    function getPersonnage(idPersonnage) {
+        var url = "./php/get.php?case=personnage&id="+idPersonnage;
+        return new Promise(function(resolve,reject){
+            http = new XMLHttpRequest();
+            http.open("GET",url);
+            http.send();
+            http.onload=function(){
+                if (http.status == 200){
+                    resolve(this.response);
+                } else reject("Erreur getPersonnage 1 : "+http.serverResponse);
+            };
+            http.onerror = function(){
+                reject("Erreur getPersonnage 2 : "+http.serverResponse);
+            };
+        });
+    }
+
+    function getStoryLine() {
+        var url = "./php/get.php?case=storyline";
+        return new Promise(function(resolve,reject){
+            http = new XMLHttpRequest();
+            http.open("GET",url);
+            http.send();
+            http.onload=function(){
+                if (http.status == 200){
+                    resolve(this.response);
+                } else reject("Erreur getStoryLine 1 : "+http.serverResponse);
+            };
+            http.onerror = function(){
+                reject("Erreur getStoryLine 2 : "+http.serverResponse);
             };
         });
     }
