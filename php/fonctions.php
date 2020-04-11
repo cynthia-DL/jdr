@@ -119,9 +119,9 @@
 	* @param $idStatistique
 	* @param $lore
 	*/
-	function addPersonnage($DB, $idEtat, $nom, $prenom, $age, $idRace, $idClasse, $idGenre, $pv, $pvMax, $armure, $idStatistique, $lore){
-		$stmt = mysqli_prepare($DB, "INSERT INTO jdrPersonnage (idEtat, nom, prenom, age, idRace, idClasse, idGenre, pv, pvMax, armure, idStatistique, lore) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-		mysqli_stmt_bind_param($stmt, 'issiiiiiiiis', $idEtat, $nom, $prenom, $age, $idRace, $idClasse, $idGenre, $pv, $pvMax, $armure, $idStatistique, $lore);
+	function addPersonnage($DB, $idEtat, $nom, $prenom, $niveau, $age, $idRace, $idClasse, $idGenre, $pv, $pvMax, $armure, $idStatistique, $lore){
+		$stmt = mysqli_prepare($DB, "INSERT INTO jdrPersonnage (idEtat, nom, prenom, niveau, age, idRace, idClasse, idGenre, pv, pvMax, armure, idStatistique, lore) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+		mysqli_stmt_bind_param($stmt, 'issiiiiiiiiis', $idEtat, $nom, $prenom, $niveau, $age, $idRace, $idClasse, $idGenre, $pv, $pvMax, $armure, $idStatistique, $lore);
 		mysqli_execute($stmt);
 	}
 
@@ -511,10 +511,10 @@
 	* @return array de tout ce que contient le personnage
 	*/
 	function getPersonnage($DB, $idPersonnage){
-		$stmt = mysqli_prepare($DB, "SELECT nomEtat, nom, prenom, age, nomRace, nomClasse, nomGenre, pv, pvMax, armure, idStatistique, lore FROM jdrPersonnage NATURAL JOIN jdrEtat NATURAL JOIN jdrRace NATURAL JOIN jdrClasse NATURAL JOIN jdrGenre WHERE idPersonnage = ? ");
+		$stmt = mysqli_prepare($DB, "SELECT nomEtat, nom, prenom, niveau, age, nomRace, nomClasse, nomGenre, pv, pvMax, armure, idStatistique, lore FROM jdrPersonnage NATURAL JOIN jdrEtat NATURAL JOIN jdrRace NATURAL JOIN jdrClasse NATURAL JOIN jdrGenre WHERE idPersonnage = ? ");
 		mysqli_stmt_bind_param($stmt, 'i', $idPersonnage);
 		mysqli_execute($stmt);
-		$resultat = mysqli_stmt_bind_result($stmt, $etat, $nom, $prenom, $age, $race, $classe, $genre, $pv, $pvMax, $armure, $idStatistique, $lore);
+		$resultat = mysqli_stmt_bind_result($stmt, $etat, $nom, $prenom, $niveau, $age, $race, $classe, $genre, $pv, $pvMax, $armure, $idStatistique, $lore);
 		
 		$personnage = array();
 		
@@ -524,6 +524,7 @@
 			$personnage["etat"] = $etat;
 			$personnage["nom"] = $nom;
 			$personnage["prenom"] = $prenom;
+			$personnage["niveau"] = $niveau;
 			$personnage["age"] = $age;
 			$personnage["race"] = $race;
 			$personnage["classe"] = $classe;
