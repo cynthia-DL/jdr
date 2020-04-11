@@ -5,48 +5,48 @@
 		<div class="row">
 			<div class="col-3 mx-auto mb-3">
 				<em class="text-primary">Nom</em>
-				<input class="form-control" type="text" name="nom">
+				<input class="form-control" type="text" id="nom">
 			</div>
 			
 			<div class="col-3 mx-auto mb-3">
 				<em class="text-primary">Prénom</em>
-				<input class="form-control" type="text" name="prenom">
+				<input class="form-control" type="text" id="prenom">
 			</div>
 
 			<div class="col-3 mx-auto mb-3">
 				<em class="text-primary">Pv</em>
-				<input class="form-control" type="number" name="pv" min="1">
+				<input class="form-control" type="number" id="pv" min="1">
 			</div>
 		</div>
 		<div class="row">
 			<div class="col-5 mx-auto mb-3">
 				<em class="text-primary">Race</em>
-				<select class="form-control" id="race" nom="race"></select>
+				<select class="form-control" id="race"></select>
 			</div>
 			<div class="col-5 mx-auto mb-3">
 				<em class="text-primary">Genre</em>
-				<select class="form-control" id="genre" nom="genre"></select>
+				<select class="form-control" id="genre"></select>
 			</div>
 		</div>
 		<div class="row">
 			<div class="col-3 mx-auto mb-3">
 				<em class="text-primary">Âge</em>
-				<input class="form-control" type="number" name="age" min="0" max="99999">
+				<input class="form-control" type="number" id="age" min="0" max="99999">
 			</div>
 			<div class="col-3 mx-auto mb-3">
 				<em class="text-primary">Niveau</em>
-				<input class="form-control" type="number" name="niveau">
+				<input class="form-control" type="number" id="niveau">
 			</div>
 			
 			<div class="col-3 mx-auto mb-3">
 				<em class="text-primary">Classe</em>
-				<select class="form-control" id="classe" nom="classe"></select>
+				<select class="form-control" id="classe"></select>
 			</div>
 		</div>
 		<div class="row">
 			<div class="mx-auto mb-3 col">
 				<em class="text-primary">Lore</em>
-				<textarea class="form-control" name="lore" rows="3"></textarea>
+				<textarea class="form-control" id="lore" rows="3"></textarea>
 			</div>
 		</div>
 		<h2>Statistiques</h2>
@@ -64,25 +64,25 @@
 				    </tr>
 				    <tr>
 				      <td scope="col">
-				      	<input class="form-control" type="number" name="force" min="20" max="80">
+				      	<input class="form-control" type="number" id="force" min="20" max="80">
 				      </td>
 				      <td scope="col">
-				      	<input class="form-control" type="number" name="agilite" min="20" max="80">
+				      	<input class="form-control" type="number" id="agilite" min="20" max="80">
 				      </td>
 				      <td scope="col">
-				      	<input class="form-control" type="number" name="social" min="20" max="80">
+				      	<input class="form-control" type="number" id="social" min="20" max="80">
 				      </td>
 				      <td scope="col">
-				      	<input class="form-control" type="number" name="perception" min="20" max="80">
+				      	<input class="form-control" type="number" id="perception" min="20" max="80">
 				      </td>
 				      <td scope="col">
-				      	<input class="form-control" type="number" name="mental" min="20" max="80">
+				      	<input class="form-control" type="number" id="mental" min="20" max="80">
 				      </td>
 				      <td scope="col">
-				      	<input class="form-control" type="number" name="intelligence" min="20" max="80">
+				      	<input class="form-control" type="number" id="intelligence" min="20" max="80">
 				      </td>
 				      <td scope="col">
-				      	<input class="form-control" type="number" name="constitution" min="20" max="80">
+				      	<input class="form-control" type="number" id="constitution" min="20" max="80">
 				      </td>
 				    </tr>
 				  </thead>
@@ -111,7 +111,6 @@
 				this.props.sa.getAllGenre().then(
 					(e) => {
 						this.state.enumGenre = JSON.parse(e);
-						console.log(this.state.enumGenre);
 						this.update();
 
 						for (var i = 0; i < this.state.enumGenre.length; i++) {
@@ -125,7 +124,6 @@
 						this.props.sa.getAllClasse().then(
 							(e) => {
 								this.state.enumClasse = JSON.parse(e);
-								console.log(this.state.enumClasse);
 								this.update();
 
 								for (i = 0; i < this.state.enumClasse.length; i++) {
@@ -138,7 +136,6 @@
 								this.props.sa.getAllRace().then(
 									(e) => {
 										this.state.enumRace = JSON.parse(e);
-										console.log(this.state.enumRace);
 										this.update();
 
 										for (i = 0; i < this.state.enumRace.length; i++) {
@@ -158,8 +155,30 @@
 
 			_submit(e){
 				e.preventDefault();
-				
-				
+
+				let nom = document.querySelector("#nom").value;
+				let prenom = document.querySelector("#prenom").value;
+				let pv = document.querySelector("#pv").value;
+				let race = document.querySelector("#race").value;
+				let genre = document.querySelector("#genre").value;
+				let age = document.querySelector("#age").value;
+				let niveau = document.querySelector("#niveau").value;
+				let classe = document.querySelector("#classe").value;
+				let lore = document.querySelector("#lore").value;
+				let force = document.querySelector("#force").value;
+				let agilite = document.querySelector("#agilite").value;
+				let social = document.querySelector("#social").value;
+				let perception = document.querySelector("#perception").value;
+				let mental = document.querySelector("#mental").value;
+				let intelligence = document.querySelector("#intelligence").value;
+				let constitution = document.querySelector("#constitution").value;
+
+				this.props.sa.addPersonnage(nom, prenom, pv, race, genre, age, niveau, classe, lore, force, agilite, social, perception, mental, intelligence, constitution).then(
+					(e) => {
+						console.log("send");
+					}
+				);
+
 			}
 		}
 	</script>

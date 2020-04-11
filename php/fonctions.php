@@ -152,7 +152,7 @@
 		mysqli_stmt_bind_param($stmt, 'iiiiiii', $F, $A, $S, $P, $M, $I, $C);
 		mysqli_execute($stmt);
 
-		return mysqli_insert_id();
+		return mysqli_insert_id($DB);
 	}
 
 	/**

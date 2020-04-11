@@ -15,13 +15,13 @@ function makeServiceAjax(){
 
     function addPersonnage(nom, prenom, pv, race, genre, age, niveau, classe, lore, force, agilite, 
         social, perception, mental, intelligence, constitution) {
-        var url = "./php/post.php";
+        var url = "./php/post.php?case=personnage&nom="+nom+"&prenom="+prenom+"&pv="+pv+"&race="+race+"&genre="+genre+
+                "&age="+age+"&niveau="+niveau+"&classe="+classe+"&lore="+lore+"&force="+force+"&agilite="+agilite+ 
+                "&social="+social+"&perception="+perception+"&mental="+mental+"&intelligence="+intelligence+"&constitution="+constitution;
         return new Promise(function(resolve,reject){
             http = new XMLHttpRequest();
-            http.open("POST",url);
-            http.send("case=personnage&nom="+nom+"&prenom="+prenom+"&pv="+pv+"&race="+race+"&genre="+genre+
-                "&age="+age+"&niveau="+niveau+"&classe="+classe+"&lore="+lore+"&force="+force+"&agilite"+agilite+ 
-                "&social="+social+"&perception="+perception+"&mental"+mental+"&intelligence="+intelligence+"&constitution="+constitution);
+            http.open("GET",url);
+            http.send();
             http.onload=function(){
                 if (http.status == 200){
                     resolve(this.response);
