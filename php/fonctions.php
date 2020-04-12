@@ -177,13 +177,6 @@
 		mysqli_execute($stmt);
 	}
 
-
-
-
-
-
-	
-
 	/**
 	* Cette fonction permet de fermer une base de données
 	* @param $DB la base de données à fermer.
@@ -576,4 +569,124 @@
 		
 		return $stats;
 	}
+
+	/**
+	* Permet de modifier un animal dans la table jdrAnimal de la BD
+	* @param $DB
+	* @param $nomAnimal
+	* @param $idAnimal
+	*/
+	function updateAnimal($DB, $nomAnimal, $idAnimal){
+		$stmt = mysqli_prepare($DB, "UPDATE jdrAnimal SET nomAnimal = ? WHERE idAnimal = ?");
+		mysqli_stmt_bind_param($stmt, 'si', $nomAnimal, $idAnimal);
+		mysqli_execute($stmt);
+	}
+
+	/**
+	* Permet de modifier une aptitude dans la table jdrAptitude de la BD
+	* @param $DB
+	* @param $estUneCompetence
+	* @param $idPersonnage
+	* @param $nomAptitude
+	* @param $descriptionAptitude
+	* @param $idAptitude
+	*/
+	function updateAptitude($DB, $estUneCompetence, $idPersonnage, $nomAptitude, $descriptionAptitude, $idAptitude){
+		$stmt = mysqli_prepare($DB, "UPDATE jdrAptitude SET estUneCompetence = ?, idPersonnage = ?, nomAptitude = ?, descriptionAptitude = ? WHERE idAptitude = ?");
+		mysqli_stmt_bind_param($stmt, 'iissi', $estUneCompetence, $idPersonnage, $nomAptitude, $descriptionAptitude, $idAptitude);
+		mysqli_execute($stmt);
+	}
+
+	/**
+	* Permet de modifier un chapitre dans la table jdrChapitre de la BD
+	* @param $DB
+	* @param $contenu
+	* @param $date
+	*/
+	function updateChapitre($DB, $contenu, $date){
+		$stmt = mysqli_prepare($DB, "UPDATE jdrChapitre SET contenu = ? WHERE date = ?");
+		mysqli_stmt_bind_param($stmt, 'ss', $contenu, $date);
+		mysqli_execute($stmt);
+	}
+
+	/**
+	* Permet de modifier une classe dans la table jdrClasse de la BD
+	* @param $DB
+	* @param $nomClasse
+	* @param $idClasse
+	*/
+	function updateClasse($DB, $nomClasse, $idClasse){
+		$stmt = mysqli_prepare($DB, "UPDATE jdrClasse SET nomClasse = ? WHERE idClasse = ?");
+		mysqli_stmt_bind_param($stmt, 'si', $nomClasse, $idClasse);
+		mysqli_execute($stmt);
+	}
+
+	/**
+	* Permet de modifier un état dans la table jdrEtat de la BD
+	* @param $DB
+	* @param $nomEtat
+	* @param $idEtat
+	*/
+	function updateEtat($DB, $nomEtat, $idEtat){
+		$stmt = mysqli_prepare($DB, "UPDATE jdrEtat SET nomEtat = ? WHERE idEtat = ?");
+		mysqli_stmt_bind_param($stmt, 'si', $nomEtat, $idEtat);
+		mysqli_execute($stmt);
+	}
+
+	/**
+	* Permet de modifier un état dans la table jdrEtat de la BD
+	* @param $DB
+	* @param $idPersonnage
+	* @param $nomFamilier
+	* @param $pvFamilier
+	* @param $pvMaxFamilier
+	* @param $armureFamilier
+	* @param $idStatistique
+	* @param $descriptionFamilier
+	* @param $idFamilier
+	*/
+	function updateFamilier($DB, $idPersonnage, $nomFamilier, $pvFamilier, $pvMaxFamilier, $armureFamilier, $idStatistique, $descriptionFamilier, $idFamilier){
+		$stmt = mysqli_prepare($DB, "UPDATE jdrFamilier SET idPersonnage = ?, nomFamilier = ?, pvFamilier = ?, pvMaxFamilier = ?, armureFamilier = ?, idStatistique = ?, descriptionFamilier = ? WHERE idFamilier = ?");
+		mysqli_stmt_bind_param($stmt, 'isiiiisi', $idPersonnage, $nomFamilier, $pvFamilier, $pvMaxFamilier, $armureFamilier, $idStatistique, $descriptionFamilier, $idFamilier);
+		mysqli_execute($stmt);
+	}
+
+	/**
+	* Permet de modifier un genre dans la table jdrGenre de la BD
+	* @param $DB
+	* @param $nomGenre
+	* @param $idGenre
+	*/
+	function updateGenre($DB, $nomGenre, $idGenre){
+		$stmt = mysqli_prepare($DB, "UPDATE jdrGenre SET nomGenre = ? WHERE idGenre = ?");
+		mysqli_stmt_bind_param($stmt, 'si', $nomGenre, $idGenre);
+		mysqli_execute($stmt);
+	}
+
+	/**
+	* Permet de modifier un inventaire dans la table jdrInventaire de la BD
+	* @param $DB
+	* @param $idPersonnage
+	* @param $idTypeInventaire
+	* @param $nomObjet
+	* @param $idTypeObjet
+	* @param $degatObjet
+	* @param $protectionObjet
+	* @param $contenuObjet
+	* @param $quantiteObjet
+	* @param $idAnimal
+	* @param $descriptionObjet
+	* @param $idObjet
+	*/
+	function updateInventaire($DB, $idPersonnage, $idTypeInventaire, $nomObjet, $idTypeObjet, $degatObjet, $protectionObjet, $contenuObjet, $quantiteObjet, $idAnimal, $descriptionObjet, $idObjet){
+		$stmt = mysqli_prepare($DB, "UPDATE jdrInventaire SET idPersonnage = ?, idTypeInventaire = ?, nomObjet = ?, idTypeObjet = ?, degatObjet = ?, protectionObjet = ?, contenuObjet = ?, quantiteObjet = ?, idAnimal = ?, descriptionObjet = ? WHERE idObjet = ?");
+		mysqli_stmt_bind_param($stmt, 'iisiiisiisi', $idPersonnage, $idTypeInventaire, $nomObjet, $idTypeObjet, $degatObjet, $protectionObjet, $contenuObjet, $quantiteObjet, $idAnimal, $descriptionObjet, $idObjet);
+		mysqli_execute($stmt);
+	}
+
+	$DB = generateDb();
+
+	updateInventaire($DB, 1, 1, "Fourche", 2, 3, 0, "", 1, 0, "Une fourche basiquement", 4);
+
+	closeDb($DB);
 ?>
