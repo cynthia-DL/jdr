@@ -39,6 +39,7 @@
 
 	<!-- La Storyline -->
 	<div class="container" if={state.storyline}>
+		<newchapitre sa={sa} fct={_onListe}></newchapitre>
 		<chapitre each={c in state.chapitres} storyline={c}></chapitre>
 	</div>
 
@@ -120,11 +121,17 @@
 			},
 
 			_onStoryLine(){
-				this.state.liste = false;
-				this.state.fiche = false;
-				this.state.newPersonnage = false;
-				this.state.storyline = true;
-				this.update();
+				this.sa.getStoryLine().then(
+					(e) => {
+						this.state.chapitres = JSON.parse(e);
+						this.update();
+						this.state.liste = false;
+						this.state.fiche = false;
+						this.state.newPersonnage = false;
+						this.state.storyline = true;
+						this.update();
+					}
+				);
 			},
 
 			_onNewPersonnage(){

@@ -1,5 +1,6 @@
 function makeServiceAjax(){
 	var service = {
+      addChapitre:addChapitre,
       addObjet:addObjet,
       addPersonnage:addPersonnage,
       getAllAnimal:getAllAnimal,
@@ -13,6 +14,23 @@ function makeServiceAjax(){
       getPersonnage:getPersonnage,
       getStoryLine:getStoryLine
     };
+
+    function addChapitre(contenu){
+        var url = "./php/post.php?case=chapitre&contenu="+contenu;
+        return new Promise(function(resolve,reject){
+            http = new XMLHttpRequest();
+            http.open("GET",url);
+            http.send();
+            http.onload=function(){
+                if (http.status == 200){
+                    resolve(this.response);
+                } else reject("Erreur addChapitre 1 : "+http.serverResponse);
+            };
+            http.onerror = function(){
+                reject("Erreur addChapitre 2 : "+http.serverResponse);
+            };
+        });
+    }
 
     function addObjet(idPersonnage, nom, typeInventaire, degats, protection, contenu, typeObjet, quantite, typeAnimal, description) {
         var url = "./php/post.php?case=objet&idPersonnage="+idPersonnage+"&nom="+nom+"&typeInventaire="+typeInventaire+

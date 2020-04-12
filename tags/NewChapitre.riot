@@ -1,0 +1,28 @@
+<newChapitre>
+	<div class="row">
+		<div class="mx-auto mb-3 col">
+			<em class="text-primary">DANS LE PASSEY</em>
+			<textarea class="form-control" id="chapitre" rows="3"></textarea>
+		</div>
+	</div>
+	<div class="row">
+		<button class="btn btn-primary mx-auto" onclick={_submit}>
+			Créer ce chapitre
+		</button>
+	</div>
+
+	<script>
+		export default {
+			_submit(){
+				var chapitre = document.querySelector("#chapitre").value;
+
+				this.props.sa.addChapitre(chapitre).then(
+					(e) => {
+						alert("Un chapitre a été créé!");
+						this.props.fct();
+					}
+				);
+			}
+		}
+	</script>
+</newChapitre>
