@@ -1,5 +1,6 @@
 function makeServiceAjax(){
 	var service = {
+      // addAptitude:addAptitude,
       addChapitre:addChapitre,
       addFamilier:addFamilier,
       addObjet:addObjet,

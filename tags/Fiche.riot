@@ -213,8 +213,9 @@
 			<div if={state.newFamilier}>
 				<button class="btn btn-info" onclick={_toggleNewFamilier}>Fermer ce menu</button>
 				<h2>Nouvel Familier</h2>
-				<newfamilier sa={props.sa} idPersonnage={props.idPersonnage} fct={props.return}></newfamilier>				
+				<newfamilier sa={props.sa} idPersonnage={props.idPersonnage} fct={props.return}></newfamilier>	
 			</div>
+			<hr>
 			<div class="col-10 mx-auto" each={f in props.perso.familier}>
 				<div class="card-body">
 					<ul class="list-group">
@@ -252,7 +253,7 @@
 							</table>							
 						</li>
 						<!-- Description du familier -->
-						<li class="list-group-item border-primary" if={f.desc}>Description : {f.desc}</li>
+						<li class="list-group-item border-primary" if={f.description}>Description : {f.description}</li>
 				</div>
 			</div>
 		</div>
