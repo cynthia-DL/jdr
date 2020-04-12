@@ -35,7 +35,7 @@
 	</div>
 	
 	<!-- Affichage d'une fiche en plein écran -->
-	<fiche perso={state.curPerso} if={state.fiche} return={_onListe}></fiche>
+	<fiche perso={state.curPerso} if={state.fiche} return={_onListe} sa={sa} idPersonnage={state.idCurPerso}></fiche>
 
 	<!-- La Storyline -->
 	<div class="container" if={state.storyline}>
@@ -65,13 +65,11 @@
 				this.sa.getStoryLine().then(
 					(e) => {
 						this.state.chapitres = JSON.parse(e);
-						console.log(this.state.chapitres);
 						this.update();
 
 						this.sa.getAllVignette().then(
 							(f) => {
 								this.state.vignette = JSON.parse(f);
-								console.log(this.state.vignette);
 								this.update();
 							}
 						);

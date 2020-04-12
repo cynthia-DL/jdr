@@ -1,0 +1,125 @@
+<newobjet>
+	<div class="row">
+		<div class="col mx-auto mb-3">
+			<em class="text-primary">Nom de l'objet</em>
+			<input class="form-control" type="text" id="nomObjet">
+		</div>
+		<div class="col mx-auto mb-3">
+				<em class="text-primary">Rangé dans : </em>
+				<select class="form-control" id="typeInventaire"></select>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-3 mx-auto mb-3">
+			<em class="text-primary">Degats (si null, mettre 0)</em>
+			<input class="form-control" type="number" id="degatObjet" min="0" max="100">
+		</div>
+		<div class="col-3 mx-auto mb-3">
+			<em class="text-primary">Point d'armure (si null, mettre 0)</em>
+			<input class="form-control" type="number" id="protectionObjet">
+		</div>
+		<div class="col-3 mx-auto mb-3">
+			<em class="text-primary">Contenu (si null, ne rien mettre)</em>
+			<input class="form-control" type="text" id="contenuObjet">
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-3 mx-auto mb-3">
+			<em class="text-primary">Type de l'objet</em>
+			<select class="form-control" id="typeObjet"></select>
+		</div>
+		<div class="col-3 mx-auto mb-3">
+			<em class="text-primary">Quantité</em>
+			<input class="form-control" type="number" id="quantiteObjet" min="1">
+		</div>
+		<div class="col-3 mx-auto mb-3">
+			<em class="text-primary">Race de la mouture si besoin</em>
+			<select class="form-control" id="typeAnimal"></select>
+		</div>
+	</div>
+	<div class="mx-auto mb-3">
+		<em class="text-primary">Vous pouvez decrire l'objet si vous voullez</em>
+		<input class="form-control" id="descriptionObjet"/>
+	</div>
+	<div class="row">
+		<button class="btn btn-primary mx-auto" onclick={_submit}>
+			Créer cet objet
+		</button>
+	</div>
+
+	<script>
+		export default {
+			state : {
+				enumTypeObjet : [],
+				enumTypeInventaire : [],
+				enumTypeAnimal : []
+			},
+
+			onMounted(props, state){
+				var typeObjet = document.querySelector("#typeObjet");
+				var typeInventaire = document.querySelector("#typeInventaire");
+				var typeAnimal = document.querySelector("#typeAnimal");
+
+				this.props.sa.getAllTypeObjet().then(
+					(e) => {
+						this.state.enumTypeObjet = JSON.parse(e);
+						this.update();
+
+						for (var i = 0; i < this.state.enumTypeObjet.length; i++) {
+							var tmp = document.createElement("option");
+							tmp.value = this.state.enumTypeObjet[i].idTypeObjet;
+							tmp.innerText = this.state.enumTypeObjet[i].nomTypeObjet;
+							typeObjet.appendChild(tmp);
+						}
+
+						this.props.sa.getAllTypeInventaire().then(
+							(e) => {
+								this.state.enumTypeInventaire = JSON.parse(e);
+								this.update();
+
+								for (var i = 0; i < this.state.enumTypeInventaire.length; i++) {
+									var tmp = document.createElement("option");
+									tmp.value = this.state.enumTypeInventaire[i].idTypeInventaire;
+									tmp.innerText = this.state.enumTypeInventaire[i].nomTypeInventaire;
+									typeInventaire.appendChild(tmp);
+								}
+								this.props.sa.getAllAnimal().then(
+									(e) => {
+										this.state.enumTypeAnimal = JSON.parse(e);
+										this.update();
+
+										for (var i = 0; i < this.state.enumTypeAnimal.length; i++) {
+											var tmp = document.createElement("option");
+											tmp.value = this.state.enumTypeAnimal[i].idAnimal;
+											tmp.innerText = this.state.enumTypeAnimal[i].nomAnimal;
+											typeAnimal.appendChild(tmp);
+										}
+									}
+								);
+							}
+						);
+					}
+				);
+			},
+
+			_submit(){
+				var nomObjet = document.querySelector("#nomObjet").value;
+				var typeInventaire = document.querySelector("#typeInventaire").value;
+				var degatObjet = document.querySelector("#degatObjet").value;
+				var protectionObjet = document.querySelector("#protectionObjet").value;
+				var contenuObjet = document.querySelector("#contenuObjet").value;
+				var typeObjet = document.querySelector("#typeObjet").value;
+				var quantiteObjet = document.querySelector("#quantiteObjet").value;
+				var typeAnimal = document.querySelector("#typeAnimal").value;
+				var descriptionObjet = document.querySelector("#descriptionObjet").value;
+
+				this.props.sa.addObjet(this.props.idPersonnage, nomObjet, typeInventaire, degatObjet, protectionObjet, contenuObjet, typeObjet, quantiteObjet, typeAnimal, descriptionObjet).then(
+					(e) => {
+						alert("Un objet a été créé!");
+						this.props.fct();
+					}
+				);
+			}
+		}
+	</script>
+</newobjet>

@@ -134,6 +134,14 @@
 
 		<!-- Inventaire -->
 		<div if={state.inv}>
+			<!-- Nouvel objet -->
+			<button class="btn btn-info" if={!state.newObjet} onclick={_toggleNewObjet}>Ajouter un objet</button>
+			<div if={state.newObjet}>
+				<button class="btn btn-info" onclick={_toggleNewObjet}>Fermer ce menu</button>
+				<h2>Nouvel Objet</h2>
+				<newobjet sa={props.sa} idPersonnage={props.idPersonnage} fct={props.return}></newobjet>				
+			</div>
+			<hr>
 			<!-- Contenu du sac -->
 			<h2>Sac de {props.perso.prenom}</h2>
 			<div class="row d-flex align-items-center">
@@ -144,9 +152,9 @@
 							<li class="list-group-item border-primary" if={i.type}>Type : {i.type}</li>
 							<li class="list-group-item border-primary" if={i.degat}>Dégats : D{i.degat}</li>
 							<li class="list-group-item border-primary" if={i.contenu}>Contenu : {i.contenu}</li>
-							<li class="list-group-item border-primary" if={i.qtte}>Quantité : {i.qtte}</li>
+							<li class="list-group-item border-primary" if={i.quantite}>Quantité : {i.quantite}</li>
 							<li class="list-group-item border-primary" if={i.animal}>Animal : {i.animal}</li>
-							<li class="list-group-item border-primary" if={i.desc}>Description : {i.desc}</li>
+							<li class="list-group-item border-primary" if={i.description}>Description : {i.description}</li>
 						</ul>
 					</div>
 				</div>
@@ -165,9 +173,9 @@
 							<li class="list-group-item border-primary" if={i.type}>Type : {i.type}</li>
 							<li class="list-group-item border-primary" if={i.degat}>Dégats : D{i.degat}</li>
 							<li class="list-group-item border-primary" if={i.contenu}>Contenu : {i.contenu}</li>
-							<li class="list-group-item border-primary" if={i.qtte}>Quantité : {i.qtte}</li>
+							<li class="list-group-item border-primary" if={i.quantite}>Quantité : {i.quantite}</li>
 							<li class="list-group-item border-primary" if={i.animal}>Animal : {i.animal}</li>
-							<li class="list-group-item border-primary" if={i.desc}>Description : {i.desc}</li>
+							<li class="list-group-item border-primary" if={i.description}>Description : {i.description}</li>
 						</ul>
 					</div>
 				</div>
@@ -229,6 +237,7 @@
 				comp : false,
 				inv : false,
 				fam : false,
+				newObjet : false,
 
 				statData : [
 					[
@@ -297,6 +306,11 @@
 				this.state.comp = false;
 				this.state.inv = false;
 				this.state.fam = true;
+				this.update();
+			},
+
+			_toggleNewObjet(){
+				this.state.newObjet = !this.state.newObjet;
 				this.update();
 			}
 		}
