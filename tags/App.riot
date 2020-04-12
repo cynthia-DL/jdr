@@ -12,9 +12,6 @@
 	         <button class="btn nav-link" onclick={_onListe}><i class="fa fa-id-card"></i> Voir les fiches</button>
 	      </li>
 	      <li class="nav-item">
-	        <a class="nav-link" href="http://devirtuel.com/" target="_blank"><i class="fa fa-random" aria-hidden="true"></i> Dés en ligne</a>
-	      </li>
-	      <li class="nav-item">
 	        <button class="btn nav-link" onclick={_onStoryLine}><i class="fa fa-archive" aria-hidden="true"></i> StoryLine</button>
 	      </li>
 	      <li class="nav-item">
@@ -38,8 +35,12 @@
 	<fiche perso={state.curPerso} if={state.fiche} return={_onListe} sa={sa} idPersonnage={state.idCurPerso}></fiche>
 
 	<!-- La Storyline -->
-	<div class="container" if={state.storyline}>
-		<newchapitre sa={sa} fct={_onListe}></newchapitre>
+	<div class="container mx_auto" if={state.storyline}>
+		<button class="btn btn-info" onclick={_toggleChapitre} if={!state.newChapitre}>Ajouter un chapitre</button>
+		<div if={state.newChapitre}>
+			<button class="btn btn-info" onclick={_toggleChapitre}>Fermer ce menu</button>
+			<newchapitre sa={sa} fct={_onStoryLine}></newchapitre>
+		</div>
 		<chapitre each={c in state.chapitres} storyline={c}></chapitre>
 	</div>
 
@@ -55,6 +56,7 @@
 				fiche : false,
 				storyLine : false,
 				newPersonnage : false,
+				newchapitre : false,
 				chapitres : [],
 				vignette : [],
 
@@ -83,6 +85,11 @@
 				this.update({"idCurPerso":id});
 				this._fullVer();
 
+			},
+
+			_toggleChapitre(){
+				this.state.newChapitre = !this.state.newChapitre;
+				this.update();
 			},
 
 			_newPersonnageCreated() {

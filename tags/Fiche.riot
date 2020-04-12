@@ -142,6 +142,28 @@
 				<newobjet sa={props.sa} idPersonnage={props.idPersonnage} fct={props.return}></newobjet>				
 			</div>
 			<hr>
+			
+			<!-- Aliés -->
+			<h2>Aliés de {props.perso.prenom}</h2>
+			<div class="row d-flex align-items-center">
+				<div class="col-3 mx-auto" each={i in props.perso.inventaire.ALIÉS}>
+					<div class="card-body">
+						<ul class="list-group">
+							<li class="list-group-item bg-primary text-white" if={i.nom}>{i.nom}</li>
+							<li class="list-group-item border-primary" if={i.type}>Type : {i.type}</li>
+							<li class="list-group-item border-primary" if={i.degat}>Dégats : D{i.degat}</li>
+							<li class="list-group-item border-primary" if={i.contenu}>Contenu : {i.contenu}</li>
+							<li class="list-group-item border-primary" if={i.quantite}>Quantité : {i.quantite}</li>
+							<li class="list-group-item border-primary" if={i.animal}>Animal : {i.animal}</li>
+							<li class="list-group-item border-primary" if={i.description}>Description : {i.description}</li>
+						</ul>
+					</div>
+				</div>
+				<div class="mx-auto" if={!props.perso.inventaire.ALIÉS}>
+					Ce personnage n'a pas d'aliés.
+				</div>
+			</div>
+
 			<!-- Contenu du sac -->
 			<h2>Sac de {props.perso.prenom}</h2>
 			<div class="row d-flex align-items-center">
