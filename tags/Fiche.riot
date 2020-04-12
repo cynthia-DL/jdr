@@ -209,6 +209,12 @@
 		
 		<!-- Familiers -->
 		<div if={state.fam}>
+			<button class="btn btn-info" if={!state.newFamilier} onclick={_toggleNewFamilier}>Ajouter un Familier</button>
+			<div if={state.newFamilier}>
+				<button class="btn btn-info" onclick={_toggleNewFamilier}>Fermer ce menu</button>
+				<h2>Nouvel Familier</h2>
+				<newfamilier sa={props.sa} idPersonnage={props.idPersonnage} fct={props.return}></newfamilier>				
+			</div>
 			<div class="col-10 mx-auto" each={f in props.perso.familier}>
 				<div class="card-body">
 					<ul class="list-group">
@@ -230,7 +236,7 @@
 							      <th scope="col" if={f.statistiques.social}>Social</th>
 							      <th scope="col" if={f.statistiques.perception}>Perception</th>
 							      <th scope="col" if={f.statistiques.mental}>Mental</th>
-							      <th scope="col" if={f.statistiques.inteligence}>Inteligence</th>
+							      <th scope="col" if={f.statistiques.intelligence}>Inteligence</th>
 							      <th scope="col" if={f.statistiques.constitution}>Constitution</th>
 							    </tr>
 							    <tr>
@@ -260,6 +266,7 @@
 				inv : false,
 				fam : false,
 				newObjet : false,
+				newFamilier : false,
 
 				statData : [
 					[
@@ -333,6 +340,11 @@
 
 			_toggleNewObjet(){
 				this.state.newObjet = !this.state.newObjet;
+				this.update();
+			},
+
+			_toggleNewFamilier(){
+				this.state.newFamilier = !this.state.newFamilier;
 				this.update();
 			}
 		}

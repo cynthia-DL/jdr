@@ -1,6 +1,7 @@
 function makeServiceAjax(){
 	var service = {
       addChapitre:addChapitre,
+      addFamilier:addFamilier,
       addObjet:addObjet,
       addPersonnage:addPersonnage,
       getAllAnimal:getAllAnimal,
@@ -28,6 +29,25 @@ function makeServiceAjax(){
             };
             http.onerror = function(){
                 reject("Erreur addChapitre 2 : "+http.serverResponse);
+            };
+        });
+    }
+
+    function addFamilier(idPersonnage, nom, pv, armure, description, force, agilite, social, perception, mental, intelligence, constitution){
+        var url = "./php/post.php?case=familier&idPersonnage="+idPersonnage+"&nom="+nom+"&pv="+pv+"&armure="+armure+
+        "&description="+description+"&force="+force+"&agilite="+agilite+"&social="+social+"&perception="+perception+
+        "&mental="+mental+"&intelligence="+intelligence+"&constitution="+constitution;
+        return new Promise(function(resolve,reject){
+            http = new XMLHttpRequest();
+            http.open("GET",url);
+            http.send();
+            http.onload=function(){
+                if (http.status == 200){
+                    resolve(this.response);
+                } else reject("Erreur addFamilier 1 : "+http.serverResponse);
+            };
+            http.onerror = function(){
+                reject("Erreur addFamilier 2 : "+http.serverResponse);
             };
         });
     }
