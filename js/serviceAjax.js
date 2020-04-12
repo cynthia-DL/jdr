@@ -1,6 +1,6 @@
 function makeServiceAjax(){
 	var service = {
-      // addAptitude:addAptitude,
+      addAptitude:addAptitude,
       addChapitre:addChapitre,
       addFamilier:addFamilier,
       addObjet:addObjet,
@@ -16,6 +16,23 @@ function makeServiceAjax(){
       getPersonnage:getPersonnage,
       getStoryLine:getStoryLine
     };
+
+    function addAptitude(estUneCompetence, idPersonnage, nom, description){
+        var url = "./php/post.php?case=aptitude&estUneCompetence="+estUneCompetence+"&idPersonnage="+idPersonnage+"&nom="+nom+"&description="+description;
+        return new Promise(function(resolve,reject){
+            http = new XMLHttpRequest();
+            http.open("GET",url);
+            http.send();
+            http.onload=function(){
+                if (http.status == 200){
+                    resolve(this.response);
+                } else reject("Erreur addAptitude 1 : "+http.serverResponse);
+            };
+            http.onerror = function(){
+                reject("Erreur addAptitude 2 : "+http.serverResponse);
+            };
+        });
+    }
 
     function addChapitre(contenu){
         var url = "./php/post.php?case=chapitre&contenu="+contenu;

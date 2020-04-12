@@ -20,6 +20,10 @@ switch ($_GET['case']) {
 		$idStat = addStatistique($bdd, $_GET["force"], $_GET["agilite"], $_GET["social"], $_GET["perception"], $_GET["mental"], $_GET["intelligence"], $_GET["constitution"]);
 		addFamilier($bdd, $_GET["idPersonnage"], $_GET["nom"], $_GET["pv"], $_GET["pv"], $_GET["armure"], $idStat, $_GET["description"]);
 		break;
+
+	case 'aptitude':
+		addAptitude($bdd, $_POST["estUneCompetence"], $_POST["idPersonnage"], $_POST["nom"], $_POST["description"]);
+		break;
 	
 	default:
 		$res = false;

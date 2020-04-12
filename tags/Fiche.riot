@@ -106,6 +106,13 @@
 		</div>
 
 		<div if={state.comp}>
+			<button class="btn btn-info" if={!state.newAptitude} onclick={_toggleNewAptitude}>Ajouter une aptitude</button>
+			<div if={state.newAptitude}>
+				<button class="btn btn-info" onclick={_toggleNewAptitude}>Fermer ce menu</button>
+				<h2>Nouvelle Aptitude</h2>
+				<newaptitude sa={props.sa} idPersonnage={props.idPersonnage} fct={props.return}></newaptitude>	
+			</div>
+			<hr>
 			<div class="row">
 				<!-- Competences -->
 				<div class="col-5 mx-auto">
@@ -268,6 +275,7 @@
 				fam : false,
 				newObjet : false,
 				newFamilier : false,
+				newAptitude : false,
 
 				statData : [
 					[
@@ -346,6 +354,11 @@
 
 			_toggleNewFamilier(){
 				this.state.newFamilier = !this.state.newFamilier;
+				this.update();
+			},
+
+			_toggleNewAptitude(){
+				this.state.newAptitude = !this.state.newAptitude;
 				this.update();
 			}
 		}

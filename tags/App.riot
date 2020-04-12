@@ -101,7 +101,6 @@
 				this.sa.getPersonnage(this.state.idCurPerso).then(
 					(e) => {
 						this.state.curPerso = JSON.parse(e);
-						console.log(this.state.curPerso);
 						this.update();
 
 						this.state.liste = false;

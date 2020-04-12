@@ -1,0 +1,42 @@
+<newaptitude>
+	<div class="row">
+		<div class="mx-auto mb-3 col-5">
+			<em class="text-primary">Nom de l'aptitude</em>
+			<input class="form-control" type="text" id="nomAptitude">
+		</div>
+		<div class="mx-auto mb-3 col-5">
+			<em class="text-primary">Type de l'aptitude</em>
+			<select class="form-control" id="estUneCompetence">
+				<option value="0">Don et trait</option>
+				<option value="1">Competence</option>
+			</select>
+		</div>
+	</div>
+	<div class="mx-auto mb-3">
+		<em class="text-primary">Description de l'aptitude</em>
+		<textarea class="form-control" id="descriptionAptitude" rows="3"></textarea>
+	</div>
+	<div class="row">
+		<button class="btn btn-primary mx-auto" onclick={_submit}>
+			Créer cette aptitude
+		</button>
+	</div>
+	<script>
+		export default {
+			_submit(){
+
+				let nom = document.querySelector("#nomAptitude").value;
+				let euc = document.querySelector("#estUneCompetence").value;
+				let description = document.querySelector("#descriptionAptitude").value;
+				
+				this.props.sa.addAptitude(euc, this.props.idPersonnage, nom, description).then(
+					(e) => {
+						alert("Une aptitude a été créé!");
+						this.props.fct();
+					}
+				);
+
+			}
+		}
+	</script>
+</newaptitude>
