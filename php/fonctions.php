@@ -684,9 +684,81 @@
 		mysqli_execute($stmt);
 	}
 
-	$DB = generateDb();
+	/**
+	* Permet de modifier un personnage dans la table jdrPersonnage de la BD
+	* @param $DB
+	* @param $idEtat
+	* @param $nom
+	* @param $prenom
+	* @param $niveau
+	* @param $age
+	* @param $idRace
+	* @param $idClasse
+	* @param $idGenre
+	* @param $pv
+	* @param $pvMax
+	* @param $armure
+	* @param $idStatistique
+	* @param $lore
+	* @param $idPersonnage
+	*/
+	function updatePersonnage($DB, $idEtat, $nom, $prenom, $niveau, $age, $idRace, $idClasse, $idGenre, $pv, $pvMax, $armure, $idStatistique, $lore, $idPersonnage){
+		$stmt = mysqli_prepare($DB, "UPDATE jdrPersonnage SET idEtat = ?, nom = ?, prenom = ?, niveau = ?, age = ?, idRace = ?, idClasse = ?, idGenre = ?, pv = ?, pvMax = ?, armure = ?, idStatistique = ?, lore = ? WHERE idPersonnage = ?");
+		mysqli_stmt_bind_param($stmt, 'issiiiiiiiiisi', $idEtat, $nom, $prenom, $niveau, $age, $idRace, $idClasse, $idGenre, $pv, $pvMax, $armure, $idStatistique, $lore, $idPersonnage);
+		mysqli_execute($stmt);
+	}
 
-	updateInventaire($DB, 1, 1, "Fourche", 2, 3, 0, "", 1, 0, "Une fourche basiquement", 4);
+	/**
+	* Permet de modifier une race dans la table jdrRace de la BD
+	* @param $DB
+	* @param $nomRace
+	* @param $idRace
+	*/
+	function updateRace($DB, $nomRace, $idRace){
+		$stmt = mysqli_prepare($DB, "UPDATE jdrRace SET nomRace = ? WHERE idRace = ?");
+		mysqli_stmt_bind_param($stmt, 'si', $nomRace, $idRace);
+		mysqli_execute($stmt);
+	}
 
-	closeDb($DB);
+	/**
+	* Permet de modifier une statistique dans la table jdrStatistique de la BD
+	* @param $DB
+	* @param $F pour la force
+	* @param $A pour l'agilité
+	* @param $S pour le social
+	* @param $P pour la perception
+	* @param $M pour le mental
+	* @param $I pour l'intelligence
+	* @param $C pour la constitution
+	* @param $idStatistique
+	*/
+	function updateStatistique($DB, $F, $A, $S, $P, $M, $I, $C, $idStatistique){
+		$stmt = mysqli_prepare($DB, "UPDATE jdrStatistique SET F = ?, A = ?, S = ?, P = ?, M = ?, I = ?, C = ? WHERE idStatistique = ?");
+		mysqli_stmt_bind_param($stmt, 'iiiiiiii', $F, $A, $S, $P, $M, $I, $C, $idStatistique);
+		mysqli_execute($stmt);
+	}
+
+	/**
+	* Permet de modifier un type d'inventaire dans la table jdrTypeInventaire de la BD
+	* @param $DB
+	* @param $nomTypeInventaire
+	* @param $idTypeInventaire
+	*/
+	function updateTypeInventaire($DB, $nomTypeInventaire, $idTypeInventaire){
+		$stmt = mysqli_prepare($DB, "UPDATE jdrTypeInventaire SET nomTypeInventaire = ? WHERE idTypeInventaire = ?");
+		mysqli_stmt_bind_param($stmt, 'si', $nomTypeInventaire, $idTypeInventaire);
+		mysqli_execute($stmt);
+	}
+
+	/**
+	* Permet de modifier un type d'objet dans la table jdrTypeObjet de la BD
+	* @param $DB
+	* @param $nomTypeObjet
+	* @param $idTypeObjet
+	*/
+	function updateTypeObjet($DB, $nomTypeObjet, $idTypeObjet){
+		$stmt = mysqli_prepare($DB, "UPDATE jdrTypeObjet SET nomTypeObjet = ? WHERE idTypeObjet = ?");
+		mysqli_stmt_bind_param($stmt, 'si', $nomTypeObjet, $idTypeObjet);
+		mysqli_execute($stmt);
+	}
 ?>
