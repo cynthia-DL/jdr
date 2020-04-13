@@ -1,5 +1,7 @@
 <?php
 
+	//Les fonctions pour ajouter des données dans la BD
+
 	/**
 	* Permet de rajouter un animal dans la table jdrAnimal de la BD
 	* @param $DB
@@ -45,7 +47,7 @@
 	}
 
 	/**
-	* Permet de rajouter un etat dans la table jdrEtat de la BD
+	* Permet de rajouter un état dans la table jdrEtat de la BD
 	* @param $DB
 	* @param $nomEtat
 	*/
@@ -177,6 +179,8 @@
 		mysqli_execute($stmt);
 	}
 
+	//Pour la BD
+
 	/**
 	* Cette fonction permet de fermer une base de données
 	* @param $DB la base de données à fermer.
@@ -184,6 +188,140 @@
 	function closeDb($DB){
 		mysqli_close($DB);
 	}
+
+	//Les fonctions pour supprimer des données de la BD
+
+	/**
+	 * Permet de supprimer un animal de la table jdrAnimal de la BD
+	 * @param $idAnimal
+	 */
+	function deleteAnimal($DB, $idAnimal){
+		$stmt = mysqli_prepare($DB, "DELETE FROM jdrAnimal WHERE idAnimal = ?");
+		mysqli_stmt_bind_param($stmt, 'i', $idAnimal);
+		mysqli_execute($stmt);
+	}
+
+	/**
+	 * Permet de supprimer une aptitude de la table jdrAptitude de la BD
+	 * @param $idAptitude
+	 */
+	function deleteAptitude($DB, $idAptitude){
+		$stmt = mysqli_prepare($DB, "DELETE FROM jdrAptitude WHERE idAptitude = ?");
+		mysqli_stmt_bind_param($stmt, 'i', $idAptitude);
+		mysqli_execute($stmt);
+	}
+
+	/**
+	 * Permet de supprimer une chapitre de la table jdrChapitre de la BD
+	 * @param $date
+	 */
+	function deleteChapitre($DB, $date){
+		$stmt = mysqli_prepare($DB, "DELETE FROM jdrChapitre WHERE date = ?");
+		mysqli_stmt_bind_param($stmt, 's', $date);
+		mysqli_execute($stmt);
+	}
+
+	/**
+	 * Permet de supprimer une classe de la table jdrClasse de la BD
+	 * @param $idClasse
+	 */
+	function deleteClasse($DB, $idClasse){
+		$stmt = mysqli_prepare($DB, "DELETE FROM jdrClasse WHERE idClasse = ?");
+		mysqli_stmt_bind_param($stmt, 'i', $idClasse);
+		mysqli_execute($stmt);
+	}
+
+	/**
+	 * Permet de supprimer un état de la table jdrEtat de la BD
+	 * @param $idEtat
+	 */
+	function deleteEtat($DB, $idEtat){
+		$stmt = mysqli_prepare($DB, "DELETE FROM jdrEtat WHERE idEtat = ?");
+		mysqli_stmt_bind_param($stmt, 'i', $idEtat);
+		mysqli_execute($stmt);
+	}
+
+	/**
+	 * Permet de supprimer un familier de la table jdrFamilier de la BD
+	 * @param $idFamilier
+	 */
+	function deleteFamilier($DB, $idFamilier){
+		$stmt = mysqli_prepare($DB, "DELETE FROM jdrFamilier WHERE idFamilier = ?");
+		mysqli_stmt_bind_param($stmt, 'i', $idFamilier);
+		mysqli_execute($stmt);
+	}
+
+	/**
+	 * Permet de supprimer un genre de la table jdrGenre de la BD
+	 * @param $idGenre
+	 */
+	function deleteGenre($DB, $idGenre){
+		$stmt = mysqli_prepare($DB, "DELETE FROM jdrGenre WHERE idGenre = ?");
+		mysqli_stmt_bind_param($stmt, 'i', $idGenre);
+		mysqli_execute($stmt);
+	}
+
+	/**
+	 * Permet de supprimer un objet de la table jdrInventaire de la BD
+	 * @param $idObjet
+	 */
+	function deleteObjet($DB, $idObjet){
+		$stmt = mysqli_prepare($DB, "DELETE FROM jdrInventaire WHERE idObjet = ?");
+		mysqli_stmt_bind_param($stmt, 'i', $idObjet);
+		mysqli_execute($stmt);
+	}
+
+	/**
+	 * Permet de supprimer un personnage de la table jdrPersonnage de la BD
+	 * @param $idPersonnage
+	 */
+	function deletePersonnage($DB, $idPersonnage){
+		$stmt = mysqli_prepare($DB, "DELETE FROM jdrPersonnage WHERE idPersonnage = ?");
+		mysqli_stmt_bind_param($stmt, 'i', $idPersonnage);
+		mysqli_execute($stmt);
+	}
+
+	/**
+	 * Permet de supprimer une race de la table jdrRace de la BD
+	 * @param $idRace
+	 */
+	function deleteRace($DB, $idRace){
+		$stmt = mysqli_prepare($DB, "DELETE FROM jdrRace WHERE idRace = ?");
+		mysqli_stmt_bind_param($stmt, 'i', $idRace);
+		mysqli_execute($stmt);
+	}
+
+	/**
+	 * Permet de supprimer une statistique de la table jdrStatistique de la BD
+	 * @param $idStatistique
+	 */
+	function deleteStatistique($DB, $idStatistique){
+		$stmt = mysqli_prepare($DB, "DELETE FROM jdrStatistique WHERE idStatistique = ?");
+		mysqli_stmt_bind_param($stmt, 'i', $idStatistique);
+		mysqli_execute($stmt);
+	}
+
+	/**
+	 * Permet de supprimer une type d'inventaire de la table jdrTypeInventaire de la BD
+	 * @param $idTypeInventaire
+	 */
+	function deleteTypeInventaire($DB, $idTypeInventaire){
+		$stmt = mysqli_prepare($DB, "DELETE FROM jdrTypeInventaire WHERE idTypeInventaire = ?");
+		mysqli_stmt_bind_param($stmt, 'i', $idTypeInventaire);
+		mysqli_execute($stmt);
+	}
+
+	/**
+	 * Permet de supprimer une type d'objet de la table jdrTypeObjet de la BD
+	 * @param $idTypeObjet
+	 */
+	function deleteTypeObjet($DB, $idTypeObjet){
+		$stmt = mysqli_prepare($DB, "DELETE FROM jdrTypeObjet WHERE idTypeObjet = ?");
+		mysqli_stmt_bind_param($stmt, 'i', $idTypeObjet);
+		mysqli_execute($stmt);
+	}
+
+	//Pour la BD
 
 	/**
 	* Cette fonction permet de générer une base de données.
@@ -196,6 +334,8 @@
 		}
 		else return $DB;
 	}
+
+	//Les fonctions pour récupérer les données de la BD
 
 	/**
 	* Permet de récupérer tous les animaux
