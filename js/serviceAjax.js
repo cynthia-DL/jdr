@@ -18,7 +18,8 @@ function makeServiceAjax(){
     };
 
     function addAptitude(estUneCompetence, idPersonnage, nom, description){
-        var url = "./php/post.php?case=aptitude&estUneCompetence="+estUneCompetence+"&idPersonnage="+idPersonnage+"&nom="+nom+"&description="+description;
+        var url = "php/post.php?case=aptitude&estUneCompetence="+estUneCompetence+"&idPersonnage="+idPersonnage+"&nom="+nom+"&description="+description;
+        console.log(url);
         return new Promise(function(resolve,reject){
             http = new XMLHttpRequest();
             http.open("GET",url);

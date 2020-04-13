@@ -22,7 +22,7 @@ switch ($_GET['case']) {
 		break;
 
 	case 'aptitude':
-		addAptitude($bdd, $_POST["estUneCompetence"], $_POST["idPersonnage"], $_POST["nom"], $_POST["description"]);
+		addAptitude($bdd, $_GET["estUneCompetence"], $_GET["idPersonnage"], $_GET["nom"], $_GET["description"]);
 		break;
 	
 	default:

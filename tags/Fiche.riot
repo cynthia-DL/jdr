@@ -151,9 +151,9 @@
 			<hr>
 			
 			<!-- Aliés -->
-			<h2>Aliés de {props.perso.prenom}</h2>
+			<h2>Alliés de {props.perso.prenom}</h2>
 			<div class="row d-flex align-items-center">
-				<div class="col-3 mx-auto" each={i in props.perso.inventaire.ALIÉS}>
+				<div class="col-3 mx-auto" each={i in props.perso.inventaire.ALLIES}>
 					<div class="card-body">
 						<ul class="list-group">
 							<li class="list-group-item bg-primary text-white" if={i.nom}>{i.nom}</li>
@@ -166,8 +166,8 @@
 						</ul>
 					</div>
 				</div>
-				<div class="mx-auto" if={!props.perso.inventaire.ALIÉS}>
-					Ce personnage n'a pas d'aliés.
+				<div class="mx-auto" if={!props.perso.inventaire.ALLIES}>
+					Ce personnage n'a pas d'alliés.
 				</div>
 			</div>
 
