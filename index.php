@@ -1,4 +1,14 @@
 <!DOCTYPE html>
+<?php
+	session_start();
+	//$_SESSION = array();
+	if(!isset($_SESSION['username'])){
+		header('Location: ./connexion.php');
+		exit;
+	}else{
+		echo $_SESSION['username'];
+	}
+?>
 <html>
 <head>
 	<meta charset="utf-8">

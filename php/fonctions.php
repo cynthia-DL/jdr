@@ -343,7 +343,7 @@
 	* @return array de tous les animaux possibles
 	*/
 	function getArrayAnimal($DB){
-		$resultat = mysqli_query($DB, "SELECT * from jdrAnimal");
+		$resultat = mysqli_query($DB, "SELECT * FROM jdrAnimal");
 		$arrayAnimal = array();
 		$i = 0;
 		
@@ -363,7 +363,7 @@
 	* @return array de tous les chapitres
 	*/
 	function getArrayChapitre($DB){
-		$resultat = mysqli_query($DB, "SELECT * from jdrChapitre ORDER BY date DESC");
+		$resultat = mysqli_query($DB, "SELECT * FROM jdrChapitre ORDER BY date DESC");
 		$arrayChapitre = array();
 		$i = 0;
 		
@@ -383,7 +383,7 @@
 	* @return array de toutes les classes possibles
 	*/
 	function getArrayClasse($DB){
-		$resultat = mysqli_query($DB, "SELECT * from jdrClasse");
+		$resultat = mysqli_query($DB, "SELECT * FROM jdrClasse");
 		$arrayClasse = array();
 		$i = 0;
 		
@@ -429,7 +429,7 @@
 	* @return array de tous les états possibles
 	*/
 	function getArrayEtat($DB){
-		$resultat = mysqli_query($DB, "SELECT * from jdrEtat");
+		$resultat = mysqli_query($DB, "SELECT * FROM jdrEtat");
 		$arrayEtat = array();
 		$i = 0;
 		
@@ -449,7 +449,7 @@
 	* @return array de tous les genres possibles
 	*/
 	function getArrayGenre($DB){
-		$resultat = mysqli_query($DB, "SELECT * from jdrGenre");
+		$resultat = mysqli_query($DB, "SELECT * FROM jdrGenre");
 		$arrayGenre = array();
 		$i = 0;
 		
@@ -469,7 +469,7 @@
 	* @return array de tous les races possibles
 	*/
 	function getArrayRace($DB){
-		$resultat = mysqli_query($DB, "SELECT * from jdrRace");
+		$resultat = mysqli_query($DB, "SELECT * FROM jdrRace");
 		$arrayRace = array();
 		$i = 0;
 		
@@ -515,7 +515,7 @@
 	* @return array de tous les types d'inventaire possibles
 	*/
 	function getArrayTypeInventaire($DB){
-		$resultat = mysqli_query($DB, "SELECT * from jdrTypeInventaire");
+		$resultat = mysqli_query($DB, "SELECT * FROM jdrTypeInventaire");
 		$arrayTypeInventaire = array();
 		$i = 0;
 		
@@ -535,7 +535,7 @@
 	* @return array de tous les types d'objet possibles
 	*/
 	function getArrayTypeObjet($DB){
-		$resultat = mysqli_query($DB, "SELECT * from jdrTypeObjet");
+		$resultat = mysqli_query($DB, "SELECT * FROM jdrTypeObjet");
 		$arrayTypeObjet = array();
 		$i = 0;
 		
@@ -555,7 +555,7 @@
 	* @return array de toutes les preview de personnages
 	*/
 	function getArrayVignette($DB){
-		$resultat = mysqli_query($DB, "SELECT idPersonnage, prenom, pv, pvMax, armure, nomEtat, idStatistique from jdrPersonnage NATURAL JOIN jdrEtat");
+		$resultat = mysqli_query($DB, "SELECT idPersonnage, prenom, pv, pvMax, armure, nomEtat, idStatistique FROM jdrPersonnage NATURAL JOIN jdrEtat");
 		$arrayVignette = array();
 		$i = 0;
 		
