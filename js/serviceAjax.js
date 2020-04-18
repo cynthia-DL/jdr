@@ -1,5 +1,5 @@
 function makeServiceAjax(){
-	var service = {
+    var service = {
       addAptitude:addAptitude,
       addChapitre:addChapitre,
       addFamilier:addFamilier,
@@ -14,7 +14,8 @@ function makeServiceAjax(){
       getAllTypeObjet:getAllTypeObjet,
       getAllVignette:getAllVignette,
       getPersonnage:getPersonnage,
-      getStoryLine:getStoryLine
+      getStoryLine:getStoryLine,
+      updateAptitude:updateAptitude
     };
 
     function addAptitude(estUneCompetence, idPersonnage, nom, description){
@@ -276,6 +277,24 @@ function makeServiceAjax(){
             };
             http.onerror = function(){
                 reject("Erreur getStoryLine 2 : "+http.serverResponse);
+            };
+        });
+    }
+
+    function updateAptitude(estUneCompetence, idPersonnage, nom, description){
+        var url = "php/update.php?case=aptitude&estUneCompetence="+estUneCompetence+"&idPersonnage="+idPersonnage+"&nom="+nom+"&description="+description;
+        console.log(url);
+        return new Promise(function(resolve,reject){
+            http = new XMLHttpRequest();
+            http.open("GET",url);
+            http.send();
+            http.onload=function(){
+                if (http.status == 200){
+                    resolve(this.response);
+                } else reject("Erreur updateAptitude 1 : "+http.serverResponse);
+            };
+            http.onerror = function(){
+                reject("Erreur updateAptitude 2 : "+http.serverResponse);
             };
         });
     }
