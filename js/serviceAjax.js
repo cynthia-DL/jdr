@@ -6,6 +6,7 @@ function makeServiceAjax(){
       addObjet:addObjet,
       addPersonnage:addPersonnage,
 
+      deleteAptitude:deleteAptitude,
       deleteAnimal:deleteAnimal,
       deleteClasse:deleteClasse,
       deleteEtat:deleteEtat,
@@ -125,6 +126,24 @@ function makeServiceAjax(){
     }
 
     //DELETE
+    function deleteAptitude(id) {
+        var url = "./php/delete.php?case=aptitude&id="+id;
+        window.location.reload();
+        return new Promise(function(resolve,reject){
+            http = new XMLHttpRequest();
+            http.open("GET",url);
+            http.send();
+            http.onload=function(){
+                if (http.status == 200){
+                    resolve(this.response);
+                } else reject("Erreur deleteAnimal 1 : "+http.serverResponse);
+            };
+            http.onerror = function(){
+                reject("Erreur deleteAnimal 2 : "+http.serverResponse);
+            };
+        });
+    }
+
     function deleteAnimal(id) {
         var url = "./php/delete.php?case=all_animal&id="+id;
         window.location.reload();
@@ -159,7 +178,6 @@ function makeServiceAjax(){
                 reject("Erreur deleteClasse 2 : "+http.serverResponse);
             };
         });
-        location.reload(true);
     }
 
     function deleteEtat(id) {
@@ -272,7 +290,6 @@ function makeServiceAjax(){
 
     function deleteChapitre(id) {
         var url = "./php/delete.php?case=storyline&id="+id;
-        window.location.reload();
         return new Promise(function(resolve,reject){
             http = new XMLHttpRequest();
             http.open("GET",url);

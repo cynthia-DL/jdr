@@ -35,8 +35,10 @@ switch ($_GET['case']) {
 	case 'vignette':
 		deleteVignette($bdd, intval($_GET['id']));
 		break;
+	case 'aptitude':
+		deleteAptitude($bdd, intval($_GET['id']));
+		break;
 }
-location.reload(true);
 
 closeDb($bdd);
 ?>

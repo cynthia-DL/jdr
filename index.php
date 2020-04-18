@@ -25,11 +25,12 @@
 	<link rel="stylesheet" href="https://bootswatch.com/4/solar/bootstrap.min.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-
+	
 	<script src="./tags/App.riot" type="riot"></script>
 	<script src="./tags/Chart.riot" type="riot"></script>
 	<script src="./tags/Chapitre.riot" type="riot"></script>
 	<script src="./tags/Fiche.riot" type="riot"></script>
+	<script src="./tags/fiche/Aptitude.riot" type="riot"></script>
 	<script src="./tags/form/add/NewAptitude.riot" type="riot"></script>
 	<script src="./tags/form/add/NewChapitre.riot" type="riot"></script>
 	<script src="./tags/form/add/NewFamilier.riot" type="riot"></script>
@@ -67,6 +68,7 @@
 			riot.mount('chapitre');
 			riot.mount('chart');
 			riot.mount('fiche');
+			riot.mount('aptitude');
 			riot.mount('app');
 		})
 	</script>

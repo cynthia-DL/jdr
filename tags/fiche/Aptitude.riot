@@ -1,0 +1,56 @@
+<aptitude>
+	<div class="card  mb-3">
+		<div if={!state.updateAptitude}>
+			<div class="card-header" if={props.aptitude.nom}>{props.aptitude.nom}</div>
+			<div class="card-body">{props.aptitude.description}</div>
+		</div>
+		<div if={state.updateAptitude}>
+			<updateaptitude aptitude={props.aptitude} sa={props.sa} fct={props.fct} idPersonnage={props.id}></updateaptitude>
+		</div>
+		<div class="card-footer">
+			<button class="btn btn-outline-warning mx-auto" onclick={_toggleUpdateMode}>
+				<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+			</button>
+			<button class="btn btn-outline-danger mx-auto" onclick={_toggleDeleteMode}>
+				<i class="fa fa-trash" aria-hidden="true"></i>
+			</button>
+		</div>
+		<div class="card-footer" if={state.deleteAptitude}>
+			Voullez-vous vraiment supprimer l'aptitude {props.aptitude.nom} ?<br>
+				<button class="btn btn-danger" onclick={_delete}>
+					Oui
+				</button>
+				<button class="btn btn-secondary" onclick={_toggleDeleteMode}>
+					Non
+				</button>
+		</div>
+
+		<script>
+			export default {
+				state : {
+					updateAptitude : false,
+					deleteAptitude : false
+				},
+
+				_toggleUpdateMode(){
+					this.state.updateAptitude = !this.state.updateAptitude;
+					this.update();
+				},
+
+				_toggleDeleteMode(){
+					this.state.deleteAptitude = !this.state.deleteAptitude;
+					this.update();
+				},
+
+				_delete(){
+					this.props.sa.deleteAptitude(this.props.aptitude.idAptitude).then(
+						(e) => {
+							this.state.deleteMode = false;
+							this.props.fct();
+						}
+					);
+				}
+			}
+		</script>
+	</div>
+</aptitude>

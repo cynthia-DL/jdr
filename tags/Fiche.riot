@@ -112,29 +112,16 @@
 				<h2>Nouvelle Aptitude</h2>
 				<newaptitude sa={props.sa} idPersonnage={props.idPersonnage} fct={props.return}></newaptitude>	
 			</div>
-			<div if={state.updateAptitude}>
+			<!-- <div if={state.updateAptitude}>
 				<updateaptitude aptitude={props.perso.competences[0]} sa={props.sa} idPersonnage={props.idPersonnage} fct={props.return}></updateaptitude>
-			</div>
+			</div> -->
 			<hr>
 			<div class="row">
 				<!-- Competences -->
 				<div class="col-5 mx-auto">
 					<h2>Competences</h2>
 					<div each={c in props.perso.competences}>
-						<div class="card  mb-3">
-							<div class="card-header" if={c.nom}>{c.nom}</div>
-							<div class="card-body">{c.description}</div>
-							<div class="card-footer">
-								<button class="btn btn-outline-warning mx-auto" onclick={_toggleUpdateAptitude}>
-									<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-									Éditer la competence
-								</button>
-								<button class="btn btn-outline-danger mx-auto">
-									<i class="fa fa-trash" aria-hidden="true"></i>
-									Effacer la competence
-								</button>
-							</div>
-						</div>
+						<aptitude aptitude={c} sa={props.sa} fct={props.return} id={props.idPersonnage}></aptitude>
 					</div>
 				</div>		
 		
@@ -143,20 +130,7 @@
 				<div class="col-5  mx-auto">
 					<h2>Don et traits</h2>
 					<div each={c in props.perso.traits}>
-						<div class="card  mb-3">
-							<div class="card-header" if={c.nom}>{c.nom}</div>
-							<div class="card-body">{c.description}</div>
-							<div class="card-footer">
-								<button class="btn btn-outline-warning mx-auto" onclick={_toggleUpdateAptitude}>
-									<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-									Éditer le don/trait
-								</button>
-								<button class="btn btn-outline-danger mx-auto">
-									<i class="fa fa-trash" aria-hidden="true"></i>
-									Effacer le don/trait
-								</button>
-							</div>
-						</div>
+						<aptitude aptitude={c} sa={props.sa} fct={props.return} id={props.idPersonnage}></aptitude>
 					</div>
 				</div>		
 			</div>
@@ -299,7 +273,8 @@
 				newObjet : false,
 				newFamilier : false,
 				newAptitude : false,
-				updateAptitude : false,
+
+				
 
 				statData : [
 					[
@@ -383,11 +358,6 @@
 
 			_toggleNewAptitude(){
 				this.state.newAptitude = !this.state.newAptitude;
-				this.update();
-			},
-
-			_toggleUpdateAptitude(){
-				this.state.updateAptitude = !this.state.updateAptitude;
 				this.update();
 			}
 		}
