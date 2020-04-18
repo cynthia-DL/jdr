@@ -405,18 +405,20 @@
 	* @return array de toutes les compétences possibles pour un personnage donné
 	*/
 	function getArrayCompetence($DB, $idPersonnage){
-		$stmt = mysqli_prepare($DB, "SELECT nomAptitude, descriptionAptitude FROM jdrAptitude WHERE estUneCompetence = 1 AND idPersonnage = ?");
+		$stmt = mysqli_prepare($DB, "SELECT nomAptitude, descriptionAptitude, idAptitude FROM jdrAptitude WHERE estUneCompetence = 1 AND idPersonnage = ?");
 		mysqli_stmt_bind_param($stmt, 'i', $idPersonnage);
 		mysqli_execute($stmt);
-		$resultat = mysqli_stmt_bind_result($stmt, $nom, $description);
+		$resultat = mysqli_stmt_bind_result($stmt, $nom, $description, $idAptitude);
 		$arrayCompetence = array();
 		$i = 0;
 		
 		if($resultat) {
 			while(mysqli_stmt_fetch($stmt)){
 				$arrayCompetence[$i] = array();
-				$arrayCompetence[$i][0] = $nom;
-				$arrayCompetence[$i][1] = $description;
+				$arrayCompetence[$i]["nom"] = $nom;
+				$arrayCompetence[$i]["description"] = $description;
+				$arrayCompetence[$i]["idAptitude"] = $idAptitude;
+				$arrayCompetence[$i]["typeAptitude"] = 1;
 				$i++;
 			}
 		}
@@ -491,18 +493,20 @@
 	* @return array de toutes les traits possibles pour un personnage donné
 	*/
 	function getArrayTrait($DB, $idPersonnage){
-		$stmt = mysqli_prepare($DB, "SELECT nomAptitude, descriptionAptitude FROM jdrAptitude WHERE estUneCompetence = 0 AND idPersonnage = ?");
+		$stmt = mysqli_prepare($DB, "SELECT nomAptitude, descriptionAptitude, idAptitude FROM jdrAptitude WHERE estUneCompetence = 0 AND idPersonnage = ?");
 		mysqli_stmt_bind_param($stmt, 'i', $idPersonnage);
 		mysqli_execute($stmt);
-		$resultat = mysqli_stmt_bind_result($stmt, $nom, $description);
+		$resultat = mysqli_stmt_bind_result($stmt, $nom, $description, $idAptitude);
 		$arrayTrait = array();
 		$i = 0;
 		
 		if($resultat) {
 			while(mysqli_stmt_fetch($stmt)){
 				$arrayTrait[$i] = array();
-				$arrayTrait[$i][0] = $nom;
-				$arrayTrait[$i][1] = $description;
+				$arrayTrait[$i]["nom"] = $nom;
+				$arrayTrait[$i]["description"] = $description;
+				$arrayTrait[$i]["idAptitude"] = $idAptitude;
+				$arrayTrait[$i]["typeAptitude"] = 0;
 				$i++;
 			}
 		}

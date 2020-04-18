@@ -281,8 +281,9 @@ function makeServiceAjax(){
         });
     }
 
-    function updateAptitude(estUneCompetence, idPersonnage, nom, description){
-        var url = "php/update.php?case=aptitude&estUneCompetence="+estUneCompetence+"&idPersonnage="+idPersonnage+"&nom="+nom+"&description="+description;
+    function updateAptitude(estUneCompetence, idPersonnage, nom, description, idAptitude){
+        var url = "php/update.php?case=aptitude&estUneCompetence="+estUneCompetence+
+        "&idPersonnage="+idPersonnage+"&nom="+nom+"&description="+description+"&idAptitude="+idAptitude;
         console.log(url);
         return new Promise(function(resolve,reject){
             http = new XMLHttpRequest();

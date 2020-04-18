@@ -1,8 +1,9 @@
 <updateaptitude>
+	<h2>Modifier une aptitude</h2>
 	<div class="row">
 		<div class="mx-auto mb-3 col-5">
 			<em class="text-primary">Nom de l'aptitude</em>
-			<input class="form-control" type="text" id="nomAptitude" value={props.aptitude.nomAptitude}>
+			<input class="form-control" type="text" id="nomAptitude" value={props.aptitude.nom}>
 		</div>
 		<div class="mx-auto mb-3 col-5">
 			<em class="text-primary">Type de l'aptitude</em>
@@ -14,7 +15,7 @@
 	</div>
 	<div class="mx-auto mb-3">
 		<em class="text-primary">Description de l'aptitude</em>
-		<textarea class="form-control" id="descriptionAptitude" rows="3" value={props.aptitude.descriptionAptitude}></textarea>
+		<textarea class="form-control" id="descriptionAptitude" rows="3" value={props.aptitude.description}></textarea>
 	</div>
 	<div class="row">
 		<button class="btn btn-primary mx-auto" onclick={_submit}>
@@ -29,7 +30,7 @@
 				let euc = document.querySelector("#estUneCompetence").value;
 				let description = document.querySelector("#descriptionAptitude").value;
 				
-				this.props.sa.updateAptitude(euc, this.props.idPersonnage, nom, description, this.props.idAPtitude).then(
+				this.props.sa.updateAptitude(euc, this.props.idPersonnage, nom, description, this.props.aptitude.idAptitude).then(
 					(e) => {
 						alert("Une aptitude a été éditée!");
 						this.props.fct();
