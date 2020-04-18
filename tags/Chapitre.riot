@@ -3,7 +3,19 @@
 		<div class="card-body">
 			<ul class="list-group">
 				<li class="list-group-item bg-primary text-white">
-					<h2>Session du {props.storyline.date}<br>
+					<h2>Session du {props.storyline.date}</h2>
+					<button class="btn btn-danger" onclick={_toggleDeleteMode}>
+						<i class="fa fa-trash" aria-hidden="true"></i>
+					</button>
+				</li>
+				<li class="list-group-item border-primary" if={state.deleteMode}>
+					Voullez-vous vraiment supprimer ce chapitre? 
+					<button class="btn btn-danger" onclick={_delete}>
+						Oui
+					</button>
+					<button class="btn btn-secondary" onclick={_toggleDeleteMode}>
+						Non
+					</button>
 				</li>
 				<li class="list-group-item border-primary">
 					{props.storyline.contenu}
@@ -11,4 +23,25 @@
 			</ul>
 		</div>
 	</div>
+	
+	<script>
+		export default {
+			state : {
+				editMode : false,
+				deleteMode : false,
+			},
+			_toggleDeleteMode(){
+				this.state.deleteMode = !this.state.deleteMode;
+				this.update();
+
+			},
+			_delete(){
+				this.props.sa.deleteChapitre(this.props.storyline.date).then(
+					(e) => {
+						this.props.fct();
+					}
+				);
+			}
+		} 
+	</script>
 </chapitre>

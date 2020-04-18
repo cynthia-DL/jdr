@@ -5,6 +5,17 @@ function makeServiceAjax(){
       addFamilier:addFamilier,
       addObjet:addObjet,
       addPersonnage:addPersonnage,
+
+      deleteAnimal:deleteAnimal,
+      deleteClasse:deleteClasse,
+      deleteEtat:deleteEtat,
+      deleteGenre:deleteGenre,
+      deleteRace:deleteRace,
+      deleteTypeInventaire:deleteTypeInventaire,
+      deleteTypeObjet:deleteTypeObjet,
+      deletePersonnage:deletePersonnage,
+      deleteChapitre:deleteChapitre,
+
       getAllAnimal:getAllAnimal,
       getAllClasse:getAllClasse,
       getAllEtat:getAllEtat,
@@ -15,9 +26,11 @@ function makeServiceAjax(){
       getAllVignette:getAllVignette,
       getPersonnage:getPersonnage,
       getStoryLine:getStoryLine,
+      
       updateAptitude:updateAptitude
     };
 
+    //ADD
     function addAptitude(estUneCompetence, idPersonnage, nom, description){
         var url = "php/post.php?case=aptitude&estUneCompetence="+estUneCompetence+"&idPersonnage="+idPersonnage+"&nom="+nom+"&description="+description;
         console.log(url);
@@ -111,6 +124,161 @@ function makeServiceAjax(){
         });
     }
 
+    //DELETE
+    function deleteAnimal(id) {
+        var url = "./php/delete.php?case=all_animal&id="+id;
+        return new Promise(function(resolve,reject){
+            http = new XMLHttpRequest();
+            http.open("GET",url);
+            http.send();
+            http.onload=function(){
+                if (http.status == 200){
+                    resolve(this.response);
+                } else reject("Erreur deleteAnimal 1 : "+http.serverResponse);
+            };
+            http.onerror = function(){
+                reject("Erreur deleteAnimal 2 : "+http.serverResponse);
+            };
+        });
+    }
+
+    function deleteClasse(id) {
+        var url = "./php/delete.php?case=all_classe&id="+id;
+        return new Promise(function(resolve,reject){
+            http = new XMLHttpRequest();
+            http.open("GET",url);
+            http.send();
+            http.onload=function(){
+                if (http.status == 200){
+                    resolve(this.response);
+                } else reject("Erreur deleteClasse 1 : "+http.serverResponse);
+            };
+            http.onerror = function(){
+                reject("Erreur deleteClasse 2 : "+http.serverResponse);
+            };
+        });
+    }
+
+    function deleteEtat(id) {
+        var url = "./php/delete.php?case=all_etat&id="+id;
+        return new Promise(function(resolve,reject){
+            http = new XMLHttpRequest();
+            http.open("GET",url);
+            http.send();
+            http.onload=function(){
+                if (http.status == 200){
+                    resolve(this.response);
+                } else reject("Erreur deleteEtat 1 : "+http.serverResponse);
+            };
+            http.onerror = function(){
+                reject("Erreur deleteEtat 2 : "+http.serverResponse);
+            };
+        });
+    }
+
+    function deleteGenre(id) {
+        var url = "./php/delete.php?case=all_genre&id="+id;
+        return new Promise(function(resolve,reject){
+            http = new XMLHttpRequest();
+            http.open("GET",url);
+            http.send();
+            http.onload=function(){
+                if (http.status == 200){
+                    resolve(this.response);
+                } else reject("Erreur deleteGenre 1 : "+http.serverResponse);
+            };
+            http.onerror = function(){
+                reject("Erreur deleteGenre 2 : "+http.serverResponse);
+            };
+        });
+    }
+
+    function deleteRace(id) {
+        var url = "./php/delete.php?case=all_race&id="+id;
+        return new Promise(function(resolve,reject){
+            http = new XMLHttpRequest();
+            http.open("GET",url);
+            http.send();
+            http.onload=function(){
+                if (http.status == 200){
+                    resolve(this.response);
+                } else reject("Erreur deleteRace 1 : "+http.serverResponse);
+            };
+            http.onerror = function(){
+                reject("Erreur deleteRace 2 : "+http.serverResponse);
+            };
+        });
+    }
+
+    function deleteTypeInventaire(id) {
+        var url = "./php/delete.php?case=all_type_inventaire&id="+id;
+        return new Promise(function(resolve,reject){
+            http = new XMLHttpRequest();
+            http.open("GET",url);
+            http.send();
+            http.onload=function(){
+                if (http.status == 200){
+                    resolve(this.response);
+                } else reject("Erreur deleteTypeInventaire 1 : "+http.serverResponse);
+            };
+            http.onerror = function(){
+                reject("Erreur deleteTypeInventaire 2 : "+http.serverResponse);
+            };
+        });
+    }
+
+    function deleteTypeObjet(id) {
+        var url = "./php/delete.php?case=all_type_objet&id="+id;
+        return new Promise(function(resolve,reject){
+            http = new XMLHttpRequest();
+            http.open("GET",url);
+            http.send();
+            http.onload=function(){
+                if (http.status == 200){
+                    resolve(this.response);
+                } else reject("Erreur deleteTypeObjet 1 : "+http.serverResponse);
+            };
+            http.onerror = function(){
+                reject("Erreur deleteTypeObjet 2 : "+http.serverResponse);
+            };
+        });
+    }
+
+    function deletePersonnage(id) {
+        var url = "./php/delete.php?case=personnage&id="+id;
+        return new Promise(function(resolve,reject){
+            http = new XMLHttpRequest();
+            http.open("GET",url);
+            http.send();
+            http.onload=function(){
+                if (http.status == 200){
+                    resolve(this.response);
+                } else reject("Erreur deletePersonnage 1 : "+http.serverResponse);
+            };
+            http.onerror = function(){
+                reject("Erreur deletePersonnage 2 : "+http.serverResponse);
+            };
+        });
+    }
+
+    function deleteChapitre(id) {
+        var url = "./php/delete.php?case=storyline&id="+id;
+        return new Promise(function(resolve,reject){
+            http = new XMLHttpRequest();
+            http.open("GET",url);
+            http.send();
+            http.onload=function(){
+                if (http.status == 200){
+                    resolve(this.response);
+                } else reject("Erreur deleteChapitre 1 : "+http.serverResponse);
+            };
+            http.onerror = function(){
+                reject("Erreur deleteChapitre 2 : "+http.serverResponse);
+            };
+        });
+    }
+
+    //GET
     function getAllAnimal() {
         var url = "./php/get.php?case=all_animal";
         return new Promise(function(resolve,reject){
@@ -281,6 +449,7 @@ function makeServiceAjax(){
         });
     }
 
+    //UPDATES
     function updateAptitude(estUneCompetence, idPersonnage, nom, description, idAptitude){
         var url = "php/update.php?case=aptitude&estUneCompetence="+estUneCompetence+
         "&idPersonnage="+idPersonnage+"&nom="+nom+"&description="+description+"&idAptitude="+idAptitude;
