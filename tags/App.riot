@@ -59,6 +59,7 @@
 				newchapitre : false,
 				chapitres : [],
 				vignette : [],
+				tmp : [],
 
 				idCurPerso : null,
 				curPerso : null
@@ -73,6 +74,7 @@
 						this.sa.getAllVignette().then(
 							(f) => {
 								this.state.vignette = JSON.parse(f);
+								this._triVignettes();
 								this.update();
 							}
 						);
@@ -117,6 +119,7 @@
 				this.sa.getAllVignette().then(
 					(e) => {
 						this.state.vignette = JSON.parse(e);
+						this._triVignettes();
 						this.state.liste = true;
 						this.state.fiche = false;
 						this.state.storyline = false;
@@ -146,6 +149,19 @@
 				this.state.newPersonnage = true;
 				this.state.storyline = false;
 				this.update();
+			},
+
+			_triVignettes(){
+				if(estMJ == 0){
+					j = 0;
+					for(i = 0; i < this.state.vignette.length; i++){
+						if(this.state.vignette[i].idUtilisateur == sessionId || this.state.vignette[i].nomEtat == "ACTIF" || this.state.vignette[i].nomEtat == "MORT"){
+							this.state.tmp[j] = this.state.vignette[i];
+							j++;
+						}
+					}
+					this.state.vignette = this.state.tmp;
+				}
 			}
 		}
 	</script>

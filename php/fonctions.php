@@ -556,7 +556,7 @@
 	* @return array de toutes les preview de personnages
 	*/
 	function getArrayVignette($DB){
-		$resultat = mysqli_query($DB, "SELECT idPersonnage, prenom, pv, pvMax, armure, nomEtat, idStatistique FROM jdrPersonnage NATURAL JOIN jdrEtat");
+		$resultat = mysqli_query($DB, "SELECT idPersonnage, idUtilisateur, prenom, pv, pvMax, armure, nomEtat, idStatistique FROM jdrPersonnage NATURAL JOIN jdrEtat");
 		$arrayVignette = array();
 		$i = 0;
 		
