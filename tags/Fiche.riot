@@ -147,8 +147,8 @@
 			<!-- Aliés -->
 			<h2>Alliés de {props.perso.prenom}</h2>
 			<div class="row d-flex align-items-center">
-				<div class="col-3 mx-auto" each={i in props.perso.inventaire.ALLIES}>
-					<objet objet={i} sa={props.sa} fct={props.return} id={props.idPersonnage}></objet>
+				<div class="col-4 mx-auto" each={i in props.perso.inventaire.ALLIES}>
+					<objet objet={i} sa={props.sa} fct={props.return} id={props.idPersonnage} typeInventaire="8"></objet>
 				</div>
 				<div class="mx-auto" if={!props.perso.inventaire.ALLIES}>
 					Ce personnage n'a pas d'alliés.
@@ -158,8 +158,8 @@
 			<!-- Contenu du sac -->
 			<h2>Sac de {props.perso.prenom}</h2>
 			<div class="row d-flex align-items-center">
-				<div class="col-3 mx-auto" each={i in props.perso.inventaire.SAC}>
-					<objet objet={i} sa={props.sa} fct={props.return} id={props.idPersonnage}></objet>
+				<div class="col-4 mx-auto" each={i in props.perso.inventaire.SAC}>
+					<objet objet={i} sa={props.sa} fct={props.return} id={props.idPersonnage} typeInventaire="1"></objet>
 				</div>
 				<div class="mx-auto" if={!props.perso.inventaire.SAC}>
 					Le sac de ce personnage est vide
@@ -169,8 +169,8 @@
 			<!-- Contenu de la selle -->
 			<h2>Selle de {props.perso.prenom}</h2>
 			<div class="row d-flex align-items-center">
-				<div class="col-3 mx-auto" each={i in props.perso.inventaire.SELLE}>
-					<objet objet={i} sa={props.sa} fct={props.return} id={props.idPersonnage}></objet>
+				<div class="col-4 mx-auto" each={i in props.perso.inventaire.SELLE}>
+					<objet objet={i} sa={props.sa} fct={props.return} id={props.idPersonnage} typeInventaire="2"></objet>
 				</div>
 				<div class="mx-auto" if={!props.perso.inventaire.SELLE}>
 					La selle de ce personnage est vide

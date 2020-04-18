@@ -42,6 +42,7 @@
 	<script src="./tags/form/add/NewPersonnage.riot" type="riot"></script>
 
 	<script src="./tags/form/update/UpdateAptitude.riot" type="riot"></script>
+	<script src="./tags/form/update/UpdateObjet.riot" type="riot"></script>
 	
 
 	<script src="https://cdn.jsdelivr.net/npm/riot@4/riot+compiler.min.js"></script>
@@ -64,6 +65,7 @@
 				}
 			});
 			riot.mount('updateaptitude');
+			riot.mount('updateobjet');
 
 			riot.mount('newpersonnage');
 			riot.mount('newchapitre');

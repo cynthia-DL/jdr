@@ -29,7 +29,8 @@ function makeServiceAjax(){
       getPersonnage:getPersonnage,
       getStoryLine:getStoryLine,
       
-      updateAptitude:updateAptitude
+      updateAptitude:updateAptitude,
+      updateObjet:updateObjet
     };
 
     //ADD
@@ -514,6 +515,30 @@ function makeServiceAjax(){
             };
         });
     }
+
+    function updateObjet(idPersonnage, idTypeInventaire, nomObjet, idTypeObjet, degatObjet, 
+        protectionObjet, contenuObjet, quantiteObjet, idAnimal, descriptionObjet, idObjet){
+        var url = "php/update.php?case=objet&idPersonnage="+idPersonnage+"&idTypeInventaire="+idTypeInventaire
+        +"&nomObjet="+nomObjet+"&idTypeObjet="+idTypeObjet+"&degatObjet="+degatObjet+"&protectionObjet="+protectionObjet
+        +"&contenuObjet="+contenuObjet+"&quantiteObjet="+quantiteObjet+"&idAnimal="+idAnimal+"&descriptionObjet="+descriptionObjet
+        +"&idObjet="+idObjet;
+        console.log(url);
+        return new Promise(function(resolve,reject){
+            http = new XMLHttpRequest();
+            http.open("GET",url);
+            http.send();
+            http.onload=function(){
+                if (http.status == 200){
+                    resolve(this.response);
+                } else reject("Erreur updateObjet 1 : "+http.serverResponse);
+            };
+            http.onerror = function(){
+                reject("Erreur updateObjet 2 : "+http.serverResponse);
+            };
+        });
+    }
+
+    
 
     return service;
 }

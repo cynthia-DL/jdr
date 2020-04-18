@@ -1,0 +1,106 @@
+<updateobjet>
+
+		<div class="col mx-auto mb-3">
+			<em class="text-primary">Nom de l'objet</em>
+			<input class="form-control" type="text" id="nomObjet" value={props.objet.nom}>
+		</div>
+		<div class="row d-flex align-items-center">
+			<div class="col mx-auto mb-3">
+				<em class="text-primary">Degats (si null, mettre 0)</em>
+				<input class="form-control" type="number" id="degatObjet" min="0" max="100"  value={props.objet.degat}>
+			</div>
+			<div class="col mx-auto mb-3">
+				<em class="text-primary">Point d'armure (si null, mettre 0)</em>
+				<input class="form-control" type="number" id="protectionObjet"  value={props.objet.protection}>
+			</div>
+		</div>
+		<div class="row d-flex align-items-center">
+			<div class="col mx-auto mb-3">
+				<em class="text-primary">Contenu (si null, ne rien mettre)</em>
+				<input class="form-control" type="text" id="contenuObjet"  value={props.objet.contenu}>
+			</div>
+			<div class="col mx-auto mb-3">
+				<em class="text-primary">Quantité</em>
+				<input class="form-control" type="number" id="quantiteObjet" min="1"  value={props.objet.quantite}>
+			</div>
+		</div>
+		<div class="row d-flex align-items-center">
+			<div class="col mx-auto mb-3">
+				<em class="text-primary">Type de l'objet</em>
+				<select class="form-control" id="typeObjet"  selected={props.objet.idTypeObjet}></select>
+			</div>
+			<div class="col mx-auto mb-3">
+				<em class="text-primary">Race de la mouture</em>
+				<select class="form-control" id="typeAnimal" selected={props.objet.idAnimal}></select>
+			</div>
+		</div>
+		<em class="text-primary">Description de l'objet</em>
+		<input class="form-control" id="descriptionObjet"  value={props.objet.description}/>
+	<div class="row">
+		<button class="btn btn-primary mx-auto" onclick={_submit}>
+			Editer l'objet
+		</button>
+	</div>
+
+	<script>
+		export default {
+			state : {
+				enumTypeObjet : [],
+				enumTypeInventaire : [],
+				enumTypeAnimal : []
+			},
+
+			onMounted(props, state){
+				var typeObjet = document.querySelector("#typeObjet");
+				var typeAnimal = document.querySelector("#typeAnimal");
+
+				this.props.sa.getAllTypeObjet().then(
+					(e) => {
+						this.state.enumTypeObjet = JSON.parse(e);
+						this.update();
+
+						for (var i = 0; i < this.state.enumTypeObjet.length; i++) {
+							var tmp = document.createElement("option");
+							tmp.value = this.state.enumTypeObjet[i].idTypeObjet;
+							tmp.innerText = this.state.enumTypeObjet[i].nomTypeObjet;
+							typeObjet.appendChild(tmp);
+						}
+	
+						this.props.sa.getAllAnimal().then(
+							(e) => {
+								this.state.enumTypeAnimal = JSON.parse(e);
+								this.update();
+
+								for (var i = 0; i < this.state.enumTypeAnimal.length; i++) {
+									var tmp = document.createElement("option");
+									tmp.value = this.state.enumTypeAnimal[i].idAnimal;
+									tmp.innerText = this.state.enumTypeAnimal[i].nomAnimal;
+									typeAnimal.appendChild(tmp);
+								}
+							}
+						);
+					}
+				);
+			},
+
+			_submit(){
+				var nomObjet = document.querySelector("#nomObjet").value;
+				// var typeInventaire = document.querySelector("#typeInventaire").value;
+				var degatObjet = document.querySelector("#degatObjet").value;
+				var protectionObjet = document.querySelector("#protectionObjet").value;
+				var contenuObjet = document.querySelector("#contenuObjet").value;
+				var typeObjet = document.querySelector("#typeObjet").value;
+				var quantiteObjet = document.querySelector("#quantiteObjet").value;
+				var typeAnimal = document.querySelector("#typeAnimal").value;
+				var descriptionObjet = document.querySelector("#descriptionObjet").value;
+
+				this.props.sa.updateObjet(this.props.idPersonnage, this.props.objet.idTypeInventaire, nomObjet, degatObjet, protectionObjet, contenuObjet, typeObjet, quantiteObjet, typeAnimal, descriptionObjet, this.props.objet.idObjet).then(
+					(e) => {
+						alert("Un objet a été édité!");
+						this.props.fct();
+					}
+				);
+			}
+		}
+	</script>
+</updateobjet>
