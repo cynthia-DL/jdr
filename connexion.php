@@ -23,7 +23,10 @@
 	      <label class="text-primary" for="password">Mot de passe</label>
 		  <input type="password" id="password" class="form-control" placeholder="Entrer le mot de passe" name="password" required>
 	    </div>
-		<input type="submit" id='submit' value='Connexion'>
+	    <button class="btn btn-primary" type="submit" id='submit'>
+	    	<i class="fa fa-sign-in" aria-hidden="true"></i>
+	    	Connexion
+	    </button>
 		<?php
 			if(isset($_GET['erreur'])){
 				$err = $_GET['erreur'];
