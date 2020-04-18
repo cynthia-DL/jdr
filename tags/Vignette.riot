@@ -55,17 +55,50 @@
 					</table>
 				</li>
 				<!-- Boutton pour ouvrir les fiches -->
-				<li class="list-group-item border-primary text-center"><button class="btn btn-outline-success"  onclick={_test}><i class="fa fa-info-circle"></i> En voir plus</button></li>
+				<li class="list-group-item border-primary text-center">
+					<button class="btn btn-outline-success"  onclick={_test}>
+						<i class="fa fa-info-circle"></i> 
+					En voir plus</button>
+					<button class="btn btn-outline-danger" onclick={_toggleDeleteMode}>
+						<i class="fa fa-trash" aria-hidden="true"></i>
+					</button>
+				</li>
+				<li class="list-group-item border-primary" if={state.deleteMode}>
+					Voullez-vous vraiment supprimer {props.perso.prenom}? 
+					<button class="btn btn-danger" onclick={_delete}>
+						Oui
+					</button>
+					<button class="btn btn-secondary" onclick={_toggleDeleteMode}>
+						Non
+					</button>
+				</li>
 			</ul>
 		</div>
 	</div>
 	<script>
 		export default {
+			state : {
+				deleteMode : false
+			},
 			// Cette fonction ouvre une fiche via le pere
 			_test(){
 				if (this.props.fct){
 					this.props.fct(this.props.perso.idPersonnage);
 				}
+			},
+
+			_toggleDeleteMode(){
+				this.state.deleteMode = !this.state.deleteMode;
+				this.update();
+
+			},
+			_delete(){
+				this.props.sa.deletePersonnage(this.props.perso.idPersonnage).then(
+					(e) => {
+						this.state.deleteMode = false;
+						this.props.return();
+					}
+				);
 			}
 		}
 	</script>

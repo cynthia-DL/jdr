@@ -29,14 +29,14 @@ Déconnexion</a>
 
 	<!-- gestions des fiches -->
 	<div class="row d-flex align-items-center" if={state.liste}>
-		<vignette each={p in state.vignette} perso={p} fct={_toggle}></vignette>
+		<vignette each={p in state.vignette} perso={p} sa={sa} fct={_toggle} return={_onListe}></vignette>
 	</div>
 	
 	<!-- Affichage d'une fiche en plein écran -->
 	<fiche perso={state.curPerso} if={state.fiche} return={_onListe} sa={sa} idPersonnage={state.idCurPerso}></fiche>
 
 	<!-- La Storyline -->
-	<div class="container mx_auto" if={state.storyline}>
+	<div class="container mx_auto text-center" if={state.storyline}>
 		<button class="btn btn-info" onclick={_toggleChapitre} if={!state.newChapitre}>Ajouter un chapitre</button>
 		<div if={state.newChapitre}>
 			<button class="btn btn-info" onclick={_toggleChapitre}>Fermer ce menu</button>

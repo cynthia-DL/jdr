@@ -9,7 +9,7 @@
 					</button>
 				</li>
 				<li class="list-group-item border-primary" if={state.deleteMode}>
-					Voullez-vous vraiment supprimer ce chapitre? 
+					Voullez-vous vraiment supprimer le chapitre de la session du {props.storyline.date}? 
 					<button class="btn btn-danger" onclick={_delete}>
 						Oui
 					</button>
@@ -38,6 +38,7 @@
 			_delete(){
 				this.props.sa.deleteChapitre(this.props.storyline.date).then(
 					(e) => {
+						this.state.deleteMode = false;
 						this.props.fct();
 					}
 				);
