@@ -11,6 +11,7 @@ function makeServiceAjax(){
       deleteClasse:deleteClasse,
       deleteEtat:deleteEtat,
       deleteGenre:deleteGenre,
+      deleteObjet:deleteObjet,
       deleteRace:deleteRace,
       deleteTypeInventaire:deleteTypeInventaire,
       deleteTypeObjet:deleteTypeObjet,
@@ -200,6 +201,24 @@ function makeServiceAjax(){
 
     function deleteGenre(id) {
         var url = "./php/delete.php?case=all_genre&id="+id;
+        window.location.reload();
+        return new Promise(function(resolve,reject){
+            http = new XMLHttpRequest();
+            http.open("GET",url);
+            http.send();
+            http.onload=function(){
+                if (http.status == 200){
+                    resolve(this.response);
+                } else reject("Erreur deleteGenre 1 : "+http.serverResponse);
+            };
+            http.onerror = function(){
+                reject("Erreur deleteGenre 2 : "+http.serverResponse);
+            };
+        });
+    }
+
+    function deleteObjet(id) {
+        var url = "./php/delete.php?case=objet&id="+id;
         window.location.reload();
         return new Promise(function(resolve,reject){
             http = new XMLHttpRequest();

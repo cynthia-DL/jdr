@@ -38,6 +38,9 @@ switch ($_GET['case']) {
 	case 'aptitude':
 		deleteAptitude($bdd, intval($_GET['id']));
 		break;
+	case 'objet':
+		deleteObjet($bdd, intval($_GET['id']));
+		break;
 }
 
 closeDb($bdd);

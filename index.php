@@ -30,14 +30,19 @@
 	<script src="./tags/Chart.riot" type="riot"></script>
 	<script src="./tags/Chapitre.riot" type="riot"></script>
 	<script src="./tags/Fiche.riot" type="riot"></script>
+	<script src="./tags/Vignette.riot" type="riot"></script>
+
 	<script src="./tags/fiche/Aptitude.riot" type="riot"></script>
+	<script src="./tags/fiche/Objet.riot" type="riot"></script>
+
 	<script src="./tags/form/add/NewAptitude.riot" type="riot"></script>
 	<script src="./tags/form/add/NewChapitre.riot" type="riot"></script>
 	<script src="./tags/form/add/NewFamilier.riot" type="riot"></script>
 	<script src="./tags/form/add/NewObjet.riot" type="riot"></script>
 	<script src="./tags/form/add/NewPersonnage.riot" type="riot"></script>
+
 	<script src="./tags/form/update/UpdateAptitude.riot" type="riot"></script>
-	<script src="./tags/Vignette.riot" type="riot"></script>
+	
 
 	<script src="https://cdn.jsdelivr.net/npm/riot@4/riot+compiler.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>
@@ -59,16 +64,20 @@
 				}
 			});
 			riot.mount('updateaptitude');
+
 			riot.mount('newpersonnage');
 			riot.mount('newchapitre');
 			riot.mount('newfamilier');
 			riot.mount('newobjet');
 			riot.mount('newaptitude');
+			
+			riot.mount('objet');
+			riot.mount('aptitude');
+
 			riot.mount('vignette');
 			riot.mount('chapitre');
 			riot.mount('chart');
 			riot.mount('fiche');
-			riot.mount('aptitude');
 			riot.mount('app');
 		})
 	</script>

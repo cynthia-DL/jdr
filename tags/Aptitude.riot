@@ -24,32 +24,33 @@
 					Non
 				</button>
 		</div>
-	</div>
-	<script>
-		export default {
-			state : {
-				updateAptitude : false,
-				deleteAptitude : false
-			},
 
-			_toggleUpdateMode(){
-				this.state.updateAptitude = !this.state.updateAptitude;
-				this.update();
-			},
+		<script>
+			export default {
+				state : {
+					updateAptitude : false,
+					deleteAptitude : false
+				},
 
-			_toggleDeleteMode(){
-				this.state.deleteAptitude = !this.state.deleteAptitude;
-				this.update();
-			},
+				_toggleUpdateMode(){
+					this.state.updateAptitude = !this.state.updateAptitude;
+					this.update();
+				},
 
-			_delete(){
-				this.props.sa.deleteAptitude(this.props.aptitude.idAptitude).then(
-					(e) => {
-						this.state.deleteMode = false;
-						this.props.fct();
-					}
-				);
+				_toggleDeleteMode(){
+					this.state.deleteAptitude = !this.state.deleteAptitude;
+					this.update();
+				},
+
+				_delete(){
+					this.props.sa.deleteAptitude(this.props.aptitude.idAptitude).then(
+						(e) => {
+							this.state.deleteMode = false;
+							this.props.fct();
+						}
+					);
+				}
 			}
-		}
-	</script>
+		</script>
+	</div>
 </aptitude>

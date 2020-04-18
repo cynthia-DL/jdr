@@ -617,10 +617,10 @@
 	*/
 	function getInventaire($DB, $idPersonnage){
 		$i = 0;
-		$stmt = mysqli_prepare($DB, "SELECT nomTypeInventaire, nomObjet, nomTypeObjet, degatObjet, protectionObjet, contenuObjet, quantiteObjet, nomAnimal, descriptionObjet FROM jdrInventaire NATURAL JOIN jdrTypeInventaire NATURAL JOIN jdrTypeObjet NATURAL JOIN jdrAnimal WHERE idPersonnage = ? ");
+		$stmt = mysqli_prepare($DB, "SELECT idObjet, nomTypeInventaire, nomObjet, nomTypeObjet, degatObjet, protectionObjet, contenuObjet, quantiteObjet, nomAnimal, descriptionObjet FROM jdrInventaire NATURAL JOIN jdrTypeInventaire NATURAL JOIN jdrTypeObjet NATURAL JOIN jdrAnimal WHERE idPersonnage = ? ");
 		mysqli_stmt_bind_param($stmt, 'i', $idPersonnage);
 		mysqli_execute($stmt);
-		$resultat = mysqli_stmt_bind_result($stmt, $typeInventaire, $nom, $type, $degat, $protection, $contenu, $quantite, $animal, $description);
+		$resultat = mysqli_stmt_bind_result($stmt, $idObjet, $typeInventaire, $nom, $type, $degat, $protection, $contenu, $quantite, $animal, $description);
 		
 		$inventaire = array();
 		
@@ -629,7 +629,7 @@
 				if(isset($inventaire[$typeInventaire]))
 					$i = count($inventaire[$typeInventaire]);
 				else $i = 0;
-
+				$inventaire[$typeInventaire][$i]["idObjet"] = $idObjet;
 				$inventaire[$typeInventaire][$i]["nom"] = $nom;
 				$inventaire[$typeInventaire][$i]["type"] = $type;
 				$inventaire[$typeInventaire][$i]["degat"] = $degat;
