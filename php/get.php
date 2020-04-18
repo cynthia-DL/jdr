@@ -1,4 +1,5 @@
 <?php
+session_start();
 include './fonctions.php';
 
 $bdd = generateDb();

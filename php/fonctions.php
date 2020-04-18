@@ -108,6 +108,7 @@
 	/**
 	* Permet de rajouter un personnage dans la table jdrPersonnage de la BD
 	* @param $DB
+	* @param $idUtilisateur
 	* @param $idEtat
 	* @param $nom
 	* @param $prenom
@@ -121,9 +122,9 @@
 	* @param $idStatistique
 	* @param $lore
 	*/
-	function addPersonnage($DB, $idEtat, $nom, $prenom, $niveau, $age, $idRace, $idClasse, $idGenre, $pv, $pvMax, $armure, $idStatistique, $lore){
-		$stmt = mysqli_prepare($DB, "INSERT INTO jdrPersonnage (idEtat, nom, prenom, niveau, age, idRace, idClasse, idGenre, pv, pvMax, armure, idStatistique, lore) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-		mysqli_stmt_bind_param($stmt, 'issiiiiiiiiis', $idEtat, $nom, $prenom, $niveau, $age, $idRace, $idClasse, $idGenre, $pv, $pvMax, $armure, $idStatistique, $lore);
+	function addPersonnage($DB, $idUtilisateur, $idEtat, $nom, $prenom, $niveau, $age, $idRace, $idClasse, $idGenre, $pv, $pvMax, $armure, $idStatistique, $lore){
+		$stmt = mysqli_prepare($DB, "INSERT INTO jdrPersonnage (idUtilisateur, idEtat, nom, prenom, niveau, age, idRace, idClasse, idGenre, pv, pvMax, armure, idStatistique, lore) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+		mysqli_stmt_bind_param($stmt, 'iissiiiiiiiiis', $idUtilisateur, $idEtat, $nom, $prenom, $niveau, $age, $idRace, $idClasse, $idGenre, $pv, $pvMax, $armure, $idStatistique, $lore);
 		mysqli_execute($stmt);
 	}
 

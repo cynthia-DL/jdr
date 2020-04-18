@@ -2,11 +2,19 @@
 <?php
 	session_start();
 	//$_SESSION = array();
-	if(!isset($_SESSION['username'])){
+	if(!isset($_SESSION['nomUtilisateur'])){
 		header('Location: ./connexion.php');
 		exit;
 	}else{
-		echo $_SESSION['username'];
+		echo "Vous êtes actuellement connecté en tant que ";
+		echo $_SESSION['nomUtilisateur'];
+		echo " avec comme id : ";
+		echo $_SESSION['idUtilisateur'];
+		if($_SESSION['estMJ'] == 1){
+			echo ". Vous êtes le MJ de ce JDR.";
+		}else{
+			echo ". Vous êtes un simple joueur de ce JDR.";
+		}
 	}
 ?>
 <html>
@@ -37,6 +45,10 @@
 <body>
 	<app></app>
 		<script>
+			var sessionId = '<?php echo $_SESSION['idUtilisateur'];?>';
+			console.log(sessionId);
+			var estMJ = '<?php echo $_SESSION['estMJ'];?>';
+			console.log(estMJ);
 			riot.compile().then(()=>{
 
 			riot.install(function(component){

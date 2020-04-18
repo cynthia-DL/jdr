@@ -14,7 +14,8 @@ function makeServiceAjax(){
       getAllTypeObjet:getAllTypeObjet,
       getAllVignette:getAllVignette,
       getPersonnage:getPersonnage,
-      getStoryLine:getStoryLine
+      getStoryLine:getStoryLine,
+      getVignetteByIdUtilisateur:getVignetteByIdUtilisateur
     };
 
     function addAptitude(estUneCompetence, idPersonnage, nom, description){
