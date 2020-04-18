@@ -36,6 +36,7 @@ switch ($_GET['case']) {
 		deleteVignette($bdd, intval($_GET['id']));
 		break;
 }
+location.reload(true);
 
 closeDb($bdd);
 ?>

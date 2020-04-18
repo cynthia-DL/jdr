@@ -127,6 +127,7 @@ function makeServiceAjax(){
     //DELETE
     function deleteAnimal(id) {
         var url = "./php/delete.php?case=all_animal&id="+id;
+        window.location.reload();
         return new Promise(function(resolve,reject){
             http = new XMLHttpRequest();
             http.open("GET",url);
@@ -144,6 +145,7 @@ function makeServiceAjax(){
 
     function deleteClasse(id) {
         var url = "./php/delete.php?case=all_classe&id="+id;
+        window.location.reload();
         return new Promise(function(resolve,reject){
             http = new XMLHttpRequest();
             http.open("GET",url);
@@ -157,10 +159,12 @@ function makeServiceAjax(){
                 reject("Erreur deleteClasse 2 : "+http.serverResponse);
             };
         });
+        location.reload(true);
     }
 
     function deleteEtat(id) {
         var url = "./php/delete.php?case=all_etat&id="+id;
+        window.location.reload();
         return new Promise(function(resolve,reject){
             http = new XMLHttpRequest();
             http.open("GET",url);
@@ -178,6 +182,7 @@ function makeServiceAjax(){
 
     function deleteGenre(id) {
         var url = "./php/delete.php?case=all_genre&id="+id;
+        window.location.reload();
         return new Promise(function(resolve,reject){
             http = new XMLHttpRequest();
             http.open("GET",url);
@@ -195,6 +200,7 @@ function makeServiceAjax(){
 
     function deleteRace(id) {
         var url = "./php/delete.php?case=all_race&id="+id;
+        window.location.reload();
         return new Promise(function(resolve,reject){
             http = new XMLHttpRequest();
             http.open("GET",url);
@@ -212,6 +218,7 @@ function makeServiceAjax(){
 
     function deleteTypeInventaire(id) {
         var url = "./php/delete.php?case=all_type_inventaire&id="+id;
+        window.location.reload();
         return new Promise(function(resolve,reject){
             http = new XMLHttpRequest();
             http.open("GET",url);
@@ -229,6 +236,7 @@ function makeServiceAjax(){
 
     function deleteTypeObjet(id) {
         var url = "./php/delete.php?case=all_type_objet&id="+id;
+        window.location.reload();
         return new Promise(function(resolve,reject){
             http = new XMLHttpRequest();
             http.open("GET",url);
@@ -246,6 +254,7 @@ function makeServiceAjax(){
 
     function deletePersonnage(id) {
         var url = "./php/delete.php?case=personnage&id="+id;
+        window.location.reload();
         return new Promise(function(resolve,reject){
             http = new XMLHttpRequest();
             http.open("GET",url);
@@ -263,6 +272,7 @@ function makeServiceAjax(){
 
     function deleteChapitre(id) {
         var url = "./php/delete.php?case=storyline&id="+id;
+        window.location.reload();
         return new Promise(function(resolve,reject){
             http = new XMLHttpRequest();
             http.open("GET",url);
