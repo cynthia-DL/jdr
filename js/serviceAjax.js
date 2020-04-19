@@ -30,6 +30,7 @@ function makeServiceAjax(){
       getStoryLine:getStoryLine,
       
       updateAptitude:updateAptitude,
+      updateChapitre:updateChapitre,
       updateObjet:updateObjet
     };
 
@@ -512,6 +513,24 @@ function makeServiceAjax(){
             };
             http.onerror = function(){
                 reject("Erreur updateAptitude 2 : "+http.serverResponse);
+            };
+        });
+    }
+
+    function updateChapitre(contenu, id){
+        var url = "php/update.php?case=chapitre&id="+id+"&contenu="+contenu;
+        console.log(url);
+        return new Promise(function(resolve,reject){
+            http = new XMLHttpRequest();
+            http.open("GET",url);
+            http.send();
+            http.onload=function(){
+                if (http.status == 200){
+                    resolve(this.response);
+                } else reject("Erreur updateChapitre 1 : "+http.serverResponse);
+            };
+            http.onerror = function(){
+                reject("Erreur updateChapitre 2 : "+http.serverResponse);
             };
         });
     }

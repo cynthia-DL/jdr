@@ -4,6 +4,9 @@
 			<ul class="list-group">
 				<li class="list-group-item bg-primary text-white">
 					<h2>Session du {props.storyline.date}</h2>
+					<button class="btn btn-warning" onclick={_toggleUpdateMode}>
+						<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+					</button>
 					<button class="btn btn-danger" onclick={_toggleDeleteMode}>
 						<i class="fa fa-trash" aria-hidden="true"></i>
 					</button>
@@ -17,8 +20,11 @@
 						Non
 					</button>
 				</li>
-				<li class="list-group-item border-primary">
+				<li class="list-group-item border-primary" if={!state.editMode}>
 					{props.storyline.contenu}
+				</li>
+				<li class="list-group-item border-primary" if={state.editMode}>
+					<updatechapitre chapitre={props.storyline} fct={props.fct}></updatechapitre>
 				</li>
 			</ul>
 		</div>
@@ -35,9 +41,15 @@
 				this.update();
 
 			},
+			_toggleUpdateMode(){
+				this.state.editMode = !this.state.editMode;
+				this.update();
+
+			},
 			_delete(){
 				this.props.sa.deleteChapitre(this.props.storyline.date).then(
 					(e) => {
+						alert("Un chapitre a été supprimé!");
 						this.state.deleteMode = false;
 						this.props.fct();
 					}

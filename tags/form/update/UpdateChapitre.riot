@@ -1,0 +1,28 @@
+<updatechapitre>
+	<div class="row">
+		<div class="mx-auto mb-3 col">
+			<em class="text-primary">DANS LE PASSEY</em>
+			<textarea class="form-control" id="chapitre" rows="3" value={props.chapitre.contenu} ></textarea>
+		</div>
+	</div>
+	<div class="row">
+		<button class="btn btn-primary mx-auto" onclick={_submit}>
+			Editer ce chapitre
+		</button>
+	</div>
+
+	<script>
+		export default {
+			_submit(){
+				var chapitre = document.querySelector("#chapitre").value;
+
+				this.sa.updateChapitre(chapitre, this.props.chapitre.date).then(
+					(e) => {
+						alert("Un chapitre a été édité!");
+						this.props.fct();
+					}
+				);
+			}
+		}
+	</script>
+</updatechapitre>

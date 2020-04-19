@@ -10,6 +10,10 @@ switch ($_GET['case']) {
 		case 'objet' :
 		updateInventaire($bdd, $_GET["idPersonnage"], $_GET["idTypeInventaire"], $_GET["nomObjet"], $_GET["idTypeObjet"], $_GET["degatObjet"], $_GET["protectionObjet"], $_GET["contenuObjet"], $_GET["quantiteObjet"], $_GET["idAnimal"], $_GET["descriptionObjet"], $_GET["idObjet"]);
 		break;
+
+		case 'chapitre' :
+		updateChapitre($bdd, $_GET["contenu"], $_GET["id"]);
+		break;
 }
 
 closeDb($bdd);

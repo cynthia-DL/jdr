@@ -42,6 +42,7 @@
 	<script src="./tags/form/add/NewPersonnage.riot" type="riot"></script>
 
 	<script src="./tags/form/update/UpdateAptitude.riot" type="riot"></script>
+	<script src="./tags/form/update/UpdateChapitre.riot" type="riot"></script>
 	<script src="./tags/form/update/UpdateObjet.riot" type="riot"></script>
 	
 
@@ -60,11 +61,13 @@
 			riot.compile().then(()=>{
 
 			riot.install(function(component){
-				if (component.name == "app"){
+				if (component.name == "app" ||
+					component.name == "updatechapitre"){
 					component.sa = makeServiceAjax()
 				}
 			});
 			riot.mount('updateaptitude');
+			riot.mount('updatechapitre');
 			riot.mount('updateobjet');
 
 			riot.mount('newpersonnage');
