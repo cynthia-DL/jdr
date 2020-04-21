@@ -14,6 +14,11 @@ switch ($_GET['case']) {
 		case 'chapitre' :
 		updateChapitre($bdd, $_GET["contenu"], $_GET["id"]);
 		break;
+
+		case 'familier' :
+		updateStatistique($bdd, $_GET["force"], $_GET["agilite"], $_GET["social"], $_GET["perception"], $_GET["mental"], $_GET["intelligence"], $_GET["constitution"], $_GET["idStatistique"]);
+		updateFamilier($bdd, $_GET["idPersonnage"], $_GET["nom"], $_GET["pv"], $_GET["pvMax"], $_GET["armure"], $_GET["idStatistique"], $_GET["description"], $_GET["idFamilier"]);
+		break;
 }
 
 closeDb($bdd);

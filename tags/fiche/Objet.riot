@@ -68,7 +68,7 @@
 			},
 
 			_delete(){
-				this.props.sa.deleteObjet(this.props.objet.idObjet).then(
+				this.sa.deleteObjet(this.props.objet.idObjet).then(
 					(e) => {
 						this.state.deleteMode = false;
 						this.props.fct();

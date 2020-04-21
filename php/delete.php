@@ -32,15 +32,16 @@ switch ($_GET['case']) {
 	case 'storyline':
 		deleteChapitre($bdd, $_GET['id']);
 		break;
-	case 'vignette':
-		deleteVignette($bdd, intval($_GET['id']));
-		break;
 	case 'aptitude':
 		deleteAptitude($bdd, intval($_GET['id']));
 		break;
 	case 'objet':
 		deleteObjet($bdd, intval($_GET['id']));
 		break;
+	case 'familier':
+		deleteFamilier($bdd, intval($_GET['id']));
+		break;
+
 }
 
 closeDb($bdd);

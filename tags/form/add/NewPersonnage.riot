@@ -108,7 +108,7 @@
 				var classe = document.querySelector("#classe");
 				var race = document.querySelector("#race");
 
-				this.props.sa.getAllGenre().then(
+				this.sa.getAllGenre().then(
 					(e) => {
 						this.state.enumGenre = JSON.parse(e);
 						this.update();
@@ -121,7 +121,7 @@
 
 						}
 
-						this.props.sa.getAllClasse().then(
+						this.sa.getAllClasse().then(
 							(e) => {
 								this.state.enumClasse = JSON.parse(e);
 								this.update();
@@ -133,7 +133,7 @@
 									classe.appendChild(tmp);
 								}
 
-								this.props.sa.getAllRace().then(
+								this.sa.getAllRace().then(
 									(e) => {
 										this.state.enumRace = JSON.parse(e);
 										this.update();

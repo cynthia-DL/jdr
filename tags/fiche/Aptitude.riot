@@ -43,7 +43,7 @@
 			},
 
 			_delete(){
-				this.props.sa.deleteAptitude(this.props.aptitude.idAptitude).then(
+				this.sa.deleteAptitude(this.props.aptitude.idAptitude).then(
 					(e) => {
 						this.state.deleteMode = false;
 						this.props.fct();

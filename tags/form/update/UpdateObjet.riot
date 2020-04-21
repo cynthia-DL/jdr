@@ -54,7 +54,7 @@
 				var typeObjet = document.querySelector("#typeObjet");
 				var typeAnimal = document.querySelector("#typeAnimal");
 
-				this.props.sa.getAllTypeObjet().then(
+				this.sa.getAllTypeObjet().then(
 					(e) => {
 						this.state.enumTypeObjet = JSON.parse(e);
 						this.update();
@@ -66,7 +66,7 @@
 							typeObjet.appendChild(tmp);
 						}
 	
-						this.props.sa.getAllAnimal().then(
+						this.sa.getAllAnimal().then(
 							(e) => {
 								this.state.enumTypeAnimal = JSON.parse(e);
 								this.update();
@@ -94,7 +94,7 @@
 				var typeAnimal = document.querySelector("#typeAnimal").value;
 				var descriptionObjet = document.querySelector("#descriptionObjet").value;
 
-				this.props.sa.updateObjet(this.props.idPersonnage, this.props.objet.idTypeInventaire, nomObjet, degatObjet, protectionObjet, contenuObjet, typeObjet, quantiteObjet, typeAnimal, descriptionObjet, this.props.objet.idObjet).then(
+				this.sa.updateObjet(this.props.idPersonnage, this.props.objet.idTypeInventaire, nomObjet, degatObjet, protectionObjet, contenuObjet, typeObjet, quantiteObjet, typeAnimal, descriptionObjet, this.props.objet.idObjet).then(
 					(e) => {
 						alert("Un objet a été édité!");
 						this.props.fct();

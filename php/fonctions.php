@@ -447,6 +447,41 @@
 	}
 
 	/**
+	* Permet de récupérer les familiers d'un personnage
+	* @param $DB
+	* @param $idPersonnage l'ID du personnage
+	* @return array de tout les familiers du personnage
+	*/
+	function getArrayFamilier($DB, $idPersonnage){
+		$i = 0;
+		$stmt = mysqli_prepare($DB, "SELECT idFamilier, nomFamilier, pvFamilier, pvMaxFamilier, armureFamilier, idStatistique, descriptionFamilier FROM jdrFamilier WHERE idPersonnage = ? ");
+		mysqli_stmt_bind_param($stmt, 'i', $idPersonnage);
+		mysqli_execute($stmt);
+		$resultat = mysqli_stmt_bind_result($stmt, $id, $nom, $pv, $pvMax, $armure, $idStatistique, $description);
+		
+		$familier = array();
+		
+		if($resultat) {
+			while(mysqli_stmt_fetch($stmt)){
+				$familier[$i]["idFamilier"] = $id;
+				$familier[$i]["nom"] = $nom;
+				$familier[$i]["pv"] = $pv;
+				$familier[$i]["pvMax"] = $pvMax;
+				$familier[$i]["armure"] = $armure;
+				$familier[$i]["description"] = $description;
+				$familier[$i]["idStatistique"] = $idStatistique;
+
+				$i++;
+			}
+		}
+
+		for ($i = 0; $i < count($familier); $i++)
+			$familier[$i]["statistiques"] = getStatistique($DB, $familier[$i]["idStatistique"]);
+
+		return $familier;
+	}
+
+	/**
 	* Permet de récupérer tous les genres
 	* @param $DB
 	* @return array de tous les genres possibles
@@ -575,36 +610,22 @@
 		return $arrayVignette;
 	}
 
-		/**
-	* Permet de récupérer les familiers d'un personnage
-	* @param $DB
-	* @param $idPersonnage l'ID du personnage
-	* @return array de tout les familiers du personnage
-	*/
-	function getFamilier($DB, $idPersonnage){
-		$i = 0;
-		$stmt = mysqli_prepare($DB, "SELECT nomFamilier, pvFamilier, pvMaxFamilier, armureFamilier, idStatistique, descriptionFamilier FROM jdrFamilier WHERE idPersonnage = ? ");
-		mysqli_stmt_bind_param($stmt, 'i', $idPersonnage);
+	function getFamilier($DB, $idFamilier){
+		$stmt = mysqli_prepare($DB, "SELECT * FROM jdrFamilier WHERE idFamilier = ?");
+		mysqli_stmt_bind_param($stmt, 'i', $idFamilier);
 		mysqli_execute($stmt);
-		$resultat = mysqli_stmt_bind_result($stmt, $nom, $pv, $pvMax, $armure, $idStatistique, $description);
+		
+		$resultat = mysqli_stmt_bind_result($stmt, $idFamilier, $idPersonnage, $nomFamilier, $pvFamilier, $pvMaxFamilier, $armureFamilier, $idStatistique, $descriptionFamilier);
 		
 		$familier = array();
 		
 		if($resultat) {
-			while(mysqli_stmt_fetch($stmt)){
-				$familier[$i]["nom"] = $nom;
-				$familier[$i]["pv"] = $pv;
-				$familier[$i]["pvMax"] = $pvMax;
-				$familier[$i]["armure"] = $armure;
-				$familier[$i]["description"] = $description;
-				$familier[$i]["statistiques"] = $idStatistique;
-
-				$i++;
+			while ($ligne = $resultat->fetch_assoc()){
+				$familier = $ligne;
 			}
 		}
-
-		for ($i = 0; $i < count($familier); $i++)
-			$familier[$i]["statistiques"] = getStatistique($DB, $familier[$i]["statistiques"]);
+		
+		$familier["statistiques"] = getStatistique($DB, $familier["idStatistique"]);
 
 		return $familier;
 	}
@@ -684,7 +705,7 @@
 		$personnage["inventaire"] = getInventaire($DB, $idPersonnage);
 		$personnage["competences"] = getArrayCompetence($DB, $idPersonnage);
 		$personnage["traits"] = getArrayTrait($DB, $idPersonnage);
-		$personnage["familier"] = getFamilier($DB, $idPersonnage);
+		$personnage["familier"] = getArrayFamilier($DB, $idPersonnage);
 		
 		return $personnage;
 	}

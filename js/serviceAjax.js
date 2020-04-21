@@ -17,6 +17,7 @@ function makeServiceAjax(){
       deleteTypeObjet:deleteTypeObjet,
       deletePersonnage:deletePersonnage,
       deleteChapitre:deleteChapitre,
+      deleteFamilier:deleteFamilier,
 
       getAllAnimal:getAllAnimal,
       getAllClasse:getAllClasse,
@@ -31,6 +32,7 @@ function makeServiceAjax(){
       
       updateAptitude:updateAptitude,
       updateChapitre:updateChapitre,
+      updateFamilier:updateFamilier,
       updateObjet:updateObjet
     };
 
@@ -326,6 +328,23 @@ function makeServiceAjax(){
         });
     }
 
+    function deleteFamilier(id) {
+        var url = "./php/delete.php?case=familier&id="+id;
+        return new Promise(function(resolve,reject){
+            http = new XMLHttpRequest();
+            http.open("GET",url);
+            http.send();
+            http.onload=function(){
+                if (http.status == 200){
+                    resolve(this.response);
+                } else reject("Erreur deleteFamilier 1 : "+http.serverResponse);
+            };
+            http.onerror = function(){
+                reject("Erreur deleteFamilier 2 : "+http.serverResponse);
+            };
+        });
+    }
+
     //GET
     function getAllAnimal() {
         var url = "./php/get.php?case=all_animal";
@@ -520,6 +539,28 @@ function makeServiceAjax(){
     function updateChapitre(contenu, id){
         var url = "php/update.php?case=chapitre&id="+id+"&contenu="+contenu;
         console.log(url);
+        return new Promise(function(resolve,reject){
+            http = new XMLHttpRequest();
+            http.open("GET",url);
+            http.send();
+            http.onload=function(){
+                if (http.status == 200){
+                    resolve(this.response);
+                } else reject("Erreur updateChapitre 1 : "+http.serverResponse);
+            };
+            http.onerror = function(){
+                reject("Erreur updateChapitre 2 : "+http.serverResponse);
+            };
+        });
+    }
+
+    //this.props.id, nom, pv, pv, armure, description, force, agilite, social, perception, mental, intelligence, constitution, this.props.familier.idFamilier
+
+    function updateFamilier(idPersonnage, idStatistique, nom, pv, pvMax, armure, description, force, agilite, social, 
+        perception, mental, intelligence, constitution, idFamilier){
+        var url = "php/update.php?case=familier&idPersonnage="+idPersonnage+"&idStatistique="+idStatistique+"&nom="+nom+"&pv="+pv+"&pvMax="+pvMax+"&armure="+armure+
+        "&description="+description+"&force="+force+"&agilite="+agilite+"&social="+social+"&perception="+perception+
+        "&mental="+mental+"&intelligence="+intelligence+"&constitution="+constitution+"&idFamilier="+idFamilier;
         return new Promise(function(resolve,reject){
             http = new XMLHttpRequest();
             http.open("GET",url);

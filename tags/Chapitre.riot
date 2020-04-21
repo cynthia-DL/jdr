@@ -47,7 +47,7 @@
 
 			},
 			_delete(){
-				this.props.sa.deleteChapitre(this.props.storyline.date).then(
+				this.sa.deleteChapitre(this.props.storyline.date).then(
 					(e) => {
 						alert("Un chapitre a été supprimé!");
 						this.state.deleteMode = false;

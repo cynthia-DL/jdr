@@ -30,7 +30,7 @@
 				let euc = document.querySelector("#estUneCompetence").value;
 				let description = document.querySelector("#descriptionAptitude").value;
 				
-				this.props.sa.updateAptitude(euc, this.props.idPersonnage, nom, description, this.props.aptitude.idAptitude).then(
+				this.sa.updateAptitude(euc, this.props.idPersonnage, nom, description, this.props.aptitude.idAptitude).then(
 					(e) => {
 						alert("Une aptitude a été éditée!");
 						this.props.fct();

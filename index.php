@@ -33,6 +33,7 @@
 	<script src="./tags/Vignette.riot" type="riot"></script>
 
 	<script src="./tags/fiche/Aptitude.riot" type="riot"></script>
+	<script src="./tags/fiche/Familier.riot" type="riot"></script>
 	<script src="./tags/fiche/Objet.riot" type="riot"></script>
 
 	<script src="./tags/form/add/NewAptitude.riot" type="riot"></script>
@@ -43,6 +44,7 @@
 
 	<script src="./tags/form/update/UpdateAptitude.riot" type="riot"></script>
 	<script src="./tags/form/update/UpdateChapitre.riot" type="riot"></script>
+	<script src="./tags/form/update/UpdateFamilier.riot" type="riot"></script>
 	<script src="./tags/form/update/UpdateObjet.riot" type="riot"></script>
 	
 
@@ -55,19 +57,33 @@
 	<app></app>
 		<script>
 			var sessionId = '<?php echo $_SESSION['idUtilisateur'];?>';
-			console.log(sessionId);
 			var estMJ = '<?php echo $_SESSION['estMJ'];?>';
-			console.log(estMJ);
 			riot.compile().then(()=>{
 
 			riot.install(function(component){
 				if (component.name == "app" ||
-					component.name == "updatechapitre"){
+					
+					component.name == "aptitude" || 
+					component.name == "chapitre" || 
+					component.name == "familier" || 
+					component.name == "objet" || 
+
+					component.name == "newaptitude" ||
+					component.name == "newfamilier" || 
+					component.name == "newobjet" ||
+					component.name == "newpersonnage" ||
+					
+				 
+					component.name == "updateaptitude" ||
+					component.name == "updatechapitre" || 
+					component.name == "updatefamilier" ||
+					component.name == "updateobjet" ){
 					component.sa = makeServiceAjax()
 				}
 			});
 			riot.mount('updateaptitude');
 			riot.mount('updatechapitre');
+			riot.mount('updatefamilier');
 			riot.mount('updateobjet');
 
 			riot.mount('newpersonnage');
@@ -76,8 +92,9 @@
 			riot.mount('newobjet');
 			riot.mount('newaptitude');
 			
-			riot.mount('objet');
 			riot.mount('aptitude');
+			riot.mount('familier');
+			riot.mount('objet');
 
 			riot.mount('vignette');
 			riot.mount('chapitre');

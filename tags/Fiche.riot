@@ -188,44 +188,7 @@
 			</div>
 			<hr>
 			<div class="col-10 mx-auto" each={f in props.perso.familier}>
-				<div class="card-body">
-					<ul class="list-group">
-						<!-- Nom du famillier + ses PV -->
-						<li class="list-group-item bg-primary text-white">
-							<h3 if={f.nom}>{f.nom}</h3>
-							<span class="badge badge-pill badge-secondary">PV : {f.armure} + {f.pv} / {f.pvMax}</li>
-						<!-- Label -->
-						<li class="list-group-item bg-primary text-white" if={f.label}>{f.label}</li>
-						<!-- Type -->
-						<li class="list-group-item border-primary" if={f.type}>Type : {f.type}</li>
-						<!-- Statistiques du familier -->
-						<li class="list-group-item border-primary">
-							<table class="table table-hover">
-							  <thead>
-							    <tr class="table-active">
-							      <th scope="col" if={f.statistiques.force}>Force</th>
-							      <th scope="col" if={f.statistiques.agilite}>Agilité</th>
-							      <th scope="col" if={f.statistiques.social}>Social</th>
-							      <th scope="col" if={f.statistiques.perception}>Perception</th>
-							      <th scope="col" if={f.statistiques.mental}>Mental</th>
-							      <th scope="col" if={f.statistiques.intelligence}>Inteligence</th>
-							      <th scope="col" if={f.statistiques.constitution}>Constitution</th>
-							    </tr>
-							    <tr>
-							      <td scope="col" if={f.statistiques.force}>{f.statistiques.force}</td>
-							      <td scope="col" if={f.statistiques.agilite}>{f.statistiques.agilite}</td>
-							      <td scope="col" if={f.statistiques.social}>{f.statistiques.social}</td>
-							      <td scope="col" if={f.statistiques.perception}>{f.statistiques.perception}</td>
-							      <td scope="col" if={f.statistiques.mental}>{f.statistiques.mental}</td>
-							      <td scope="col" if={f.statistiques.intelligence}>{f.statistiques.intelligence}</td>
-							      <td scope="col" if={f.statistiques.constitution}>{f.statistiques.constitution}</td>
-							    </tr>
-							  </thead>
-							</table>							
-						</li>
-						<!-- Description du familier -->
-						<li class="list-group-item border-primary" if={f.description}>Description : {f.description}</li>
-				</div>
+				<familier familier={f} id={props.idPersonnage} fct={props.return}></familier>
 			</div>
 		</div>
 	</div>	
@@ -239,9 +202,7 @@
 				fam : false,
 				newObjet : false,
 				newFamilier : false,
-				newAptitude : false,
-
-				
+				newAptitude : false,				
 
 				statData : [
 					[

@@ -1,0 +1,99 @@
+<updatefamilier>
+	<h2>Information générales du familier</h2>
+	<div class="row">
+		<div class="mx-auto mb-3 col-3">
+			<em class="text-primary">Nom du familier</em>
+			<input class="form-control" type="text" id="nomFamilier" value={props.familier.nom}>
+		</div>
+		<div class="mx-auto mb-3 col-3">
+			<em class="text-primary">PV du familier</em>
+			<input class="form-control" type="number" id="pvFamilier"  value={props.familier.pv}>
+		</div>
+		<div class="mx-auto mb-3 col-3">
+			<em class="text-primary">PV max du familier</em>
+			<input class="form-control" type="number" id="pvMaxFamilier" value={props.familier.pvMax}>
+		</div>
+		<div class="mx-auto mb-3 col-3">
+			<em class="text-primary">Armure du familier</em>
+			<input class="form-control" type="number" id="armureFamilier"  value={props.familier.armure}>
+		</div>
+	</div>
+	<div class="mx-auto mb-3 col">
+		<em class="text-primary">Description du familier</em>
+		<textarea class="form-control" id="descriptionFamilier" rows="3"  value={props.familier.description}></textarea>
+	</div>
+	<h2>Statistiques du familier</h2>
+
+		<div class="row">
+				<table class="table table-hover mx-auto ">
+				  <thead>
+				    <tr class="table-active">
+				      <th scope="col">Force</th>
+				      <th scope="col">Agilité</th>
+				      <th scope="col">Social</th>
+				      <th scope="col">Perception</th>
+				      <th scope="col">Mental</th>
+				      <th scope="col">Intelligence</th>
+				      <th scope="col">Constitution</th>
+				    </tr>
+				    <tr>
+				      <td scope="col">
+				      	<input class="form-control" type="number" id="forceFamilier" value={props.familier.statistiques.force}>
+				      </td>
+				      <td scope="col">
+				      	<input class="form-control" type="number" id="agiliteFamilier" value={props.familier.statistiques.agilite}>
+				      </td>
+				      <td scope="col">
+				      	<input class="form-control" type="number" id="socialFamilier" value={props.familier.statistiques.social}>
+				      </td>
+				      <td scope="col">
+				      	<input class="form-control" type="number" id="perceptionFamilier" value={props.familier.statistiques.perception}>
+				      </td>
+				      <td scope="col">
+				      	<input class="form-control" type="number" id="mentalFamilier" value={props.familier.statistiques.mental}>
+				      </td>
+				      <td scope="col">
+				      	<input class="form-control" type="number" id="intelligenceFamilier" value={props.familier.statistiques.intelligence}>
+				      </td>
+				      <td scope="col">
+				      	<input class="form-control" type="number" id="constitutionFamilier" value={props.familier.statistiques.constitution}>
+				      </td>
+				    </tr>
+				  </thead>
+				</table>
+		</div>
+		<div class="row">
+			<button class="btn btn-primary mx-auto" onclick={_submit}>
+				Éditer ce familier
+			</button>
+		</div>
+
+		<script>
+			export default {
+				_submit(){
+
+				let nom = document.querySelector("#nomFamilier").value;
+				let pv = document.querySelector("#pvFamilier").value;
+				let pvMax = document.querySelector("#pvMaxFamilier").value;
+				let armure = document.querySelector("#armureFamilier").value;
+				let description = document.querySelector("#descriptionFamilier").value;
+				let force = document.querySelector("#forceFamilier").value;
+				let agilite = document.querySelector("#agiliteFamilier").value;
+				let social = document.querySelector("#socialFamilier").value;
+				let perception = document.querySelector("#perceptionFamilier").value;
+				let mental = document.querySelector("#mentalFamilier").value;
+				let intelligence = document.querySelector("#intelligenceFamilier").value;
+				let constitution = document.querySelector("#constitutionFamilier").value;
+
+				//idPersonnage, idStatistique, nom, pv, pvMax, armure, description, force, agilite, social, 
+        		//perception, mental, intelligence, constitution, idFamilier
+				this.sa.updateFamilier(this.props.id, this.props.familier.idStatistique, nom, pv, pvMax, armure, description, force, agilite, social, perception, mental, intelligence, constitution, this.props.familier.idFamilier).then(
+						(e) => {
+							alert("Un familier a été créé!");
+							this.props.fct();
+						}
+					);
+				}
+			}
+		</script>
+</updatefamilier>

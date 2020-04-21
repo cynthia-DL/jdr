@@ -1,0 +1,116 @@
+<familier>	
+	<div class="col-10 mx-auto">
+		<div class="card-body">
+			<ul class="list-group" if={!state.editMode}>
+				<!-- Nom du famillier + ses PV -->
+				<li class="list-group-item bg-primary text-white">
+					<h3 if={props.familier.nom}>{props.familier.nom}</h3>
+					<span class="badge badge-pill badge-secondary">PV : {props.familier.armure} + {props.familier.pv} / {props.familier.pvMax}</span></li>
+					<!-- Label -->
+					<li class="list-group-item bg-primary text-white" if={props.familier.label}>{props.familier.label}</li>
+					<!-- Type -->
+					<li class="list-group-item border-primary" if={props.familier.type}>Type : {props.familier.type}</li>
+					<!-- Statistiques du familier -->
+					<li class="list-group-item border-primary">
+						<table class="table table-hover">
+							<thead>
+								<tr class="table-active">
+									<th scope="col" if={props.familier.statistiques.force}>Force</th>
+									<th scope="col" if={props.familier.statistiques.agilite}>Agilité</th>
+									<th scope="col" if={props.familier.statistiques.social}>Social</th>
+									<th scope="col" if={props.familier.statistiques.perception}>Perception</th>
+									<th scope="col" if={props.familier.statistiques.mental}>Mental</th>
+									<th scope="col" if={props.familier.statistiques.intelligence}>Inteligence</th>
+									<th scope="col" if={props.familier.statistiques.constitution}>Constitution</th>
+								</tr>
+								<tr>
+									<td scope="col" if={props.familier.statistiques.force}>{props.familier.statistiques.force}</td>
+									<td scope="col" if={props.familier.statistiques.agilite}>{props.familier.statistiques.agilite}</td>
+									<td scope="col" if={props.familier.statistiques.social}>{props.familier.statistiques.social}</td>
+									<td scope="col" if={props.familier.statistiques.perception}>{props.familier.statistiques.perception}</td>
+									<td scope="col" if={props.familier.statistiques.mental}>{props.familier.statistiques.mental}</td>
+									<td scope="col" if={props.familier.statistiques.intelligence}>{props.familier.statistiques.intelligence}</td>
+									<td scope="col" if={props.familier.statistiques.constitution}>{props.familier.statistiques.constitution}</td>
+								</tr>
+							</thead>
+						</table>							
+					</li>
+					<!-- Description du familier -->
+					<li class="list-group-item border-primary" if={props.familier.description}>
+						Description : {props.familier.description}
+					</li>
+
+					<li class="list-group-item border-primary">
+						<button class="btn btn-warning" onclick={_toggleUpdateMode}>
+							<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+						</button>
+						<button class="btn btn-danger" onclick={_toggleDeleteMode}>
+							<i class="fa fa-trash" aria-hidden="true"></i>
+						</button>
+					</li>
+					<li class="list-group-item border-primary" if={state.deleteMode}>
+						Voullez-vous vraiment supprimer le familier {props.familier.nom}? 
+						<button class="btn btn-danger" onclick={_delete}>
+							Oui
+						</button>
+						<button class="btn btn-secondary" onclick={_toggleDeleteMode}>
+							Non
+						</button>
+					</li>
+				</ul>
+				<ul class="list-group" if={state.editMode}>
+					<li class="list-group-item border-primary">
+						<updatefamilier familier={props.familier} id={props.id} fct={props.fct}></updatefamilier>
+					</li>
+					<li class="list-group-item border-primary">
+						<button class="btn btn-warning" onclick={_toggleUpdateMode}>
+							<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+						</button>
+						<button class="btn btn-danger" onclick={_toggleDeleteMode}>
+							<i class="fa fa-trash" aria-hidden="true"></i>
+						</button>
+					</li>
+					<li class="list-group-item border-primary" if={state.deleteMode}>
+						Voullez-vous vraiment supprimer le familier {props.familier.nom}? 
+						<button class="btn btn-danger" onclick={_delete}>
+							Oui
+						</button>
+						<button class="btn btn-secondary" onclick={_toggleDeleteMode}>
+							Non
+						</button>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<script>
+			export default {
+				state : {
+					editMode : false,
+					deleteMode : false,
+				},
+
+				_toggleDeleteMode(){
+					this.state.deleteMode = !this.state.deleteMode;
+					this.update();
+
+				},
+
+				_toggleUpdateMode(){
+					this.state.editMode = !this.state.editMode;
+					this.update();
+
+				},
+
+				_delete(){
+					this.sa.deleteFamilier(this.props.familier.idFamilier).then(
+						(e) => {
+							alert("Un famillier a été supprimé");
+							this.state.deleteMode = false;
+							this.props.fct();
+						}
+						);
+				}
+			} 
+		</script>
+	</familier>
+

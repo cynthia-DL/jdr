@@ -29,7 +29,7 @@ Déconnexion</a>
 
 	<!-- gestions des fiches -->
 	<div class="row d-flex align-items-center" if={state.liste}>
-		<vignette each={p in state.vignette} perso={p} sa={sa} fct={_toggle} return={_onListe}></vignette>
+		<vignette each={p in state.vignette} perso={p} fct={_toggle} return={_onListe}></vignette>
 	</div>
 	
 	<!-- Affichage d'une fiche en plein écran -->
@@ -42,12 +42,12 @@ Déconnexion</a>
 			<button class="btn btn-info" onclick={_toggleChapitre}>Fermer ce menu</button>
 			<newchapitre sa={sa} fct={_onStoryLine}></newchapitre>
 		</div>
-		<chapitre each={c in state.chapitres} storyline={c} sa={sa} fct={_onStoryLine}></chapitre>
+		<chapitre each={c in state.chapitres} storyline={c} fct={_onStoryLine}></chapitre>
 	</div>
 
 	<!-- La création de personnage -->
 	<div if={state.newPersonnage}>
-		<newpersonnage sa={sa} fct={_newPersonnageCreated}></newpersonnage>
+		<newpersonnage fct={_newPersonnageCreated}></newpersonnage>
 	</div>
 	
 	<script>
