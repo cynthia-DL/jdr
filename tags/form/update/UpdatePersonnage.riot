@@ -1,0 +1,231 @@
+<updatepersonnage>
+	<div class="container">
+		<form class="form-group" method="post" onsubmit={ _submit }>
+			<div class="row">
+				<div class="col-3 mx-auto mb-3">
+					<em class="text-primary">Nom</em>
+					<input class="form-control" type="text" id="nom" value={props.personnage.nom}>
+				</div>
+
+				<div class="col-3 mx-auto mb-3">
+					<em class="text-primary">Prénom</em>
+					<input class="form-control" type="text" id="prenom" value={props.personnage.prenom}>
+				</div>
+				<div class="col-3 mx-auto mb-3">
+					<em class="text-primary">Pv</em>
+					<input class="form-control" type="number" id="pv" min="1" value={props.personnage.pv}>
+				</div>
+				<div class="col-3 mx-auto mb-3">
+					<em class="text-primary">Pv max</em>
+					<input class="form-control" type="number" id="pvMax" min="1" value={props.personnage.pvMax}>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-3 mx-auto mb-3">
+					<em class="text-primary">Race</em>
+					<select class="form-control" id="race" value={props.personnage.idRace}></select>
+				</div>
+				<div class="col-3 mx-auto mb-3">
+					<em class="text-primary">Etat</em>
+					<select class="form-control" id="etat" value={props.personnage.idEtat}></select>
+				</div>
+				<div class="col-3 mx-auto mb-3">
+					<em class="text-primary">Genre</em>
+					<select class="form-control" id="genre" value={props.personnage.idGenre}></select>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-3 mx-auto mb-3">
+					<em class="text-primary">Âge</em>
+					<input class="form-control" type="number" id="age" min="0" max="99999" value={props.personnage.age}>
+				</div>
+				<div class="col-3 mx-auto mb-3">
+					<em class="text-primary">Niveau</em>
+					<input class="form-control" type="number" id="niveau" value={props.personnage.niveau}>
+				</div>
+
+				<div class="col-3 mx-auto mb-3">
+					<em class="text-primary">Armure</em>
+					<input class="form-control" type="number" id="armure" value={props.personnage.armure}>
+				</div>
+
+				<div class="col-3 mx-auto mb-3">
+					<em class="text-primary">Classe</em>
+					<select class="form-control" id="classe" value={props.personnage.idClasse}></select>
+				</div>
+			</div>
+			<div class="row">
+				<div class="mx-auto mb-3 col">
+					<em class="text-primary">Lore</em>
+					<textarea class="form-control" id="lore" rows="3" value={props.personnage.lore}></textarea>
+				</div>
+			</div>
+			<h2>Statistiques</h2>
+			<div class="row">
+				<table class="table table-hover mx-auto ">
+					<thead>
+						<tr class="table-active">
+							<th scope="col">Force</th>
+							<th scope="col">Agilité</th>
+							<th scope="col">Social</th>
+							<th scope="col">Perception</th>
+							<th scope="col">Mental</th>
+							<th scope="col">Intelligence</th>
+							<th scope="col">Constitution</th>
+						</tr>
+						<tr>
+							<td scope="col">
+								<input class="form-control" type="number" id="force" min="20" max="80" value={props.personnage.statistiques.force}>
+							</td>
+							<td scope="col">	
+								<input class="form-control" type="number" id="agilite" min="20" max="80" value={props.personnage.statistiques.agilite}>
+							</td>
+							<td scope="col">
+								<input class="form-control" type="number" id="social" min="20" max="80" value={props.personnage.statistiques.social}>
+							</td>
+							<td scope="col">
+								<input class="form-control" type="number" id="perception" min="20" max="80" value={props.personnage.statistiques.perception}>
+							</td>
+							<td scope="col">
+								<input class="form-control" type="number" id="mental" min="20" max="80" value={props.personnage.statistiques.mental}>
+							</td>
+							<td scope="col">
+								<input class="form-control" type="number" id="intelligence" min="20" max="80" value={props.personnage.statistiques.intelligence}>
+							</td>
+							<td scope="col">
+								<input class="form-control" type="number" id="constitution" min="20" max="80" value={props.personnage.statistiques.constitution}>
+							</td>
+						</tr>
+					</thead>
+				</table>
+			</div>
+			<div class="row">
+				<button class="btn btn-primary mx-auto" type="submit">
+					Editer ce personnage
+				</button>
+			</div>
+		</form>
+	</div>
+	<script>
+		export default {
+			state : {
+				enumGenre : [],
+				enumClasse : [],
+				enumRace : [],
+				enumEtat : []
+			},
+
+			onMounted(props, state){
+				var genre = document.querySelector("#genre");
+				var classe = document.querySelector("#classe");
+				var race = document.querySelector("#race");
+				var etat = document.querySelector("#etat");
+
+
+				this.sa.getAllGenre().then(
+					(e) => {
+						this.state.enumGenre = JSON.parse(e);
+						this.update();
+
+						for (var i = 0; i < this.state.enumGenre.length; i++) {let niveau = document.querySelector("#niveau").value;
+							var tmp = document.createElement("option");
+							tmp.value = this.state.enumGenre[i].idGenre;
+							tmp.innerText = this.state.enumGenre[i].nomGenre;
+							genre.appendChild(tmp);
+
+						}
+
+						genre.value = this.props.personnage.idGenre;
+						this.update();
+
+						this.sa.getAllClasse().then(
+							(e) => {
+								this.state.enumClasse = JSON.parse(e);
+								this.update();
+
+								for (i = 0; i < this.state.enumClasse.length; i++) {let niveau = document.querySelector("#niveau").value;
+									tmp = document.createElement("option");
+									tmp.value = this.state.enumClasse[i].idClasse;
+									tmp.innerText = this.state.enumClasse[i].nomClasse;
+									classe.appendChild(tmp);
+								}
+
+								classe.value = this.props.personnage.idClasse;
+								this.update();
+
+								this.sa.getAllRace().then(
+									(e) => {
+										this.state.enumRace = JSON.parse(e);
+										this.update();
+
+										for (i = 0; i < this.state.enumRace.length; i++) {
+											tmp = document.createElement("option");
+											tmp.value = this.state.enumRace[i].idRace;
+											tmp.innerText = this.state.enumRace[i].nomRace;
+											race.appendChild(tmp);
+
+										}
+
+										race.value = this.props.personnage.idRace;
+										this.update();
+
+										this.sa.getAllEtat().then(
+											(e) => {
+												this.state.enumEtat = JSON.parse(e);
+												this.update();
+
+												for (i = 0; i < this.state.enumEtat.length; i++) {
+													tmp = document.createElement("option");
+													tmp.value = this.state.enumEtat[i].idEtat;
+													tmp.innerText = this.state.enumEtat[i].nomEtat;
+													etat.appendChild(tmp);
+
+												}
+
+												etat.value = this.props.personnage.idEtat;
+												this.update();
+											}
+										);
+									}
+								);
+							}
+						);
+					}
+				);
+			},
+
+			_submit(e){
+				e.preventDefault();
+
+				let nom = document.querySelector("#nom").value;
+				let prenom = document.querySelector("#prenom").value;
+				let pv = document.querySelector("#pv").value;
+				let pvMax = document.querySelector("#pvMax").value;
+				let race = document.querySelector("#race").value;
+				let etat = document.querySelector("#etat").value;
+				let genre = document.querySelector("#genre").value;
+				let age = document.querySelector("#age").value;
+				let niveau = document.querySelector("#niveau").value;
+				let armure = document.querySelector("#armure").value;
+				let classe = document.querySelector("#classe").value;
+				let lore = document.querySelector("#lore").value;
+				let force = document.querySelector("#force").value;
+				let agilite = document.querySelector("#agilite").value;
+				let social = document.querySelector("#social").value;
+				let perception = document.querySelector("#perception").value;
+				let mental = document.querySelector("#mental").value;
+				let intelligence = document.querySelector("#intelligence").value;
+				let constitution = document.querySelector("#constitution").value;
+
+				this.sa.updatePersonnage(this.props.id, this.props.personnage.idStatistique, etat, nom, prenom, 
+				pv, pvMax, race, genre, age, niveau, armure, classe, lore, force, agilite, social, perception, mental, intelligence, constitution).then(
+					(e) => {
+						alert("Un personnage a été éditer!");
+						this.props.fct();
+					}
+				);
+
+			}
+		}
+	</script>
+</updatepersonnage>

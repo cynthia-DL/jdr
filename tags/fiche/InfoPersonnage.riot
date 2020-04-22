@@ -1,0 +1,86 @@
+<infopersonnage>
+	<h2>Informations générales</h2>
+	<div if={!state.editMode}>
+		<div class="row">
+			<div class="card col-5 mx-auto mb-3">
+				<em class="text-primary">Nom</em>
+				<em if={props.perso.nom}>{props.perso.nom}</em>
+				<em if={!props.perso.nom}>Ce personnage n'a pas de nom</em>	
+			</div>
+
+			<div class="card col-5  mx-auto mb-3">
+				<em class="text-primary">Prenom</em>
+				<em if={props.perso.prenom}>{props.perso.prenom}</em>
+				<em if={!props.perso.prenom}>Ce personnage n'a pas de prénom</em>
+			</div>
+
+		</div>
+
+		<div class="row">
+			<div class="card col-3 mx-auto mb-3">
+				<em class="text-primary">Âge</em>
+				<em if={props.perso.age}>{props.perso.age}</em>
+				<em if={!props.perso.age}>Ce personnage n'a pas d'age</em>
+			</div>
+			<div class="card col-3 mx-auto mb-3">
+				<em class="text-primary">Niveau</em>
+				<em if={props.perso.niveau}>{props.perso.niveau}</em>
+				<em if={!props.perso.niveau}>Ce personnage n'a pas de niveau</em>
+			</div>
+
+			<div class="card col-3 mx-auto mb-3">
+				<em class="text-primary">Classe</em>
+				<em if={props.perso.classe}>{props.perso.classe}</em>
+				<em if={!props.perso.classe}>Ce personnage n'a pas de classe</em>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="card col-5 mx-auto mb-3">
+				<em class="text-primary">Race</em>
+				<em if={props.perso.race}>{props.perso.race}</em>
+				<em if={!props.perso.race}>Ce personnage n'a pas de race. Yikes.</em>
+			</div>
+			<div class="card col-5 mx-auto mb-3">
+				<em class="text-primary">Genre</em>
+				<em if={props.perso.genre}>{props.perso.genre}</em>
+				<em if={!props.perso.genre}>Ce personnage n'a pas de genre</em>
+			</div>
+		</div>
+		<hr>
+		<div class="card mx-auto mb-3">
+			<em class="text-primary">Lore</em>
+			<em if={props.perso.lore}>{props.perso.lore}</em>
+			<em if={!props.perso.lore}>Ce personnage n'a pas de lore</em>
+		</div>
+	</div>
+
+	<div if={state.editMode}>
+		<updatepersonnage personnage={props.perso} fct={props.fct} id={props.id}></updatepersonnage>
+	</div>
+
+	<button class="btn btn-warning btn-lg" onclick={_toggleUpdateMode}>
+		<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+	</button>
+	<script>
+			export default {
+				state : {
+					editMode : false,
+					deleteMode : false,
+				},
+
+				// _toggleDeleteMode(){
+				// 	this.state.deleteMode = !this.state.deleteMode;
+				// 	this.update();
+
+				// },
+
+				_toggleUpdateMode(){
+					this.state.editMode = !this.state.editMode;
+					console.log(this.props.perso);
+					this.update();
+
+				}
+			} 
+		</script>
+</infopersonnage>

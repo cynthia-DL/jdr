@@ -34,6 +34,7 @@
 
 	<script src="./tags/fiche/Aptitude.riot" type="riot"></script>
 	<script src="./tags/fiche/Familier.riot" type="riot"></script>
+	<script src="./tags/fiche/InfoPersonnage.riot" type="riot"></script>
 	<script src="./tags/fiche/Objet.riot" type="riot"></script>
 
 	<script src="./tags/form/add/NewAptitude.riot" type="riot"></script>
@@ -46,7 +47,7 @@
 	<script src="./tags/form/update/UpdateChapitre.riot" type="riot"></script>
 	<script src="./tags/form/update/UpdateFamilier.riot" type="riot"></script>
 	<script src="./tags/form/update/UpdateObjet.riot" type="riot"></script>
-	
+	<script src="./tags/form/update/UpdatePersonnage.riot" type="riot"></script>
 
 	<script src="https://cdn.jsdelivr.net/npm/riot@4/riot+compiler.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>
@@ -69,6 +70,7 @@
 					component.name == "objet" || 
 
 					component.name == "newaptitude" ||
+					component.name == "newchapitre" ||
 					component.name == "newfamilier" || 
 					component.name == "newobjet" ||
 					component.name == "newpersonnage" ||
@@ -77,7 +79,8 @@
 					component.name == "updateaptitude" ||
 					component.name == "updatechapitre" || 
 					component.name == "updatefamilier" ||
-					component.name == "updateobjet" ){
+					component.name == "updateobjet" ||
+					component.name == "updatepersonnage" ){
 					component.sa = makeServiceAjax()
 				}
 			});
@@ -85,6 +88,7 @@
 			riot.mount('updatechapitre');
 			riot.mount('updatefamilier');
 			riot.mount('updateobjet');
+			riot.mount('updatepersonnage');
 
 			riot.mount('newpersonnage');
 			riot.mount('newchapitre');
@@ -94,6 +98,7 @@
 			
 			riot.mount('aptitude');
 			riot.mount('familier');
+			riot.mount('infopersonnage');
 			riot.mount('objet');
 
 			riot.mount('vignette');

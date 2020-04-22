@@ -19,6 +19,13 @@ switch ($_GET['case']) {
 		updateStatistique($bdd, $_GET["force"], $_GET["agilite"], $_GET["social"], $_GET["perception"], $_GET["mental"], $_GET["intelligence"], $_GET["constitution"], $_GET["idStatistique"]);
 		updateFamilier($bdd, $_GET["idPersonnage"], $_GET["nom"], $_GET["pv"], $_GET["pvMax"], $_GET["armure"], $_GET["idStatistique"], $_GET["description"], $_GET["idFamilier"]);
 		break;
+
+		case 'personnage' :
+			updateStatistique($bdd, $_GET["force"], $_GET["agilite"], $_GET["social"], $_GET["perception"], $_GET["mental"], $_GET["intelligence"], $_GET["constitution"], $_GET["idStatistique"]);
+			updatePersonnage($bdd, $_GET["etat"], $_GET["nom"], $_GET["prenom"], $_GET["niveau"], $_GET["age"],
+			$_GET["race"], $_GET["classe"], $_GET["genre"], $_GET["pv"], $_GET["pvMax"], $_GET["armure"], 
+			$_GET["idStatistique"], $_GET["lore"], $_GET["idPersonnage"]);
+			break;
 }
 
 closeDb($bdd);

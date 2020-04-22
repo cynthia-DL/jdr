@@ -173,7 +173,7 @@
 				let intelligence = document.querySelector("#intelligence").value;
 				let constitution = document.querySelector("#constitution").value;
 
-				this.props.sa.addPersonnage(nom, prenom, pv, race, genre, age, niveau, classe, lore, force, agilite, social, perception, mental, intelligence, constitution).then(
+				this.sa.addPersonnage(nom, prenom, pv, race, genre, age, niveau, classe, lore, force, agilite, social, perception, mental, intelligence, constitution).then(
 					(e) => {
 						alert("Un personnage a été créé!");
 						this.props.fct();

@@ -675,33 +675,36 @@
 	* @return array de tout ce que contient le personnage
 	*/
 	function getPersonnage($DB, $idPersonnage){
-		$stmt = mysqli_prepare($DB, "SELECT nomEtat, nom, prenom, niveau, age, nomRace, nomClasse, nomGenre, pv, pvMax, armure, idStatistique, lore FROM jdrPersonnage NATURAL JOIN jdrEtat NATURAL JOIN jdrRace NATURAL JOIN jdrClasse NATURAL JOIN jdrGenre WHERE idPersonnage = ? ");
+		$stmt = mysqli_prepare($DB, "SELECT idEtat,nomEtat, nom, prenom, niveau, age, idRace, nomRace, idClasse, nomClasse, idGenre, nomGenre, pv, pvMax, armure, idStatistique, lore FROM jdrPersonnage NATURAL JOIN jdrEtat NATURAL JOIN jdrRace NATURAL JOIN jdrClasse NATURAL JOIN jdrGenre WHERE idPersonnage = ? ");
 		mysqli_stmt_bind_param($stmt, 'i', $idPersonnage);
 		mysqli_execute($stmt);
-		$resultat = mysqli_stmt_bind_result($stmt, $etat, $nom, $prenom, $niveau, $age, $race, $classe, $genre, $pv, $pvMax, $armure, $idStatistique, $lore);
+		$resultat = mysqli_stmt_bind_result($stmt, $idEtat, $etat, $nom, $prenom, $niveau, $age, $idRace, $race, $idClasse, $classe, $idGenre, $genre, $pv, $pvMax, $armure, $idStatistique, $lore);
 		
 		$personnage = array();
 		
 		if($resultat) {
 			while(mysqli_stmt_fetch($stmt)){
-			
+			$personnage["idEtat"] = $idEtat;
 			$personnage["etat"] = $etat;
 			$personnage["nom"] = $nom;
 			$personnage["prenom"] = $prenom;
 			$personnage["niveau"] = $niveau;
 			$personnage["age"] = $age;
+			$personnage["idRace"] = $idRace;
 			$personnage["race"] = $race;
+			$personnage["idClasse"] = $idClasse;
 			$personnage["classe"] = $classe;
+			$personnage["idGenre"] = $idGenre;
 			$personnage["genre"] = $genre;
 			$personnage["pv"] = $pv;
 			$personnage["pvMax"] = $pvMax;
 			$personnage["armure"] = $armure;
 			$personnage["lore"] = $lore;
-			$personnage["statistiques"] = $idStatistique;
+			$personnage["idStatistique"] = $idStatistique;
 			}
 		}
 
-		$personnage["statistiques"] = getStatistique($DB, $personnage["statistiques"]);
+		$personnage["statistiques"] = getStatistique($DB, $personnage["idStatistique"]);
 		$personnage["inventaire"] = getInventaire($DB, $idPersonnage);
 		$personnage["competences"] = getArrayCompetence($DB, $idPersonnage);
 		$personnage["traits"] = getArrayTrait($DB, $idPersonnage);
