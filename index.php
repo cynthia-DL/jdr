@@ -64,6 +64,7 @@
 			riot.install(function(component){
 				if (component.name == "app" ||
 					
+					component.name == "vignette" || 
 					component.name == "aptitude" || 
 					component.name == "chapitre" || 
 					component.name == "familier" || 

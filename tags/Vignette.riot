@@ -93,7 +93,7 @@
 
 			},
 			_delete(){
-				this.props.sa.deletePersonnage(this.props.perso.idPersonnage).then(
+				this.sa.deletePersonnage(this.props.perso.idPersonnage).then(
 					(e) => {
 						this.state.deleteMode = false;
 						this.props.return();

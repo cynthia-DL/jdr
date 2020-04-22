@@ -173,13 +173,18 @@
 				let intelligence = document.querySelector("#intelligence").value;
 				let constitution = document.querySelector("#constitution").value;
 
-				this.sa.addPersonnage(nom, prenom, pv, race, genre, age, niveau, classe, lore, force, agilite, social, perception, mental, intelligence, constitution).then(
-					(e) => {
-						alert("Un personnage a été créé!");
-						this.props.fct();
-					}
-				);
+				let sommeStat = parseInt(force) + parseInt(agilite) + parseInt(social) + parseInt(perception) + parseInt(mental) + parseInt(intelligence) + parseInt(constitution);
 
+				if (sommeStat == 370) {
+					this.sa.addPersonnage(nom, prenom, pv, race, genre, age, niveau, classe, lore, force, agilite, social, perception, mental, intelligence, constitution).then(
+						(e) => {
+							alert("Un personnage a été créé!");
+							this.props.fct();
+						}
+					);
+				} else {
+					alert("La somme des statistiques doit être égale a 370! ("+sommeStat+")");
+				}
 			}
 		}
 	</script>
