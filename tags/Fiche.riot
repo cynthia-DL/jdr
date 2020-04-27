@@ -24,6 +24,35 @@
 			<infopersonnage perso={props.perso} fct={props.return} id={props.idPersonnage}></infopersonnage>
 		</div>
 
+		<!-- Statistiques -->
+		<div if={state.stats}>
+			<h2>Statistiques</h2>
+				<table class="table table-hover">
+				  <thead>
+				    <tr class="table-active">
+				      <th scope="col">Force</th>
+				      <th scope="col">Agilité</th>
+				      <th scope="col">Social</th>
+				      <th scope="col">Perception</th>
+				      <th scope="col">Mental</th>
+				      <th scope="col">Inteligence</th>
+				      <th scope="col">Constitution</th>
+				    </tr>
+				    <tr>
+				      <td scope="col">{props.perso.statistiques.force}</td>
+				      <td scope="col">{props.perso.statistiques.agilite}</td>
+				      <td scope="col">{props.perso.statistiques.social}</td>
+				      <td scope="col">{props.perso.statistiques.perception}</td>
+				      <td scope="col">{props.perso.statistiques.mental}</td>
+				      <td scope="col">{props.perso.statistiques.intelligence}</td>
+				      <td scope="col">{props.perso.statistiques.constitution}</td>
+				    </tr>
+				  </thead>
+				</table>
+				<chart stats={state.statData}></chart>
+			<hr>
+		</div>
+
 		<div if={state.comp}>
 			<button class="btn btn-info" if={!state.newAptitude} onclick={_toggleNewAptitude}>Ajouter une aptitude</button>
 			<div if={state.newAptitude}>
@@ -66,7 +95,7 @@
 			<!-- Aliés -->
 			<h2>Alliés de {props.perso.prenom}</h2>
 			<div class="row d-flex align-items-center">
-				<div class="col-4 mx-auto" each={i in props.perso.inventaire.ALLIES}>
+				<div class="col-lg-4 col-md-12 col-sm-12 mx-auto" each={i in props.perso.inventaire.ALLIES}>
 					<objet objet={i} sa={props.sa} fct={props.return} id={props.idPersonnage} typeInventaire="8"></objet>
 				</div>
 				<div class="mx-auto" if={!props.perso.inventaire.ALLIES}>
@@ -77,7 +106,7 @@
 			<!-- Contenu du sac -->
 			<h2>Sac de {props.perso.prenom}</h2>
 			<div class="row d-flex align-items-center">
-				<div class="col-4 mx-auto" each={i in props.perso.inventaire.SAC}>
+				<div class="col-lg-4 col-md-12 col-sm-12 mx-auto" each={i in props.perso.inventaire.SAC}>
 					<objet objet={i} sa={props.sa} fct={props.return} id={props.idPersonnage} typeInventaire="1"></objet>
 				</div>
 				<div class="mx-auto" if={!props.perso.inventaire.SAC}>
@@ -88,7 +117,7 @@
 			<!-- Contenu de la selle -->
 			<h2>Selle de {props.perso.prenom}</h2>
 			<div class="row d-flex align-items-center">
-				<div class="col-4 mx-auto" each={i in props.perso.inventaire.SELLE}>
+				<div class="col-lg-4 col-md-12 col-sm-12 mx-auto" each={i in props.perso.inventaire.SELLE}>
 					<objet objet={i} sa={props.sa} fct={props.return} id={props.idPersonnage} typeInventaire="2"></objet>
 				</div>
 				<div class="mx-auto" if={!props.perso.inventaire.SELLE}>
@@ -106,7 +135,7 @@
 				<newfamilier sa={props.sa} idPersonnage={props.idPersonnage} fct={props.return}></newfamilier>	
 			</div>
 			<hr>
-			<div class="col-10 mx-auto" each={f in props.perso.familier}>
+			<div class="col-lg-10 col-md-12 col-sm-12 mx-auto" each={f in props.perso.familier}>
 				<familier familier={f} id={props.idPersonnage} fct={props.return}></familier>
 			</div>
 		</div>
