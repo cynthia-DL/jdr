@@ -63,7 +63,7 @@
 			<hr>
 			<div class="row">
 				<!-- Competences -->
-				<div class="col-5 mx-auto">
+				<div class="col-lg-5 col-md-12 col-sm-12 mx-auto">
 					<h2>Competences</h2>
 					<div each={c in props.perso.competences}>
 						<aptitude aptitude={c} sa={props.sa} fct={props.return} id={props.idPersonnage}></aptitude>
@@ -72,7 +72,7 @@
 		
 
 				<!-- Dons et traits -->
-				<div class="col-5  mx-auto">
+				<div class="col-lg-5 col-md-12 col-sm-12 mx-auto">
 					<h2>Don et traits</h2>
 					<div each={c in props.perso.traits}>
 						<aptitude aptitude={c} sa={props.sa} fct={props.return} id={props.idPersonnage}></aptitude>
