@@ -709,6 +709,8 @@
 		$personnage["competences"] = getArrayCompetence($DB, $idPersonnage);
 		$personnage["traits"] = getArrayTrait($DB, $idPersonnage);
 		$personnage["familier"] = getArrayFamilier($DB, $idPersonnage);
+
+		$personnage["lore"] = nl2br($personnage["lore"]);
 		
 		return $personnage;
 	}
