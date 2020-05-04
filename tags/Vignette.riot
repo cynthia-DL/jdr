@@ -55,15 +55,18 @@
 				</li>
 				<!-- Boutton pour ouvrir les fiches -->
 				<li class="list-group-item border-primary text-center">
-					<button class="btn btn-outline-success"  onclick={_test}>
+					<button class="btn btn-outline-success" onclick={_test}>
 						<i class="fa fa-info-circle"></i> 
 					En voir plus</button>
-					<button class="btn btn-outline-danger" onclick={_toggleDeleteMode}>
+					<button if={props.perso.idUtilisateur == state.sessionId} class="btn btn-outline-danger" onclick={_toggleDeleteMode}>
+						<i class="fa fa-trash" aria-hidden="true"></i>
+					</button>
+					<button if={state.estMJ == 1} class="btn btn-outline-danger" onclick={_toggleDeleteMode}>
 						<i class="fa fa-trash" aria-hidden="true"></i>
 					</button>
 				</li>
 				<li class="list-group-item border-primary" if={state.deleteMode}>
-					Voullez-vous vraiment supprimer {props.perso.prenom}? 
+					Voulez-vous vraiment supprimer {props.perso.prenom}? 
 					<button class="btn btn-danger" onclick={_delete}>
 						Oui
 					</button>
@@ -77,8 +80,11 @@
 	<script>
 		export default {
 			state : {
-				deleteMode : false
+				deleteMode : false,
+				sessionId : [sessionId],
+				estMJ : [estMJ]
 			},
+
 			// Cette fonction ouvre une fiche via le pere
 			_test(){
 				if (this.props.fct){
@@ -89,8 +95,8 @@
 			_toggleDeleteMode(){
 				this.state.deleteMode = !this.state.deleteMode;
 				this.update();
-
 			},
+
 			_delete(){
 				this.sa.deletePersonnage(this.props.perso.idPersonnage).then(
 					(e) => {
