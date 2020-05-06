@@ -675,15 +675,16 @@
 	* @return array de tout ce que contient le personnage
 	*/
 	function getPersonnage($DB, $idPersonnage){
-		$stmt = mysqli_prepare($DB, "SELECT idEtat,nomEtat, nom, prenom, niveau, age, idRace, nomRace, idClasse, nomClasse, idGenre, nomGenre, pv, pvMax, armure, idStatistique, lore FROM jdrPersonnage NATURAL JOIN jdrEtat NATURAL JOIN jdrRace NATURAL JOIN jdrClasse NATURAL JOIN jdrGenre WHERE idPersonnage = ? ");
+		$stmt = mysqli_prepare($DB, "SELECT idUtilisateur, idEtat, nomEtat, nom, prenom, niveau, age, idRace, nomRace, idClasse, nomClasse, idGenre, nomGenre, pv, pvMax, armure, idStatistique, lore FROM jdrPersonnage NATURAL JOIN jdrEtat NATURAL JOIN jdrRace NATURAL JOIN jdrClasse NATURAL JOIN jdrGenre WHERE idPersonnage = ? ");
 		mysqli_stmt_bind_param($stmt, 'i', $idPersonnage);
 		mysqli_execute($stmt);
-		$resultat = mysqli_stmt_bind_result($stmt, $idEtat, $etat, $nom, $prenom, $niveau, $age, $idRace, $race, $idClasse, $classe, $idGenre, $genre, $pv, $pvMax, $armure, $idStatistique, $lore);
+		$resultat = mysqli_stmt_bind_result($stmt, $idUtilisateur, $idEtat, $etat, $nom, $prenom, $niveau, $age, $idRace, $race, $idClasse, $classe, $idGenre, $genre, $pv, $pvMax, $armure, $idStatistique, $lore);
 		
 		$personnage = array();
 		
 		if($resultat) {
 			while(mysqli_stmt_fetch($stmt)){
+			$personnage["idUtilisateur"] = $idUtilisateur;
 			$personnage["idEtat"] = $idEtat;
 			$personnage["etat"] = $etat;
 			$personnage["nom"] = $nom;

@@ -57,11 +57,8 @@
 				<li class="list-group-item border-primary text-center">
 					<button class="btn btn-outline-success" onclick={_test}>
 						<i class="fa fa-info-circle"></i> 
-					En voir plus</button>
-					<button if={props.perso.idUtilisateur == state.sessionId} class="btn btn-outline-danger" onclick={_toggleDeleteMode}>
-						<i class="fa fa-trash" aria-hidden="true"></i>
-					</button>
-					<button if={state.estMJ == 1} class="btn btn-outline-danger" onclick={_toggleDeleteMode}>
+							En voir plus</button>
+					<button if={props.perso.idUtilisateur == state.sessionId || state.estMJ == 1} class="btn btn-outline-danger" onclick={_toggleDeleteMode}>
 						<i class="fa fa-trash" aria-hidden="true"></i>
 					</button>
 				</li>

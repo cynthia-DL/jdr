@@ -40,7 +40,7 @@
 						Description : {props.familier.description}
 					</li>
 
-					<li class="list-group-item border-primary">
+					<li if={props.idUtilisateur == state.sessionId || state.estMJ == 1} class="list-group-item border-primary">
 						<button class="btn btn-warning" onclick={_toggleUpdateMode}>
 							<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
 						</button>
@@ -87,6 +87,8 @@
 				state : {
 					editMode : false,
 					deleteMode : false,
+					sessionId : [sessionId],
+					estMJ : [estMJ]
 				},
 
 				_toggleDeleteMode(){

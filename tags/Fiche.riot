@@ -54,7 +54,7 @@
 		</div>
 
 		<div if={state.comp}>
-			<button class="btn btn-info" if={!state.newAptitude} onclick={_toggleNewAptitude}>Ajouter une aptitude</button>
+			<button if={props.perso.idUtilisateur == state.sessionId || state.estMJ == 1} class="btn btn-info" if={!state.newAptitude} onclick={_toggleNewAptitude}>Ajouter une aptitude</button>
 			<div if={state.newAptitude}>
 				<button class="btn btn-info" onclick={_toggleNewAptitude}>Fermer ce menu</button>
 				<h2>Nouvelle Aptitude</h2>
@@ -66,16 +66,14 @@
 				<div class="col-lg-5 col-md-12 col-sm-12 mx-auto">
 					<h2>Competences</h2>
 					<div each={c in props.perso.competences}>
-						<aptitude aptitude={c} sa={props.sa} fct={props.return} id={props.idPersonnage}></aptitude>
+						<aptitude idUtilisateur={props.perso.idUtilisateur} aptitude={c} sa={props.sa} fct={props.return} id={props.idPersonnage}></aptitude>
 					</div>
-				</div>		
-		
-
+				</div>
 				<!-- Dons et traits -->
 				<div class="col-lg-5 col-md-12 col-sm-12 mx-auto">
 					<h2>Don et traits</h2>
 					<div each={c in props.perso.traits}>
-						<aptitude aptitude={c} sa={props.sa} fct={props.return} id={props.idPersonnage}></aptitude>
+						<aptitude idUtilisateur={props.perso.idUtilisateur} aptitude={c} sa={props.sa} fct={props.return} id={props.idPersonnage}></aptitude>
 					</div>
 				</div>		
 			</div>
@@ -84,7 +82,7 @@
 		<!-- Inventaire -->
 		<div if={state.inv}>
 			<!-- Nouvel objet -->
-			<button class="btn btn-info" if={!state.newObjet} onclick={_toggleNewObjet}>Ajouter un objet</button>
+			<button if={props.perso.idUtilisateur == state.sessionId || state.estMJ == 1} class="btn btn-info" if={!state.newObjet} onclick={_toggleNewObjet}>Ajouter un objet</button>
 			<div if={state.newObjet}>
 				<button class="btn btn-info" onclick={_toggleNewObjet}>Fermer ce menu</button>
 				<h2>Nouvel Objet</h2>
@@ -92,11 +90,11 @@
 			</div>
 			<hr>
 			
-			<!-- Aliés -->
+			<!-- Alliés -->
 			<h2>Alliés de {props.perso.prenom}</h2>
 			<div class="row d-flex align-items-center">
 				<div class="col-lg-4 col-md-6 col-sm-12 mx-auto" each={i in props.perso.inventaire.ALLIES}>
-					<objet objet={i} sa={props.sa} fct={props.return} id={props.idPersonnage} typeInventaire="8"></objet>
+					<objet idUtilisateur={props.perso.idUtilisateur} objet={i} sa={props.sa} fct={props.return} id={props.idPersonnage} typeInventaire="8"></objet>
 				</div>
 				<div class="mx-auto" if={!props.perso.inventaire.ALLIES}>
 					Ce personnage n'a pas d'alliés.
@@ -107,10 +105,10 @@
 			<h2>Sac de {props.perso.prenom}</h2>
 			<div class="row d-flex align-items-center">
 				<div class="col-lg-4 col-md-6 col-sm-12 mx-auto" each={i in props.perso.inventaire.SAC}>
-					<objet objet={i} sa={props.sa} fct={props.return} id={props.idPersonnage} typeInventaire="1"></objet>
+					<objet idUtilisateur={props.perso.idUtilisateur} objet={i} sa={props.sa} fct={props.return} id={props.idPersonnage} typeInventaire="1"></objet>
 				</div>
 				<div class="mx-auto" if={!props.perso.inventaire.SAC}>
-					Le sac de ce personnage est vide
+					Le sac de ce personnage est vide.
 				</div>
 			</div>
 			
@@ -118,25 +116,25 @@
 			<h2>Selle de {props.perso.prenom}</h2>
 			<div class="row d-flex align-items-center">
 				<div class="col-lg-4 col-md-6 col-sm-12 mx-auto" each={i in props.perso.inventaire.SELLE}>
-					<objet objet={i} sa={props.sa} fct={props.return} id={props.idPersonnage} typeInventaire="2"></objet>
+					<objet idUtilisateur={props.perso.idUtilisateur} objet={i} sa={props.sa} fct={props.return} id={props.idPersonnage} typeInventaire="2"></objet>
 				</div>
 				<div class="mx-auto" if={!props.perso.inventaire.SELLE}>
-					La selle de ce personnage est vide
+					La selle de ce personnage est vide.
 				</div>
 			</div>
 		</div>
 		
 		<!-- Familiers -->
 		<div if={state.fam}>
-			<button class="btn btn-info" if={!state.newFamilier} onclick={_toggleNewFamilier}>Ajouter un Familier</button>
+			<button if={props.perso.idUtilisateur == state.sessionId || state.estMJ == 1} class="btn btn-info" if={!state.newFamilier} onclick={_toggleNewFamilier}>Ajouter un Familier</button>
 			<div if={state.newFamilier}>
 				<button class="btn btn-info" onclick={_toggleNewFamilier}>Fermer ce menu</button>
-				<h2>Nouvel Familier</h2>
+				<h2>Nouveau Familier</h2>
 				<newfamilier sa={props.sa} idPersonnage={props.idPersonnage} fct={props.return}></newfamilier>	
 			</div>
 			<hr>
 			<div class="col-lg-10 col-md-12 col-sm-12 mx-auto" each={f in props.perso.familier}>
-				<familier familier={f} id={props.idPersonnage} fct={props.return}></familier>
+				<familier idUtilisateur={props.perso.idUtilisateur} familier={f} id={props.idPersonnage} fct={props.return}></familier>
 			</div>
 		</div>
 	</div>	
@@ -150,7 +148,9 @@
 				fam : false,
 				newObjet : false,
 				newFamilier : false,
-				newAptitude : false,				
+				newAptitude : false,
+				sessionId : [sessionId],
+				estMJ : [estMJ],			
 
 				statData : [
 					[

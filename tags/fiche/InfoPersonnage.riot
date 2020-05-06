@@ -20,7 +20,7 @@
 			<div class="card col-3 mx-auto mb-3">
 				<em class="text-primary">Âge</em>
 				<em if={props.perso.age}>{props.perso.age}</em>
-				<em if={!props.perso.age}>Ce personnage n'a pas d'age</em>
+				<em if={!props.perso.age}>Ce personnage n'a pas d'âge</em>
 			</div>
 			<div class="card col-3 mx-auto mb-3">
 				<em class="text-primary">Niveau</em>
@@ -59,28 +59,30 @@
 		<updatepersonnage personnage={props.perso} fct={props.fct} id={props.id}></updatepersonnage>
 	</div>
 
-	<button class="btn btn-warning btn-lg" onclick={_toggleUpdateMode}>
+	<button if={props.perso.idUtilisateur == state.sessionId || state.estMJ == 1} class="btn btn-warning btn-lg" onclick={_toggleUpdateMode}>
 		<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
 	</button>
+
 	<script>
-			export default {
-				state : {
-					editMode : false,
-					deleteMode : false,
-				},
+		export default {
+			state : {
+				editMode : false,
+				deleteMode : false,
+				sessionId : [sessionId],
+				estMJ : [estMJ]
+			},
 
-				// _toggleDeleteMode(){
-				// 	this.state.deleteMode = !this.state.deleteMode;
-				// 	this.update();
+			// _toggleDeleteMode(){
+			// 	this.state.deleteMode = !this.state.deleteMode;
+			// 	this.update();
 
-				// },
+			// },
 
-				_toggleUpdateMode(){
-					this.state.editMode = !this.state.editMode;
-					console.log(this.props.perso);
-					this.update();
-
-				}
-			} 
-		</script>
+			_toggleUpdateMode(){
+				this.state.editMode = !this.state.editMode;
+				console.log(this.props.perso);
+				this.update();
+			}
+		} 
+	</script>
 </infopersonnage>
