@@ -106,6 +106,17 @@
 	}
 
 	/**
+	* Permet de rajouter une partie dans la table jdrPartie de la BD
+	* @param $DB
+	* @param $nomPartie
+	*/
+	function addPartie($DB, $nomPartie){
+		$stmt = mysqli_prepare($DB, "INSERT INTO jdrPartie (nomPartie) VALUES (?)");
+		mysqli_stmt_bind_param($stmt, 's', $nomPartie);
+		mysqli_execute($stmt);
+	}
+
+	/**
 	* Permet de rajouter un personnage dans la table jdrPersonnage de la BD
 	* @param $DB
 	* @param $idUtilisateur
@@ -269,6 +280,16 @@
 	function deleteObjet($DB, $idObjet){
 		$stmt = mysqli_prepare($DB, "DELETE FROM jdrInventaire WHERE idObjet = ?");
 		mysqli_stmt_bind_param($stmt, 'i', $idObjet);
+		mysqli_execute($stmt);
+	}
+
+	/**
+	 * Permet de supprimer un animal de la table jdrPartie de la BD
+	 * @param $idPartie
+	 */
+	function deletePartie($DB, $idPartie){
+		$stmt = mysqli_prepare($DB, "DELETE FROM jdrPartie WHERE idPartie = ?");
+		mysqli_stmt_bind_param($stmt, 'i', $idPartie);
 		mysqli_execute($stmt);
 	}
 
@@ -610,6 +631,12 @@
 		return $arrayVignette;
 	}
 
+	/**
+	* Permet de récupérer toutes les  informations d'un familier
+	* @param $DB
+	* @param $idFamilier l'id du dit familier
+	* @return array des infos du familier
+	*/
 	function getFamilier($DB, $idFamilier){
 		$stmt = mysqli_prepare($DB, "SELECT * FROM jdrFamilier WHERE idFamilier = ?");
 		mysqli_stmt_bind_param($stmt, 'i', $idFamilier);
@@ -666,6 +693,30 @@
 		}
 
 		return $inventaire;
+	}
+
+	/**
+	* Permet de récupérer toutes les  informations d'une partie
+	* @param $DB
+	* @param $idFamilier l'id d'une partie
+	* @return array des infos de la partie
+	*/
+	function getPartie($DB, $idPartie){
+		$stmt = mysqli_prepare($DB, "SELECT * FROM jdrPartie WHERE idPartie = ?");
+		mysqli_stmt_bind_param($stmt, 'i', $idPartie);
+		mysqli_execute($stmt);
+		
+		$resultat = mysqli_stmt_bind_result($stmt, $nomPartie);
+		
+		$partie = array();
+		
+		if($resultat) {
+			while ($ligne = $resultat->fetch_assoc()){
+				$partie = $ligne;
+			}
+		}
+		
+		return $partie;
 	}
 
 	/**
@@ -856,6 +907,18 @@
 	function updateInventaire($DB, $idPersonnage, $idTypeInventaire, $nomObjet, $idTypeObjet, $degatObjet, $protectionObjet, $contenuObjet, $quantiteObjet, $idAnimal, $descriptionObjet, $idObjet){
 		$stmt = mysqli_prepare($DB, "UPDATE jdrInventaire SET idPersonnage = ?, idTypeInventaire = ?, nomObjet = ?, idTypeObjet = ?, degatObjet = ?, protectionObjet = ?, contenuObjet = ?, quantiteObjet = ?, idAnimal = ?, descriptionObjet = ? WHERE idObjet = ?");
 		mysqli_stmt_bind_param($stmt, 'iisiiisiisi', $idPersonnage, $idTypeInventaire, $nomObjet, $idTypeObjet, $degatObjet, $protectionObjet, $contenuObjet, $quantiteObjet, $idAnimal, $descriptionObjet, $idObjet);
+		mysqli_execute($stmt);
+	}
+
+	/**
+	* Permet de modifier une partie dans la table jdrPartie de la BD
+	* @param $DB
+	* @param $nomPartie
+	* @param $idPartie
+	*/
+	function updatePartie($DB, $nomPartie, $idPartie){
+		$stmt = mysqli_prepare($DB, "UPDATE jdrPartie SET nomPartie = ? WHERE idPartie = ?");
+		mysqli_stmt_bind_param($stmt, 'si', $nomPartie, $idPartie);
 		mysqli_execute($stmt);
 	}
 
