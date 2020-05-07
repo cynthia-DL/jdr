@@ -25,7 +25,7 @@
 				</div>
 				<div class="form-group">
 					<label class="text-primary" for="password">Confirmation mot de passe</label>
-					<input type="password" id="password" class="form-control" placeholder="Entrer le mot de passe" name="password" required>
+					<input type="password" id="confirmPassword" class="form-control" placeholder="Entrer le mot de passe" name="confirmPassword" required>
 				</div>
 				<button class="btn btn-primary" type="submit" id='submit'>
 					<i class="fa fa-sign-in" aria-hidden="true"></i>
@@ -34,8 +34,11 @@
 				<?php
 					if(isset($_GET['erreur'])){
 						$err = $_GET['erreur'];
-						if($err==1 || $err==2){
-							echo "<p class='text-danger'>Utilisateur ou mot de passe incorrect</p>";
+						if($err==1){
+							echo "<p class='text-danger'>Le mot de passe et la confirmation du mot de passe ne sont pas les mêmes</p>";
+						}
+						else if($err==2){
+							echo "<p class='text-danger'>Utilisateur ou mot de passe ou confirmation du mot de passe vide</p>";
 						}
 					}
 				?>

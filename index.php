@@ -58,6 +58,7 @@
 	<app></app>
 		<script>
 			var sessionId = '<?php echo $_SESSION['idUtilisateur'];?>';
+			var sessionName = '<?php echo $_SESSION['nomUtilisateur'];?>';
 			var estMJ = '<?php echo $_SESSION['estMJ'];?>';
 			riot.compile().then(()=>{
 

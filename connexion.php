@@ -34,8 +34,11 @@
 			<?php
 				if(isset($_GET['erreur'])){
 					$err = $_GET['erreur'];
-					if($err==1 || $err==2){
+					if($err==1){
 						echo "<p class='text-danger'>Utilisateur ou mot de passe incorrect</p>";
+					}
+					else if($err==2){
+						echo "<p class='text-danger'>Utilisateur ou mot de passe vide</p>";
 					}
 				}
 			?>

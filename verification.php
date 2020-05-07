@@ -14,13 +14,13 @@
 			
 			mysqli_stmt_fetch($stmt);
 
-			if($password == $mdpUtilisateur){ // Le mot de passe rentré est le bon
+			if(password_verify($password, $mdpUtilisateur)){ // Le mot de passe rentré est le bon
 				$_SESSION['idUtilisateur'] = $idUtilisateur;
 				$_SESSION['nomUtilisateur'] = $nomUtilisateur;
 				$_SESSION['estMJ'] = $estMJ;
 				header('Location: index.php');
 			}else{
-				header('Location: connexion.php?erreur=1'); // Utilisateur ou mot de passe incorrect
+				// header('Location: connexion.php?erreur=1'); // Utilisateur ou mot de passe incorrect
 			}
 		}else{
 			header('Location: connexion.php?erreur=2'); // Utilisateur ou mot de passe vide

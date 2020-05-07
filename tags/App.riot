@@ -18,7 +18,7 @@
 					<button class="btn nav-link" onclick={_onNewPersonnage}><i class="fa fa-user" aria-hidden="true"></i> Nouveau Personnage</button>
 				</li>
 			</ul>
-			<ul class="navbar-nav my-2 my-lg-0">
+			<ul if={state.estMJ == 1} class="navbar-nav my-2 my-lg-0">
 				<li class="nav-item">
 					<a class="nav-link" href="./creationCompte.php"><i class="fa fa-sign-in" aria-hidden="true"></i> Créer un compte joueur</a>
 				</li>
@@ -65,6 +65,8 @@
 				chapitres : [],
 				vignette : [],
 				tmp : [],
+				sessionId : [sessionId],
+				estMJ : [estMJ],
 
 				idCurPerso : null,
 				curPerso : null
