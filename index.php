@@ -59,7 +59,6 @@
 		<script>
 			var sessionId = '<?php echo $_SESSION['idUtilisateur'];?>';
 			var estMJ = '<?php echo $_SESSION['estMJ'];?>';
-			console.log(sessionId);
 			riot.compile().then(()=>{
 
 			riot.install(function(component){
