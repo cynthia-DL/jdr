@@ -29,6 +29,7 @@
 	<script src="./tags/App.riot" type="riot"></script>
 	<script src="./tags/Chart.riot" type="riot"></script>
 	<script src="./tags/Chapitre.riot" type="riot"></script>
+	<script src="./tags/Dashboard.riot" type="riot"></script>
 	<script src="./tags/Fiche.riot" type="riot"></script>
 	<script src="./tags/Vignette.riot" type="riot"></script>
 
@@ -60,9 +61,16 @@
 			var sessionId = '<?php echo $_SESSION['idUtilisateur'];?>';
 			var sessionName = '<?php echo $_SESSION['nomUtilisateur'];?>';
 			var estMJ = '<?php echo $_SESSION['estMJ'];?>';
+			
+			var utilisateur = {
+				id:sessionId,
+				name:sessionName,
+				estMJ:estMJ
+			};
 			riot.compile().then(()=>{
 
 			riot.install(function(component){
+				component.user = utilisateur;
 				if (component.name == "app" ||
 					
 					component.name == "vignette" || 
@@ -107,6 +115,7 @@
 			riot.mount('chapitre');
 			riot.mount('chart');
 			riot.mount('fiche');
+			riot.mount('dashboard');
 			riot.mount('app');
 		})
 	</script>
