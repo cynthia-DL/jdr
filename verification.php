@@ -20,7 +20,7 @@
 				$_SESSION['estMJ'] = $estMJ;
 				header('Location: index.php');
 			}else{
-				// header('Location: connexion.php?erreur=1'); // Utilisateur ou mot de passe incorrect
+				header('Location: connexion.php?erreur=1'); // Utilisateur ou mot de passe incorrect
 			}
 		}else{
 			header('Location: connexion.php?erreur=2'); // Utilisateur ou mot de passe vide
