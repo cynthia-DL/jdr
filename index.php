@@ -5,17 +5,19 @@
 	if(!isset($_SESSION['nomUtilisateur'])){
 		header('Location: ./connexion.php');
 		exit;
-	}else{
-		echo "Vous êtes actuellement connecté en tant que ";
-		echo $_SESSION['nomUtilisateur'];
-		echo " avec comme id : ";
-		echo $_SESSION['idUtilisateur'];
-		if($_SESSION['estMJ'] == 1){
-			echo ". Vous êtes le MJ de ce JDR.";
-		}else{
-			echo ". Vous êtes un simple joueur de ce JDR.";
-		}
 	}
+	/** Vue qu'il y a maintenant le dashboard, je ne suis pas sure que ca soit nessessaire de laissez ca **/
+	// else{
+	// 	echo "Vous êtes actuellement connecté en tant que ";
+	// 	echo $_SESSION['nomUtilisateur'];
+	// 	echo " avec comme id : ";
+	// 	echo $_SESSION['idUtilisateur'];
+	// 	if($_SESSION['estMJ'] == 1){
+	// 		echo ". Vous êtes le MJ de ce JDR.";
+	// 	}else{
+	// 		echo ". Vous êtes un simple joueur de ce JDR.";
+	// 	}
+	// }
 ?>
 <html>
 <head>
@@ -61,11 +63,13 @@
 			var sessionId = '<?php echo $_SESSION['idUtilisateur'];?>';
 			var sessionName = '<?php echo $_SESSION['nomUtilisateur'];?>';
 			var estMJ = '<?php echo $_SESSION['estMJ'];?>';
+			var partyId = '<?php echo $_SESSION['idPartie'];?>';
 			
 			var utilisateur = {
 				id:sessionId,
 				name:sessionName,
-				estMJ:estMJ
+				estMJ:estMJ,
+				partyId:partyId
 			};
 			riot.compile().then(()=>{
 

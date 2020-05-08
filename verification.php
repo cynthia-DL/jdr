@@ -10,7 +10,7 @@
 			$stmt = mysqli_prepare($DB, "SELECT * FROM jdrUtilisateur WHERE nomUtilisateur = ?");
 			mysqli_stmt_bind_param($stmt, 's', $username);
 			mysqli_execute($stmt);
-			$resultat = mysqli_stmt_bind_result($stmt, $idUtilisateur, $nomUtilisateur, $mdpUtilisateur, $estMJ);
+			$resultat = mysqli_stmt_bind_result($stmt, $idUtilisateur, $nomUtilisateur, $mdpUtilisateur, $estMJ, $idPartie);
 			
 			mysqli_stmt_fetch($stmt);
 
@@ -18,6 +18,7 @@
 				$_SESSION['idUtilisateur'] = $idUtilisateur;
 				$_SESSION['nomUtilisateur'] = $nomUtilisateur;
 				$_SESSION['estMJ'] = $estMJ;
+				$_SESSION['idPartie'] = $idPartie;
 				header('Location: index.php');
 			}else{
 				header('Location: connexion.php?erreur=1'); // Utilisateur ou mot de passe incorrect
