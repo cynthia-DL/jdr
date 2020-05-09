@@ -23,6 +23,9 @@
 <head>
 	<meta charset="utf-8">
 	<title>Gestionnaire de JDR</title>
+	a
+	<link rel="shortcut icon" href="./iconfinder_die_1055072.png" type="image/x-icon">
+	<link rel="icon" href="./iconfinder_die_1055072.png" type="image/x-icon">
 
 	<link rel="stylesheet" href="https://bootswatch.com/4/solar/bootstrap.min.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -63,6 +66,8 @@
 			var sessionId = '<?php echo $_SESSION['idUtilisateur'];?>';
 			var sessionName = '<?php echo $_SESSION['nomUtilisateur'];?>';
 			var estMJ = '<?php echo $_SESSION['estMJ'];?>';
+
+			if (estMJ == 0) estMJ = false; else estMJ = true;
 			var partyId = '<?php echo $_SESSION['idPartie'];?>';
 			
 			var utilisateur = {

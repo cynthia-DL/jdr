@@ -59,7 +59,7 @@
 		<updatepersonnage personnage={props.perso} fct={props.fct} id={props.id}></updatepersonnage>
 	</div>
 
-	<button if={props.perso.idUtilisateur == state.sessionId || state.estMJ == 1} class="btn btn-warning btn-lg" onclick={_toggleUpdateMode}>
+	<button if={props.perso.idUtilisateur == user.id || user.estMJ == 1} class="btn btn-warning btn-lg" onclick={_toggleUpdateMode}>
 		<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
 	</button>
 
@@ -67,9 +67,7 @@
 		export default {
 			state : {
 				editMode : false,
-				deleteMode : false,
-				sessionId : [sessionId],
-				estMJ : [estMJ]
+				deleteMode : false
 			},
 
 			// _toggleDeleteMode(){

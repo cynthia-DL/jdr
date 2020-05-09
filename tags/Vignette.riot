@@ -58,7 +58,7 @@
 					<button class="btn btn-outline-success" onclick={_test}>
 						<i class="fa fa-info-circle"></i> 
 							En voir plus</button>
-					<button if={props.perso.idUtilisateur == state.sessionId || state.estMJ == 1} class="btn btn-outline-danger" onclick={_toggleDeleteMode}>
+					<button if={props.perso.idUtilisateur == user.id || user.estMJ == 1} class="btn btn-outline-danger" onclick={_toggleDeleteMode}>
 						<i class="fa fa-trash" aria-hidden="true"></i>
 					</button>
 				</li>
@@ -77,9 +77,7 @@
 	<script>
 		export default {
 			state : {
-				deleteMode : false,
-				sessionId : [sessionId],
-				estMJ : [estMJ]
+				deleteMode : false
 			},
 
 			// Cette fonction ouvre une fiche via le pere
