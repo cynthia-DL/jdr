@@ -23,7 +23,7 @@
 <head>
 	<meta charset="utf-8">
 	<title>Gestionnaire de JDR</title>
-	a
+	
 	<link rel="shortcut icon" href="./iconfinder_die_1055072.png" type="image/x-icon">
 	<link rel="icon" href="./iconfinder_die_1055072.png" type="image/x-icon">
 

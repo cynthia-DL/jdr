@@ -1,10 +1,27 @@
 <dashboard>
     <div class="container">
-        <div class="bg-primary text-white mx-auto">
-            <h1>Bonjour {user.name}!</h1>
-            <h2>ID n°{user.id}</h2>        
-            <h2> est MJ : {user.estMJ}</h2>
-            <h2>Partie n° {user.partyId}!</h2>
+        <div class="row d-flex justify-content-center">
+            <img src="https://via.placeholder.com/250" />
+        </div>
+        <h1 class="text-center" if={user.estMJ}><span class="badge badge-pill badge-primary">MJ</span></h1>
+        <div class="card border-primary border-3 bg-dark col-6 m-2 text-white mx-auto mt-5">
+            <h1 class="text-center">{user.name}</h1>
+
+            <div class="row d-flex justify-content-center">
+                <h3 class="col-3 text-muted text-right">ID : </h3>
+                <h3 class="col-3 text-muted">{user.id}</h3>
+            </div>
+            <div class="row d-flex justify-content-center">
+                <h3 class="col-3 text-muted text-right">Partie : </h3>
+                <h3 class="col-3 text-muted">{user.partyId}</h3>
+            </div>
         </div>
     </div>
+
+    <style>
+	.border-3 {
+		border-width:3px !important;
+	}
+	</style>
+
 </dashboard>
